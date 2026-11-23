@@ -1,0 +1,139 @@
+# lab0: środowisko laboratorium
+
+### 1. Repozytorium (aktualizacja)
+
+cd ~/5gs/repo
+git pull
+# pierwsze pobranie: git clone https://github.com/qikcik/course_11_2026_imt2020.git ~/5gs/repo
+# własne zmiany w labach: git config pull.rebase true (raz), przy konflikcie git stash, potem git pull
+
+
+### 2. Po każdym starcie maszyny
+
+sudo ip netns add ue1                          # przestrzeń sieciowa srsUE ("File exists" = już jest)
+sudo ip addr add 127.0.0.100/8 dev lo          # adres gNB: OCUDU i PacketRusher
+# PacketRusher: drugi gNB i reguła tablicy local za VRF UE
+sudo ip addr add 127.0.0.101/8 dev lo
+sudo ip -4 rule add pref 32765 table local
+sudo ip -4 rule del pref 0
+systemctl list-units 'open5gs-*' --no-pager    # usługi 5GC: active (running)
+
+
+### 3. Wireshark (raz)
+
+# Edit → Configuration Profiles → Import → from zip file → lab/lab0/config/wireshark-profile-5G-lab.zip
+# Profil: heurystyki MAC-NR i RLC-NR, User DLT dla pcapów srsUE, PDCP 18 bit, LCID 4 → DRB1, TCP 7777 jako HTTP/2.
+# Aktywny profil widać w prawym dolnym rogu okna Wiresharka.
+
+
+### 4. Abonent w WebUI (raz)
+
+# http://localhost:9999 → Subscriber → +
+#   IMSI 999700000000001
+#   K    465B5CE8B199B49FAA5F0A2EE238A6BC
+#   OPc  E8ED289DEBA952E4283B54E88E6183CA
+#   slice SST 1 (domyślny), DNN internet, typ IPv4
+# Te same wartości są w sekcji [usim] plików lab/labN/config/ue_zmq.conf.
+
+
+### 5. Sprawdzenie środowiska
+
+curl --http2-prior-knowledge -s http://127.0.0.10:7777/nnrf-nfm/v1/nf-instances | jq    # NF zarejestrowane w NRF
+ip a show ogstun                                                                         # 10.45.0.1/16
+which gnb srsue
+# test zestawu radiowego: lab/lab1
+
+# Konfiguracja 5GC: pliki wzorcowe w lab/lab1/recording/core_config
+for f in ~/5gs/repo/lab/lab1/recording/core_config/*.yaml; do sudo diff -q $f /etc/open5gs/$(basename $f); done    # brak linii = zgodne
+# przywrócenie, gdy są różnice:
+#   sudo cp ~/5gs/repo/lab/lab1/recording/core_config/*.yaml /etc/open5gs/
+#   sudo systemctl restart open5gs-nrfd && sleep 1 && sudo systemctl restart open5gs-udrd open5gs-udmd open5gs-ausfd open5gs-pcfd open5gs-nssfd open5gs-bsfd open5gs-upfd open5gs-smfd open5gs-amfd
+# Abonenci w bazie: 999700000000001
+sudo open5gs-dbctl showpretty | grep imsi
+
+
+### 9. Instalacja od zera
+
+# Wersje: OCUDU commit c922d9f29f (gałąź dev), srsRAN_4G commit cc8f48a78, Open5GS 2.8.0, PacketRusher 7836091
+
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y git wget curl tar jq build-essential cmake make gcc g++ pkg-config \
+  tcpdump iperf3 python3 nghttp2-server nghttp2-client linux-modules-extra-$(uname -r)
+
+# Wireshark
+sudo add-apt-repository ppa:wireshark-dev/stable
+sudo apt install -y wireshark tshark && sudo usermod -aG wireshark $USER
+
+# MongoDB 8.0
+curl -fsSL https://www.mongodb.org/static/pgp/server-8.0.asc | sudo gpg -o /usr/share/keyrings/mongodb-server-8.0.gpg --dearmor
+echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] https://repo.mongodb.org/apt/ubuntu noble/mongodb-org/8.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-8.0.list
+sudo apt update && sudo apt install -y mongodb-org && sudo systemctl enable --now mongod
+
+# Open5GS
+sudo add-apt-repository ppa:open5gs/latest
+sudo apt update && sudo apt install -y open5gs && sudo apt-mark hold open5gs
+sudo systemctl disable --now open5gs-mmed open5gs-sgwcd open5gs-sgwud open5gs-hssd open5gs-pcrfd open5gs-seppd
+
+# Open5GS: SBI bezpośrednio do NRF, bez SCP
+cd /etc/open5gs && sudo cp -a . ~/open5gs-config-backup
+for f in amf ausf bsf nssf pcf smf udm udr; do
+  sudo perl -0pi -e 's/^#      nrf:\n#        - uri: (http:\/\/127\.0\.0\.10:7777)\n      scp:\n        - uri: http:\/\/127\.0\.0\.200:7777\n/      nrf:\n        - uri: $1\n/m' $f.yaml
+done
+sudo systemctl disable --now open5gs-scpd
+sudo systemctl restart open5gs-nrfd && sleep 1 && sudo systemctl restart open5gs-udrd open5gs-udmd open5gs-ausfd open5gs-pcfd open5gs-nssfd open5gs-bsfd open5gs-smfd open5gs-amfd
+# PLMN 999-70, TAC 1 w amf.yaml i nrf.yaml (wzorzec: lab/lab1/recording/core_config)
+
+# WebUI
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo apt install -y nodejs
+curl -fsSL https://open5gs.org/open5gs/assets/webui/install | sudo -E bash -
+
+# srsUE (srsRAN_4G) z ZMQ
+sudo apt install -y libboost-all-dev libconfig++-dev libuhd-dev libmbedtls-dev libpcsclite-dev libfftw3-dev libsctp-dev libzmq3-dev
+mkdir -p ~/5gs && cd ~/5gs && git clone https://github.com/srsRAN/srsRAN_4G.git && cd srsRAN_4G
+git checkout cc8f48a78
+mkdir build && cd build && cmake .. -DENABLE_ZEROMQ=ON -DENABLE_WERROR=OFF
+make -j$(nproc) && sudo make install && sudo ldconfig
+
+# gNB (OCUDU) z ZMQ
+sudo apt install -y libfftw3-dev libmbedtls-dev libsctp-dev libyaml-cpp-dev libgtest-dev libzmq3-dev
+cd ~/5gs && git clone https://gitlab.com/ocudu/ocudu.git && cd ocudu
+git checkout c922d9f29f
+mkdir build && cd build && cmake .. -DENABLE_ZEROMQ=ON
+make -j$(nproc) && sudo make install && sudo ldconfig
+
+# PacketRusher
+sudo apt install -y golang
+cd ~/5gs && git clone https://github.com/HewlettPackard/PacketRusher && cd PacketRusher
+git checkout 7836091 && go mod download && go build -o packetrusher ./cmd
+
+# Prometheus, Grafana, narzędzia (konfigurację i dashboard wgrywa lab z własnego katalogu config/)
+sudo apt install -y prometheus prometheus-node-exporter moreutils
+# Prometheus na 127.0.0.1:9091 (port 9090 zajmują liczniki funkcji Open5GS)
+echo 'ARGS="--web.listen-address=127.0.0.1:9091"' | sudo tee /etc/default/prometheus
+# node-exporter: stan usług systemd open5gs-* i ruch na interfejsach jako liczniki
+echo 'ARGS="--collector.systemd --collector.systemd.unit-include=open5gs-.+"' | sudo tee /etc/default/prometheus-node-exporter
+sudo systemctl restart prometheus prometheus-node-exporter
+
+# Grafana, wejście bez logowania
+sudo mkdir -p /etc/apt/keyrings
+wget -q -O - https://apt.grafana.com/gpg.key | gpg --dearmor | sudo tee /etc/apt/keyrings/grafana.gpg > /dev/null
+echo "deb [signed-by=/etc/apt/keyrings/grafana.gpg] https://apt.grafana.com stable main" | sudo tee /etc/apt/sources.list.d/grafana.list
+sudo apt update && sudo apt install -y grafana
+sudo mkdir -p /var/lib/grafana/dashboards
+printf 'GF_AUTH_ANONYMOUS_ENABLED=true\nGF_AUTH_ANONYMOUS_ORG_ROLE=Admin\n' | sudo tee -a /etc/default/grafana-server
+sudo systemctl enable --now grafana-server    # http://127.0.0.1:3000
+
+# open5gs-dbctl: dodawanie abonentów z wiersza poleceń
+sudo wget -q -O /usr/local/bin/open5gs-dbctl https://raw.githubusercontent.com/open5gs/open5gs/v2.8.0/misc/db/open5gs-dbctl
+sudo chmod +x /usr/local/bin/open5gs-dbctl
+
+# step: znacznik czasu kroku w current/log/steps.txt (wywoływany z katalogu labu)
+cat >> ~/.bashrc <<'EOS'
+step() { [ -f commands.txt ] || { echo "step: uruchom w katalogu labu"; return 1; }; mkdir -p current/log; echo "$(date +%T.%3N) $*" | tee -a current/log/steps.txt; }
+EOS
+source ~/.bashrc
+
+# Repozytorium
+git clone https://github.com/qikcik/course_11_2026_imt2020.git ~/5gs/repo
+cd ~/5gs/repo && git config pull.rebase true

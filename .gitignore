@@ -1,0 +1,3 @@
+lab/*/current/*
+!lab/*/current/.gitkeep
+lab/*/config/www/plik50k.bin

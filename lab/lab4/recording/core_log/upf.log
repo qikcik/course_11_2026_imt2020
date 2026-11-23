@@ -1,0 +1,17 @@
+Open5GS daemon v2.8.0
+
+11/23 03:04:24.451: [app] INFO: Configuration: '/etc/open5gs/upf.yaml' (../lib/app/ogs-init.c:144)
+11/23 03:04:24.451: [app] INFO: File Logging: '/var/log/open5gs/upf.log' (../lib/app/ogs-init.c:147)
+11/23 03:04:24.507: [metrics] INFO: metrics_server() [http://127.0.0.7]:9090 (../lib/metrics/prometheus/context.c:392)
+11/23 03:04:24.507: [pfcp] INFO: pfcp_server() [127.0.0.7]:8805 (../lib/pfcp/path.c:30)
+11/23 03:04:24.507: [gtp] INFO: gtp_server() [127.0.0.7]:2152 (../lib/gtp/path.c:30)
+11/23 03:04:24.508: [app] INFO: UPF initialize...done (../src/upf/app.c:31)
+11/23 03:04:24.536: [upf] INFO: PFCP associated [127.0.0.4]:8805 (../src/upf/pfcp-sm.c:168)
+11/23 03:04:52.954: [upf] INFO: [Added] Number of UPF-Sessions is now 1 (../src/upf/context.c:212)
+11/23 03:04:52.955: [gtp] INFO: gtp_connect() [127.0.0.4]:2152 (../lib/gtp/path.c:60)
+11/23 03:04:52.955: [upf] INFO: UE F-SEID[UP:0xee CP:0xa42] APN[internet] PDN-Type[1] IPv4[10.45.0.2] IPv6[] (../src/upf/context.c:498)
+11/23 03:04:53.021: [gtp] INFO: gtp_connect() [127.0.0.100]:2152 (../lib/gtp/path.c:60)
+11/23 03:04:53.040: [upf] ERROR: Invalid packet [IP version:6, Packet Length:48] (../src/upf/gtp-path.c:694)
+0000: 60000000 00083aff fe800000 00000000   `.....:.........
+0010: 21a375bc b679cfee ff020000 00000000   !.u..y..........
+0020: 00000000 00000002 85005f6f 00000000   .........._o....

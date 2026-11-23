@@ -1,0 +1,45 @@
+# lab1: cellka i jej konfiguracja
+# Pliki: current/pcap/ gnb_f1ap.pcap, gnb_ngap.pcap, ue_nas.pcap
+# Terminale: T1 gNB, T2 UE
+
+
+### 0. Przygotowanie (raz po starcie maszyny; "File exists" oznacza, że już jest)
+
+sudo ip netns add ue1
+sudo ip addr add 127.0.0.100/8 dev lo      # adres gNB (N2, N3)
+
+
+### 1. Czysty start
+
+cd ~/5gs/repo/lab/lab1
+sudo rm -rf current/pcap current/log current/core_log current/core_config
+mkdir -p current/{pcap,log,core_log,core_config}
+
+sudo systemctl stop open5gs-amfd open5gs-smfd open5gs-upfd open5gs-ausfd open5gs-udmd open5gs-udrd open5gs-pcfd open5gs-nssfd open5gs-bsfd open5gs-nrfd
+sudo rm -f /var/log/open5gs/*.log*
+sudo systemctl start open5gs-nrfd
+sleep 1
+sudo systemctl start open5gs-udrd open5gs-udmd open5gs-ausfd open5gs-pcfd open5gs-nssfd open5gs-bsfd open5gs-upfd open5gs-smfd open5gs-amfd
+
+
+### 2. Przebieg
+
+# T1: gNB (NG Setup z AMF, potem F1 Setup i cellka nadaje SSB)
+step "1 start gNB"
+sudo gnb -c ./config/gnb_zmq.yml
+
+# T2: UE (znajduje cellkę, rejestruje się i dostaje adres IP)
+step "2 start UE"
+sudo srsue ./config/ue_zmq.conf
+# poczekać na adres IP UE w konsoli srsue, potem:
+
+# T2: Ctrl+C (UE kończy pracę)
+# T1: Ctrl+C (gNB zamyka pliki pcap; NG Reset do AMF)
+step "3 koniec"
+
+
+### 3. Zapis
+
+sudo cp -R /etc/open5gs/. current/core_config/
+sudo cp -R /var/log/open5gs/. current/core_log/
+sudo chown -R $USER: current

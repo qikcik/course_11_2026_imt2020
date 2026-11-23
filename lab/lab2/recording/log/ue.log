@@ -1,0 +1,1079 @@
+2026-11-23T03:01:37.697160 [UE     ] [I] Using binary srsue with arguments: ./config/ue_zmq.conf 
+2026-11-23T03:01:37.781247 [UE     ] [I] Built in Release mode using commit cc8f48a78 on branch HEAD.
+2026-11-23T03:01:37.885108 [RF     ] [I] Configuring physical DL channel 0 with band-pass filter (0.0, 0.0)
+2026-11-23T03:01:37.885109 [RF     ] [I] Configuring physical UL channel 0 with band-pass filter (0.0, 0.0)
+2026-11-23T03:01:38.087134 [STCK   ] [I] Open nas pcap file ./current/pcap/ue_nas.pcap
+2026-11-23T03:01:38.122553 [MAC    ] [I] [    0] Resetting MAC
+2026-11-23T03:01:38.122562 [MAC    ] [I] [    0] Logical Channel Setup: LCID=0, LCG=0, priority=0, PBR=-1, BSD=50ms, bucket_size=0
+2026-11-23T03:01:38.122565 [MAC    ] [I] [    0] Logical Channel Setup: LCID=1, LCG=0, priority=1, PBR=-1, BSD=50ms, bucket_size=0
+2026-11-23T03:01:38.122582 [MAC    ] [I] [    0] Setting configuration
+2026-11-23T03:01:38.122584 [MAC    ] [I] [    0] BSR:   Configured timer reTX 2560 ms
+2026-11-23T03:01:38.122676 [RLC    ] [I] Added LTE radio bearer with LCID 0 in Transparent Mode
+2026-11-23T03:01:38.122687 [USIM   ] [I] Read Home PLMN Id=99970
+2026-11-23T03:01:38.139160 [RLC-NR ] [I] Added LTE radio bearer with LCID 0 in Transparent Mode
+2026-11-23T03:01:38.139168 [MAC-NR ] [I] [    0] Logical Channel Setup: LCID=0, LCG=0, priority=0, PBR=0, BSD=0ms, bucket_size=0
+2026-11-23T03:01:38.139178 [RRC    ] [I] using srand seed of 139178
+2026-11-23T03:01:38.219222 [STCK   ] [I] Triggering NAS switch on
+2026-11-23T03:01:38.219236 [NAS5G  ] [I] Switching on
+2026-11-23T03:01:38.220021 [USIM   ] [I] Read Home PLMN Id=99970
+2026-11-23T03:01:38.220022 [NAS5G  ] [I] Requesting IMSI attach (IMSI=999700000000001)
+2026-11-23T03:01:38.220030 [NAS5G  ] [I] Sending Registration Request
+2026-11-23T03:01:38.220032 [RRC-NR ] [I] Proc "Setup Request" - Initiation of Setup request procedure
+2026-11-23T03:01:38.220032 [RRC-NR ] [I] Proc "Cell Selection" - Starting...
+2026-11-23T03:01:38.220051 [PHY-SA ] [I] [    0] Cell Search: Going to IDLE
+2026-11-23T03:01:38.220052 [PHY-SA ] [I] [    0] Tuning Rx channel 0 to 1842.50 MHz
+2026-11-23T03:01:38.220231 [RF     ] [I] Mapping RF channel 0 (device=0, channel=0) to logical carrier 0 on f_rx=1842.5 MHz
+2026-11-23T03:01:38.220243 [PHY-SA ] [I] [    0] Cell search: Setting SSB configuration srate=11.52 MHz; c-freq=1842.500 MHz; ss-freq=1842.050 MHz; scs=15kHz; pattern=A; duplex=fdd;
+2026-11-23T03:01:38.220805 [PHY-SA ] [I] [    0] Cell Search: Running Cell search state
+2026-11-23T03:01:38.250766 [RRC-NR ] [I] Proc "Cell Selection" - Cell search found ARFCN=0 PCI=1 epre=+28.9 snr=+58.9 cfo=+0.0 delay=-0.0  sfn=20 ssb_idx=0 hrf=n scs=15 ssb_offset=6 dmrs_typeA_pos=pos2 coreset0=6 ss0=0 barred=n intra_freq_reselection=y spare=0
+2026-11-23T03:01:38.250783 [PHY-SA ] [I] [    0] Cell Select: Going to IDLE
+2026-11-23T03:01:38.250802 [PHY-SA ] [I] [    0] Tuning Rx channel 0 to 1842.50 MHz
+2026-11-23T03:01:38.250804 [RF     ] [I] Mapping RF channel 0 (device=0, channel=0) to logical carrier 0 on f_rx=1842.5 MHz
+2026-11-23T03:01:38.250805 [RF     ] [I] RF Rx channel 0 already on freq
+2026-11-23T03:01:38.250805 [PHY-SA ] [I] [    0] Tuning Tx channel 0 to 1747.50 MHz
+2026-11-23T03:01:38.250807 [RF     ] [I] Mapping RF channel 0 (device=0, channel=0) to logical carrier 0 on f_tx=1747.5 MHz
+2026-11-23T03:01:38.250816 [PHY-SA ] [I] [    0] SYNC: Setting SSB configuration srate=11.52 MHz; c-freq=1842.500 MHz; ss-freq=1842.050 MHz; scs=15kHz; pattern=A; duplex=fdd; period=10 ms; Tracking N_id=1.
+2026-11-23T03:01:38.253811 [PHY-SA ] [I] [    0] Setting new PHY configuration ARFCN=368500, PCI=1
+2026-11-23T03:01:38.253814 [PHY-SA ] [I] [    0] PRACH: cell.id=1, configIdx=0, rootSequence=0, zeroCorrelationConfig=0, freqOffset=0
+2026-11-23T03:01:38.253969 [PHY-SA ] [I] [    0] Finished setting new PRACH configuration.
+2026-11-23T03:01:38.254001 [RRC-NR ] [I] PHY configuration with MIB parameters completed.
+2026-11-23T03:01:38.273007 [PHY-SA ] [I] [    0] SYNC: SFN synchronised successfully (SFN=22). Transitioning to IDLE...
+2026-11-23T03:01:38.273017 [PHY-SA ] [I] [  221] Cell Select: SFN synchronized. CAMPING...
+2026-11-23T03:01:38.273142 [RRC-NR ] [I] Proc "Cell Selection" - Cell selection completed. Starting SIB1 acquisition
+2026-11-23T03:01:38.395154 [PHY0-NR] [I] [  321] PDCCH: cc=0, si-rnti=0xffff dci=1_0 ss=common0 L=2 cce=0 f_alloc=0x150 t_alloc=0x0 vrb_to_prb_map=0 mcs=5 rv=0 sii=0 coreset0_bw=48 reserved=0x0 
+2026-11-23T03:01:38.395260 [PHY0-NR] [I] [  321] PDSCH: cc=0 pid=0 si-rnti=0xffff prb=(1,8) symb=(2,13) CW0: mod=QPSK tbs=80 R=0.380 rv=0 CRC=OK iter=1.0 evm=0.00 t_us=45 epre=+57.8 snr=+69.8 cfo=+0.0 delay=-0.0  ack_tti_tx=322
+    0000: 77 81 01 70 10 66 64 e0 00 00 02 00 0c d8 00 18
+    0010: 05 41 00 40 1a 20 00 06 60 20 51 38 0c 6d 92 21
+2026-11-23T03:01:38.395263 [MAC-NR ] [I] [  321] DL 0:  newTX tbs=80, rv=0, ack=OK, ndi=0
+2026-11-23T03:01:38.396438 [RLC-NR ] [I] BCCH TXSCH message received.
+    0000: 77 81 01 70 10 66 64 e0 00 00 02 00 0c d8 00 18
+    0010: 05 41 00 40 1a 20 00 06 60 20 51 38 0c 6d 92 21
+2026-11-23T03:01:38.396471 [RRC-NR ] [I] BCCH-DLSCH - Rx systemInformationBlockType1 (80 B)
+2026-11-23T03:01:38.396472 [RRC-NR ] [I] Processing SIB1 (1/1)
+2026-11-23T03:01:38.396479 [RRC-NR ] [I] SIB1 received, CellID=4095
+2026-11-23T03:01:38.396480 [RRC-NR ] [I] Set Constants and Timers: N310=1, N311=1, t300=1000, t301=1000, t310=1000, t311=3000
+2026-11-23T03:01:38.396482 [MAC-NR ] [I] [  322] Set RACH common config (Config Index 1, preambleTransMax 7, Response Window 10)
+2026-11-23T03:01:38.396502 [RRC-NR ] [I] Proc "Cell Selection" - SIB1 acquired successfully
+2026-11-23T03:01:38.396503 [RRC-NR ] [I] Proc "Cell Selection" - Completed with success.
+2026-11-23T03:01:38.396508 [RRC-NR ] [I] Proc "Setup Request" - Configuring serving cell...
+2026-11-23T03:01:38.396515 [PHY-SA ] [I] [  323] Setting new PHY configuration ARFCN=368500, PCI=1
+2026-11-23T03:01:38.396517 [PHY-SA ] [I] [  323] PRACH: cell.id=1, configIdx=1, rootSequence=1, zeroCorrelationConfig=0, freqOffset=11
+2026-11-23T03:01:38.396517 [RRC-NR ] [I] SRB0 - Tx rrcSetupRequest (6 B)
+2026-11-23T03:01:38.396519 [RLC-NR ] [I] SRB0: Tx SDU, queue size=1, bytes=6
+    0000: 1b f8 a8 4c 7c e6
+2026-11-23T03:01:38.396519 [RRC-NR ] [I] Proc "Setup Request" - Waiting for RRCSetup/Reject or expiry
+2026-11-23T03:01:38.396630 [PHY-SA ] [I] [  323] Finished setting new PRACH configuration.
+2026-11-23T03:01:38.396630 [PHY-SA ] [I] [  323] PHY:   Set TA offset: n_ta_offset: 400, ta_usec: 13.0
+2026-11-23T03:01:38.396731 [RRC-NR ] [I] PHY configuration with SIB parameters completed.
+2026-11-23T03:01:38.397577 [MAC-NR ] [I] [  323] SR:    Starting procedure
+2026-11-23T03:01:38.397578 [MAC-NR ] [I] [  323] SR:    PUCCH not configured. Starting RA procedure
+2026-11-23T03:01:38.397578 [MAC-NR ] [I] [  323] Starting PRACH by MAC order
+2026-11-23T03:01:38.404996 [PHY-SA ] [I] [  330] PRACH: Transmitted preamble=0, tti_tx=334, CFO=0.00 KHz, nof_sf=1, target_power=-1.0 dBm
+2026-11-23T03:01:38.405029 [MAC-NR ] [I] [  329] prach_occasion=0, preamble_index=0, ra-rnti=0x39, ra-tti=334, s_id=0, t_id=4, f_id=0, ul_carrier_id=0
+2026-11-23T03:01:38.414549 [PHY0-NR] [I] [  337] PDCCH: cc=0, ra-rnti=0x0039 dci=1_0 ss=common1 L=2 cce=0 f_alloc=0x60 t_alloc=0x0 vrb_to_prb_map=0 mcs=0 tb_scaling=0 reserved=0x0 
+2026-11-23T03:01:38.414724 [PHY0-NR] [I] [  337] PDSCH: cc=0 pid=0 ra-rnti=0x39 prb=(1,3) symb=(1,13) CW0: mod=QPSK tbs=10 R=0.133 rv=0 CRC=OK iter=1.0 evm=0.00 t_us=31 epre=+57.8 snr=+69.8 cfo=-0.0 delay=+0.0  ack_tti_tx=338
+    0000: 40 00 00 07 40 0e 46 01 00 00
+2026-11-23T03:01:38.414828 [MAC-NR ] [I] [  337] DL RAPID: 0, Temp C-RNTI: 0x4601, TA: 0, UL Grant: [00 e8 01 c0 ]
+2026-11-23T03:01:38.414832 [PHY-SA ] [I] [  337] Setting RAR Grant: ra-rnti=0x4601 dci=RAR ss=rar hop=0 f_alloc=0x74 t_alloc=0x0 mcs=0 tpc=7 csi=0 
+2026-11-23T03:01:38.414840 [PHY-SA ] [I] [  337] PHY:   Set TA RAR: ta_cmd: 0, n_ta: 400, ta_usec: 13.0
+2026-11-23T03:01:38.417116 [RLC-NR ] [I] SRB0: Tx Transparent Mode PDU, queue size=0, bytes=0
+    0000: 1b f8 a8 4c 7c e6
+2026-11-23T03:01:38.417124 [MAC-NR ] [I] [  339] UL CCCH48: len=6 SBSR: lcg=0 bs=1 PAD: len=1
+2026-11-23T03:01:38.417125 [MAC    ] [I] [  339] UL 0:  New TX for Msg3, rv=0, tbs=11
+2026-11-23T03:01:38.417261 [PHY0-NR] [I] [  339] PUSCH: cc=0 pid=0 ra-rnti=0x4601 prb=(12,14) symb=(0,13) CW0: mod=QPSK tbs=11 R=0.131 rv=0  t=23 us cfo=-0 tti_tx=343
+    0000: 34 1b f8 a8 4c 7c e6 3d 01 3f 00
+2026-11-23T03:01:38.428190 [PHY0-NR] [I] [  348] PDCCH: cc=0, c-rnti=0x4601 dci=1_0 ss=common0 L=2 cce=0 f_alloc=0x30 t_alloc=0x0 vrb_to_prb_map=0 mcs=0 ndi=1 rv=0 harq_id=0 dai=0 pucch_tpc=1 pucch_res=0 harq_feedback=3 
+2026-11-23T03:01:38.428199 [MAC-NR ] [I] [  348] Considering NDI in pid=0 to be toggled for first Temporal C-RNTI
+2026-11-23T03:01:38.428249 [PHY0-NR] [I] [  348] PDSCH: cc=0 pid=0 c-rnti=0x4601 prb=(1,2) symb=(1,13) CW0: mod=QPSK tbs=7 R=0.150 rv=0 CRC=OK iter=1.0 evm=0.00 t_us=24 epre=+57.8 snr=+69.8 cfo=-0.0 delay=+0.0  ack_tti_tx=352
+    0000: 3e 1b f8 a8 4c 7c e6
+2026-11-23T03:01:38.428255 [MAC-NR ] [I] [  348] DL CON_RES: id=1bf8a84c7ce6
+2026-11-23T03:01:38.428256 [MAC-NR ] [I] [  348] Received Contention Resolution ID 0x1bf8a84c7ce6
+2026-11-23T03:01:38.428257 [MAC-NR ] [I] [  348] Received CONRES ID matches transmitted UE ID
+2026-11-23T03:01:38.428272 [MAC-NR ] [I] [  348] Random Access Complete.     c-rnti=0x4601, ta=0
+2026-11-23T03:01:38.428273 [RRC-NR ] [I] RA completed.
+2026-11-23T03:01:38.428275 [MAC-NR ] [I] [  348] DL 0:  newTX tbs=7, rv=0, ack=OK, ndi=1
+2026-11-23T03:01:38.428325 [PHY0-NR] [I] [  348] PUCCH: cc=0, f=1 prb=0:1 symb=0:14 hop=51 cs=0 occ=0 rnti=0x4601 ack=1 , tti_tx=352
+2026-11-23T03:01:38.437920 [PHY0-NR] [I] [  356] PDCCH: cc=0, c-rnti=0x4601 dci=1_0 ss=common0 L=2 cce=0 f_alloc=0x17f t_alloc=0x0 vrb_to_prb_map=0 mcs=3 ndi=0 rv=0 harq_id=0 dai=0 pucch_tpc=1 pucch_res=0 harq_feedback=3 
+2026-11-23T03:01:38.438089 [PHY0-NR] [I] [  356] PDSCH: cc=0 pid=0 c-rnti=0x4601 prb=(1,42) symb=(1,13) CW0: mod=QPSK tbs=309 R=0.247 rv=0 CRC=OK iter=1.0 evm=0.00 t_us=120 epre=+57.8 snr=+69.8 cfo=+0.0 delay=+0.0  ack_tti_tx=360
+    0000: 40 01 2d 20 40 04 09 42 e0 05 80 08 8b d7 63 80
+    0010: 83 0f 00 03 e0 10 23 41 e0 40 00 20 90 4c 0c a8
+2026-11-23T03:01:38.438092 [MAC-NR ] [I] [  356] DL 0:  newTX tbs=309, rv=0, ack=OK, ndi=0
+2026-11-23T03:01:38.438150 [PHY0-NR] [I] [  356] PUCCH: cc=0, f=1 prb=0:1 symb=0:14 hop=51 cs=0 occ=0 rnti=0x4601 ack=1 , tti_tx=360
+2026-11-23T03:01:38.439235 [MAC-NR ] [I] [  357] DL LCID=0 len=301 PAD: len=4
+2026-11-23T03:01:38.439247 [RRC-NR ] [I] SRB0 - Rx rrcSetup (301 B)
+2026-11-23T03:01:38.439455 [RRC-NR ] [I] Proc "Connection Setup" - Starting...
+2026-11-23T03:01:38.439705 [RLC-NR ] [I] SRB1: AM NR configured - tx_sn_field_length=12, rx_sn_field_length=12, t_poll_retx=45, poll_pdu=-1, poll_byte=-1, max_retx_thresh=8, t_reassembly=35, t_status_prohibit=0, tx_queue_length=256
+2026-11-23T03:01:38.439707 [RLC-NR ] [I] Added NR radio bearer with LCID 1 in Acknowledged Mode
+2026-11-23T03:01:38.439710 [MAC-NR ] [I] [  357] Logical Channel Setup: LCID=1, LCG=0, priority=1, PBR=-1, BSD=5ms, bucket_size=-5
+2026-11-23T03:01:38.439711 [MAC-NR ] [I] [  357] SR:    Set sr-TransMax=64
+2026-11-23T03:01:38.439713 [MAC-NR ] [I] [  357] BSR:   Configured timer periodic 10 ms
+2026-11-23T03:01:38.439714 [MAC-NR ] [I] [  357] BSR:   Configured timer reTX 80 ms
+2026-11-23T03:01:38.439714 [MAC-NR ] [I] [  357] Add tag config not supported yet
+2026-11-23T03:01:38.439714 [MAC-NR ] [I] [  357] Add phr config not supported yet
+2026-11-23T03:01:38.455655 [PDCP-NR] [I] SRB1 PDCP-NR entity configured. SN_LEN=12, Discard timer -1, Re-ordering timer 500, RLC=AM, RAT=NR
+2026-11-23T03:01:38.455656 [PDCP-NR] [I] Add SRB1 (lcid=1, sn_len=12bits)
+2026-11-23T03:01:38.455670 [PHY-SA ] [I] [  359] Setting new PHY configuration ARFCN=368500, PCI=1
+2026-11-23T03:01:38.455697 [RRC-NR ] [I] SRB1 - Tx rrcSetupComplete (27 B)
+2026-11-23T03:01:38.455699 [PDCP-NR] [I] TX SRB1 SDU (27B), integrity=none, encryption=none
+    0000: 10 00 05 df 80 10 5e 40 03 40 66 7e 41 c0 00 00
+    0010: 00 00 00 00 00 04 0b 80 bc 1c 00
+2026-11-23T03:01:38.455703 [PDCP-NR] [I] TX SRB1 PDU (33B), HFN=0, SN=0, integrity=none, encryption=none
+    0000: 00 00 10 00 05 df 80 10 5e 40 03 40 66 7e 41 c0
+    0010: 00 00 00 00 00 00 00 04 0b 80 bc 1c 00 00 00 00
+2026-11-23T03:01:38.455704 [RLC-NR ] [I] SRB1: Tx SDU (33 B, PDCP_SN=0 tx_sdu_queue_len=1)
+    0000: 00 00 10 00 05 df 80 10 5e 40 03 40 66 7e 41 c0
+    0010: 00 00 00 00 00 00 00 04 0b 80 bc 1c 00 00 00 00
+2026-11-23T03:01:38.455705 [RRC-NR ] [I] Finished Connection Setup successfully
+2026-11-23T03:01:38.455706 [RRC-NR ] [I] PHY configuration completed.
+2026-11-23T03:01:38.455708 [MAC-NR ] [I] [  359] SR:    Starting procedure
+2026-11-23T03:01:38.459680 [PHY0-NR] [I] [  362] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=366
+2026-11-23T03:01:38.476494 [MAC-NR ] [I] [  376] SR:    Signalling PHY sr_counter=1
+2026-11-23T03:01:38.476546 [PHY0-NR] [I] [  376] PUCCH: cc=0, f=1 prb=8:1 symb=0:14 cs=0 occ=0 rnti=0x4601 sr=1 , tti_tx=380
+2026-11-23T03:01:38.483823 [PHY0-NR] [I] [  382] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=386
+2026-11-23T03:01:38.486345 [PHY0-NR] [I] [  384] PDCCH: cc=0, c-rnti=0x4601 dci=0_0 ss=common0 L=2 cce=0 f_alloc=0x4b8 t_alloc=0x0 hop=n mcs=9 ndi=1 rv=0 harq_id=0 tpc=1 
+2026-11-23T03:01:38.486367 [RLC-NR ] [I] SRB1: Started t-PollRetransmit. POLL_SN=0
+2026-11-23T03:01:38.486371 [RLC-NR ] [I] SRB1: [Data PDU, P=1, SI=full, SN_SIZE=12 bits, SN=0, SO=0]
+2026-11-23T03:01:38.486374 [RLC-NR ] [I] SRB1: No data available to be sent
+2026-11-23T03:01:38.486376 [MAC-NR ] [I] [  384] UL LCID=1 len=35 SBSR: lcg=0 bs=5 PAD: len=488
+2026-11-23T03:01:38.486378 [MAC    ] [I] [  384] UL 0:  New TX, rv=0, tbs=528
+2026-11-23T03:01:38.486553 [PHY0-NR] [I] [  384] PUSCH: cc=0 pid=0 c-rnti=0x4601 prb=(12,35) symb=(0,13) CW0: mod=QPSK tbs=528 R=0.670 rv=0  t=82 us cfo=-0 tti_tx=388
+    0000: 01 23 c0 00 00 00 10 00 05 df 80 10 5e 40 03 40
+    0010: 66 7e 41 c0 00 00 00 00 00 00 00 04 0b 80 bc 1c
+2026-11-23T03:01:38.496344 [PHY0-NR] [I] [  392] PDCCH: cc=0, c-rnti=0x4601 dci=1_0 ss=common3 L=1 cce=0 f_alloc=0x30 t_alloc=0x0 vrb_to_prb_map=0 mcs=26 ndi=1 rv=0 harq_id=0 dai=0 pucch_tpc=1 pucch_res=0 harq_feedback=3 
+2026-11-23T03:01:38.496358 [PHY0-NR] [I] [  392] PDCCH: cc=0, c-rnti=0x4601 dci=0_0 ss=common3 L=1 cce=2 f_alloc=0x68 t_alloc=0x0 hop=n mcs=7 ndi=0 rv=0 harq_id=0 tpc=1 
+2026-11-23T03:01:38.496429 [PHY0-NR] [I] [  392] PDSCH: cc=0 pid=0 c-rnti=0x4601 prb=(0,1) symb=(1,13) CW0: mod=64QAM tbs=153 R=0.906 rv=0 CRC=OK iter=1.0 evm=0.00 t_us=36 epre=+57.8 snr=+69.8 cfo=-0.0 delay=+0.0  ack_tti_tx=396
+    0000: 01 03 00 01 00 3f 00 00 00 00 00 00 00 00 00 00
+    0010: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+2026-11-23T03:01:38.496433 [MAC-NR ] [I] [  392] DL 0:  newTX tbs=153, rv=0, ack=OK, ndi=1
+2026-11-23T03:01:38.496442 [RLC-NR ] [I] SRB1: No data available to be sent
+2026-11-23T03:01:38.496447 [MAC-NR ] [I] [  392] UL SBSR: lcg=0 bs=0 PAD: len=48
+2026-11-23T03:01:38.496448 [MAC    ] [I] [  392] UL 0:  New TX, rv=0, tbs=51
+2026-11-23T03:01:38.496570 [PHY0-NR] [I] [  392] PUSCH: cc=0 pid=0 c-rnti=0x4601 prb=(0,2) symb=(0,13) CW0: mod=QPSK tbs=51 R=0.535 rv=0 ack=1  t=30 us cfo=-0 tti_tx=396
+    0000: 3d 00 3f 00 00 00 00 00 00 00 00 00 00 00 00 00
+    0010: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+2026-11-23T03:01:38.497700 [MAC-NR ] [I] [  393] DL LCID=1 len=3 PAD: len=147
+2026-11-23T03:01:38.497702 [RLC-NR ] [I] SRB1: Rx PDU - N bytes 3
+2026-11-23T03:01:38.497706 [RLC-NR ] [I] RX status PDU: ACK_SN = 1, N_nack = 0
+2026-11-23T03:01:38.500314 [PHY0-NR] [I] [  395] PDCCH: cc=0, c-rnti=0x4601 dci=1_0 ss=common3 L=1 cce=0 f_alloc=0x30 t_alloc=0x0 vrb_to_prb_map=0 mcs=28 ndi=1 rv=0 harq_id=1 dai=0 pucch_tpc=1 pucch_res=0 harq_feedback=3 
+2026-11-23T03:01:38.500379 [PHY0-NR] [I] [  395] PDSCH: cc=0 pid=1 c-rnti=0x4601 prb=(0,1) symb=(1,13) CW0: mod=64QAM tbs=169 R=0.950 rv=0 CRC=OK iter=2.0 evm=0.00 t_us=35 epre=+57.8 snr=+69.8 cfo=-0.0 delay=+0.0  ack_tti_tx=399
+    0000: 01 35 c0 00 00 00 28 85 4f c0 0a c0 00 40 00 04
+    0010: 38 d1 6a b2 52 6a 4d 35 a5 51 39 25 b1 60 b8 77
+2026-11-23T03:01:38.500382 [MAC-NR ] [I] [  395] DL 1:  newTX tbs=169, rv=0, ack=OK, ndi=1
+2026-11-23T03:01:38.500430 [PHY0-NR] [I] [  395] PUCCH: cc=0, f=1 prb=4:1 symb=0:14 cs=0 occ=0 rnti=0x4601 ack=1 , tti_tx=399
+2026-11-23T03:01:38.501544 [MAC-NR ] [I] [  396] DL LCID=1 len=53 PAD: len=113
+2026-11-23T03:01:38.501545 [RLC-NR ] [I] SRB1: Rx PDU - N bytes 53
+2026-11-23T03:01:38.501546 [RLC-NR ] [I] SRB1: Rx data PDU SN=0 (53 B)
+    0000: c0 00 00 00 28 85 4f c0 0a c0 00 40 00 04 38 d1
+    0010: 6a b2 52 6a 4d 35 a5 51 39 25 b1 60 b8 77 04 02
+2026-11-23T03:01:38.501547 [RLC-NR ] [I] SRB1: status packet requested through polling bit
+2026-11-23T03:01:38.501552 [PDCP-NR] [I] RX SRB1 PDU (51 B), integrity=none, encryption=none
+    0000: 00 00 28 85 4f c0 0a c0 00 40 00 04 38 d1 6a b2
+    0010: 52 6a 4d 35 a5 51 39 25 b1 60 b8 77 04 02 00 06
+2026-11-23T03:01:38.501562 [RRC-NR ] [I] SRB1 - Rx dlInformationTransfer (45 B)
+2026-11-23T03:01:38.501567 [NAS5G  ] [I] DL PDU (length 42)
+    0000: 7e 00 56 00 02 00 00 21 c6 8b 55 92 93 52 69 ad
+    0010: 2a 89 c9 2d 8b 05 c3 b8 20 10 00 36 1b 21 63 fd
+2026-11-23T03:01:38.501570 [NAS5G  ] [I] Decrypted DL PDU (length 42)
+    0000: 7e 00 56 00 02 00 00 21 c6 8b 55 92 93 52 69 ad
+    0010: 2a 89 c9 2d 8b 05 c3 b8 20 10 00 36 1b 21 63 fd
+2026-11-23T03:01:38.501575 [NAS5G  ] [I] Handling Authentication Request
+2026-11-23T03:01:38.501586 [USIM   ] [I] Read Home PLMN Id=99970
+2026-11-23T03:01:38.501586 [NAS5G  ] [I] Authentication request RAND
+    0000: c6 8b 55 92 93 52 69 ad 2a 89 c9 2d 8b 05 c3 b8
+2026-11-23T03:01:38.501586 [NAS5G  ] [I] Authentication request AUTN
+    0000: 00 36 1b 21 63 fd 80 00 1f 24 cf 14 ac f0 e4 88
+2026-11-23T03:01:38.501590 [NAS5G  ] [I] Serving network name 5G:mnc070.mcc999.3gppnetwork.org
+2026-11-23T03:01:38.501616 [NAS5G  ] [I] Generated k_amf:
+    0000: b9 8a 0d d1 76 3c 47 9e 5d cc a0 5f f5 5a bc 91
+    0010: 82 91 00 32 63 07 3e 1d 5e 38 d7 bc f2 dd cd 13
+2026-11-23T03:01:38.501616 [NAS5G  ] [I] Network authentication successful
+2026-11-23T03:01:38.501620 [NAS5G  ] [I] Sending Authentication Response
+2026-11-23T03:01:38.501625 [RRC-NR ] [I] SRB1 - Tx ulInformationTransfer (24 B)
+2026-11-23T03:01:38.501626 [PDCP-NR] [I] TX SRB1 SDU (24B), integrity=none, encryption=none
+    0000: 3a 0a bf 00 2b 96 88 4f e7 df b4 e4 6e eb ba 2d
+    0010: 24 23 e8 1e 44 04 d7 80
+2026-11-23T03:01:38.501629 [PDCP-NR] [I] TX SRB1 PDU (30B), HFN=0, SN=1, integrity=none, encryption=none
+    0000: 00 01 3a 0a bf 00 2b 96 88 4f e7 df b4 e4 6e eb
+    0010: ba 2d 24 23 e8 1e 44 04 d7 80 00 00 00 00
+2026-11-23T03:01:38.501630 [RLC-NR ] [I] SRB1: Tx SDU (30 B, PDCP_SN=1 tx_sdu_queue_len=1)
+    0000: 00 01 3a 0a bf 00 2b 96 88 4f e7 df b4 e4 6e eb
+    0010: ba 2d 24 23 e8 1e 44 04 d7 80 00 00 00 00
+2026-11-23T03:01:38.501631 [NAS5G  ] [I] Generated res_star (16):
+    0000: 9f cf bf 69 c8 dd d7 74 5a 48 47 d0 3c 88 09 af
+2026-11-23T03:01:38.502816 [MAC-NR ] [I] [  397] SR:    Starting procedure
+2026-11-23T03:01:38.509013 [PHY0-NR] [I] [  402] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=406
+2026-11-23T03:01:38.526054 [MAC-NR ] [I] [  416] SR:    Signalling PHY sr_counter=1
+2026-11-23T03:01:38.526101 [PHY0-NR] [I] [  416] PUCCH: cc=0, f=1 prb=8:1 symb=0:14 cs=0 occ=0 rnti=0x4601 sr=1 , tti_tx=420
+2026-11-23T03:01:38.533434 [PHY0-NR] [I] [  422] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=426
+2026-11-23T03:01:38.535843 [PHY0-NR] [I] [  424] PDCCH: cc=0, c-rnti=0x4601 dci=0_0 ss=common3 L=1 cce=0 f_alloc=0x3a8 t_alloc=0x0 hop=n mcs=12 ndi=1 rv=0 harq_id=0 tpc=1 
+2026-11-23T03:01:38.535861 [RLC-NR ] [I] SRB1: generating status PDU. Bytes available:523
+2026-11-23T03:01:38.535864 [RLC-NR ] [I] TX status PDU - ACK_SN = 1, N_nack = 0
+2026-11-23T03:01:38.535871 [RLC-NR ] [I] SRB1: Started t-PollRetransmit. POLL_SN=1
+2026-11-23T03:01:38.535874 [RLC-NR ] [I] SRB1: [Data PDU, P=1, SI=full, SN_SIZE=12 bits, SN=1, SO=0]
+2026-11-23T03:01:38.535874 [RLC-NR ] [I] SRB1: No data available to be sent
+2026-11-23T03:01:38.535878 [MAC-NR ] [I] [  424] UL LCID=1 len=3 LCID=1 len=32 SBSR: lcg=0 bs=5 PAD: len=486
+2026-11-23T03:01:38.535879 [MAC    ] [I] [  424] UL 0:  New TX, rv=0, tbs=528
+2026-11-23T03:01:38.536074 [PHY0-NR] [I] [  424] PUSCH: cc=0 pid=0 c-rnti=0x4601 prb=(0,18) symb=(0,13) CW0: mod=16QAM tbs=528 R=0.423 rv=0  t=101 us cfo=-0 tti_tx=428
+    0000: 01 03 00 01 00 01 20 c0 01 00 01 3a 0a bf 00 2b
+    0010: 96 88 4f e7 df b4 e4 6e eb ba 2d 24 23 e8 1e 44
+2026-11-23T03:01:38.545752 [PHY0-NR] [I] [  432] PDCCH: cc=0, c-rnti=0x4601 dci=0_0 ss=common3 L=1 cce=0 f_alloc=0x3a8 t_alloc=0x0 hop=n mcs=12 ndi=1 rv=0 harq_id=0 tpc=1 
+2026-11-23T03:01:38.545762 [MAC    ] [I] [  432] UL 0:  Retx=1, rv=0, tbs=528
+2026-11-23T03:01:38.545942 [PHY0-NR] [I] [  432] PUSCH: cc=0 pid=0 c-rnti=0x4601 prb=(0,18) symb=(0,13) CW0: mod=16QAM tbs=528 R=0.423 rv=0  t=89 us cfo=-0 tti_tx=436
+    0000: 01 03 00 01 00 01 20 c0 01 00 01 3a 0a bf 00 2b
+    0010: 96 88 4f e7 df b4 e4 6e eb ba 2d 24 23 e8 1e 44
+2026-11-23T03:01:38.555648 [PHY0-NR] [I] [  440] PDCCH: cc=0, c-rnti=0x4601 dci=0_0 ss=common3 L=1 cce=0 f_alloc=0x3a8 t_alloc=0x0 hop=n mcs=12 ndi=1 rv=0 harq_id=0 tpc=1 
+2026-11-23T03:01:38.555659 [MAC    ] [I] [  440] UL 0:  Retx=2, rv=0, tbs=528
+2026-11-23T03:01:38.555829 [PHY0-NR] [I] [  440] PUSCH: cc=0 pid=0 c-rnti=0x4601 prb=(0,18) symb=(0,13) CW0: mod=16QAM tbs=528 R=0.423 rv=0  t=88 us cfo=-0 tti_tx=444
+    0000: 01 03 00 01 00 01 20 c0 01 00 01 3a 0a bf 00 2b
+    0010: 96 88 4f e7 df b4 e4 6e eb ba 2d 24 23 e8 1e 44
+2026-11-23T03:01:38.557065 [PHY0-NR] [I] [  441] PDCCH: cc=0, c-rnti=0x4601 dci=1_0 ss=common3 L=1 cce=0 f_alloc=0x30 t_alloc=0x0 vrb_to_prb_map=0 mcs=28 ndi=0 rv=0 harq_id=0 dai=0 pucch_tpc=1 pucch_res=0 harq_feedback=3 
+2026-11-23T03:01:38.557148 [PHY0-NR] [I] [  441] PDSCH: cc=0 pid=0 c-rnti=0x4601 prb=(0,1) symb=(1,13) CW0: mod=64QAM tbs=169 R=0.950 rv=0 CRC=OK iter=2.0 evm=0.00 t_us=37 epre=+57.8 snr=+69.8 cfo=-0.0 delay=+0.0  ack_tti_tx=445
+    0000: 01 35 c0 00 00 00 28 85 4f c0 0a c0 00 40 00 04
+    0010: 38 d1 6a b2 52 6a 4d 35 a5 51 39 25 b1 60 b8 77
+2026-11-23T03:01:38.557152 [MAC-NR ] [I] [  441] DL 0:  newTX tbs=169, rv=0, ack=OK, ndi=0
+2026-11-23T03:01:38.557199 [PHY0-NR] [I] [  441] PUCCH: cc=0, f=1 prb=4:1 symb=0:14 cs=0 occ=0 rnti=0x4601 ack=1 , tti_tx=445
+2026-11-23T03:01:38.558266 [MAC-NR ] [I] [  442] DL LCID=1 len=53 PAD: len=113
+2026-11-23T03:01:38.558267 [RLC-NR ] [I] SRB1: Rx PDU - N bytes 53
+2026-11-23T03:01:38.558268 [RLC-NR ] [I] SRB1: Rx data PDU SN=0 (53 B)
+    0000: c0 00 00 00 28 85 4f c0 0a c0 00 40 00 04 38 d1
+    0010: 6a b2 52 6a 4d 35 a5 51 39 25 b1 60 b8 77 04 02
+2026-11-23T03:01:38.558271 [RLC-NR ] [I] SRB1: status packet requested through polling bit
+2026-11-23T03:01:38.558272 [RLC-NR ] [I] SRB1: SN=0 outside rx window [1:2049] - discarding
+2026-11-23T03:01:38.558423 [PHY0-NR] [I] [  442] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=446
+2026-11-23T03:01:38.559575 [MAC-NR ] [I] [  443] SR:    Starting procedure
+2026-11-23T03:01:38.565659 [PHY0-NR] [I] [  448] PDCCH: cc=0, c-rnti=0x4601 dci=0_0 ss=common3 L=1 cce=0 f_alloc=0x3a8 t_alloc=0x0 hop=n mcs=12 ndi=1 rv=0 harq_id=0 tpc=1 
+2026-11-23T03:01:38.565669 [MAC    ] [I] [  448] UL 0:  Retx=3, rv=0, tbs=528
+2026-11-23T03:01:38.565839 [PHY0-NR] [I] [  448] PUSCH: cc=0 pid=0 c-rnti=0x4601 prb=(0,18) symb=(0,13) CW0: mod=16QAM tbs=528 R=0.423 rv=0  t=88 us cfo=-0 tti_tx=452
+    0000: 01 03 00 01 00 01 20 c0 01 00 01 3a 0a bf 00 2b
+    0010: 96 88 4f e7 df b4 e4 6e eb ba 2d 24 23 e8 1e 44
+2026-11-23T03:01:38.567073 [PHY0-NR] [I] [  449] PDCCH: cc=0, c-rnti=0x4601 dci=1_0 ss=common3 L=1 cce=0 f_alloc=0x30 t_alloc=0x0 vrb_to_prb_map=0 mcs=28 ndi=1 rv=0 harq_id=0 dai=0 pucch_tpc=1 pucch_res=0 harq_feedback=3 
+2026-11-23T03:01:38.567140 [PHY0-NR] [I] [  449] PDSCH: cc=0 pid=0 c-rnti=0x4601 prb=(0,1) symb=(1,13) CW0: mod=64QAM tbs=169 R=0.950 rv=0 CRC=OK iter=2.0 evm=0.00 t_us=37 epre=+57.8 snr=+69.8 cfo=-0.0 delay=-0.0  ack_tti_tx=453
+    0000: 3d 1e 3f 00 00 00 00 00 00 00 00 00 00 00 00 00
+    0010: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+2026-11-23T03:01:38.567142 [MAC-NR ] [I] [  449] DL 0:  newTX tbs=169, rv=0, ack=OK, ndi=1
+2026-11-23T03:01:38.567193 [PHY0-NR] [I] [  449] PUCCH: cc=0, f=1 prb=4:1 symb=0:14 cs=0 occ=0 rnti=0x4601 ack=1 , tti_tx=453
+2026-11-23T03:01:38.568312 [MAC-NR ] [I] [  450] DL TA: id=0 command=30 PAD: len=166
+2026-11-23T03:01:38.568312 [MAC-NR ] [I] [  450] Received TA=30.
+2026-11-23T03:01:38.568313 [PHY-SA ] [I] [  451] PHY:   Set TA: ta_cmd: 30, n_ta: 384, ta_usec: 12.5
+2026-11-23T03:01:38.575766 [PHY0-NR] [I] [  456] PDCCH: cc=0, c-rnti=0x4601 dci=0_0 ss=common3 L=1 cce=0 f_alloc=0x3b1 t_alloc=0x0 hop=n mcs=12 ndi=1 rv=0 harq_id=0 tpc=1 
+2026-11-23T03:01:38.575776 [MAC    ] [I] [  456] UL 0:  Retx=4, rv=0, tbs=528
+2026-11-23T03:01:38.575949 [PHY0-NR] [I] [  456] PUSCH: cc=0 pid=0 c-rnti=0x4601 prb=(9,27) symb=(0,13) CW0: mod=16QAM tbs=528 R=0.423 rv=0  t=88 us cfo=-0 tti_tx=460
+    0000: 01 03 00 01 00 01 20 c0 01 00 01 3a 0a bf 00 2b
+    0010: 96 88 4f e7 df b4 e4 6e eb ba 2d 24 23 e8 1e 44
+2026-11-23T03:01:38.583487 [PHY0-NR] [I] [  462] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=466
+2026-11-23T03:01:38.585994 [PHY0-NR] [I] [  464] PDCCH: cc=0, c-rnti=0x4601 dci=1_0 ss=common3 L=1 cce=0 f_alloc=0x30 t_alloc=0x0 vrb_to_prb_map=0 mcs=28 ndi=0 rv=0 harq_id=0 dai=0 pucch_tpc=1 pucch_res=0 harq_feedback=3 
+2026-11-23T03:01:38.586005 [PHY0-NR] [I] [  464] PDCCH: cc=0, c-rnti=0x4601 dci=0_0 ss=common3 L=1 cce=2 f_alloc=0x68 t_alloc=0x0 hop=n mcs=8 ndi=0 rv=0 harq_id=0 tpc=1 
+2026-11-23T03:01:38.586095 [PHY0-NR] [I] [  464] PDSCH: cc=0 pid=0 c-rnti=0x4601 prb=(0,1) symb=(1,13) CW0: mod=64QAM tbs=169 R=0.950 rv=0 CRC=OK iter=2.0 evm=0.00 t_us=49 epre=+57.8 snr=+69.8 cfo=-0.0 delay=+0.0  ack_tti_tx=468
+    0000: 01 03 00 02 00 3f 00 00 00 00 00 00 00 00 00 00
+    0010: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+2026-11-23T03:01:38.586099 [MAC-NR ] [I] [  464] DL 0:  newTX tbs=169, rv=0, ack=OK, ndi=0
+2026-11-23T03:01:38.586105 [MAC    ] [I] [  464] UL 0:  Maximum number of ReTX reached (5). Discarding TB.
+2026-11-23T03:01:38.586113 [RLC-NR ] [I] SRB1: generating status PDU. Bytes available:56
+2026-11-23T03:01:38.586116 [RLC-NR ] [I] TX status PDU - ACK_SN = 1, N_nack = 0
+2026-11-23T03:01:38.586120 [RLC-NR ] [I] SRB1: No data available to be sent
+2026-11-23T03:01:38.586123 [MAC-NR ] [I] [  464] UL LCID=1 len=3 SBSR: lcg=0 bs=1 PAD: len=52
+2026-11-23T03:01:38.586125 [MAC    ] [I] [  464] UL 0:  New TX, rv=0, tbs=60
+2026-11-23T03:01:38.586286 [PHY0-NR] [I] [  464] PUSCH: cc=0 pid=0 c-rnti=0x4601 prb=(0,2) symb=(0,13) CW0: mod=QPSK tbs=60 R=0.626 rv=0 ack=1  t=41 us cfo=-0 tti_tx=468
+    0000: 01 03 00 01 00 3d 01 3f 00 00 00 00 00 00 00 00
+    0010: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+2026-11-23T03:01:38.587388 [MAC-NR ] [I] [  465] DL LCID=1 len=3 PAD: len=163
+2026-11-23T03:01:38.587390 [RLC-NR ] [I] SRB1: Rx PDU - N bytes 3
+2026-11-23T03:01:38.587392 [RLC-NR ] [I] RX status PDU: ACK_SN = 2, N_nack = 0
+2026-11-23T03:01:38.590050 [PHY0-NR] [I] [  467] PDCCH: cc=0, c-rnti=0x4601 dci=1_0 ss=common3 L=1 cce=0 f_alloc=0x30 t_alloc=0x0 vrb_to_prb_map=0 mcs=28 ndi=0 rv=0 harq_id=1 dai=0 pucch_tpc=1 pucch_res=0 harq_feedback=3 
+2026-11-23T03:01:38.590142 [PHY0-NR] [I] [  467] PDSCH: cc=0 pid=1 c-rnti=0x4601 prb=(0,1) symb=(1,13) CW0: mod=64QAM tbs=169 R=0.950 rv=0 CRC=OK iter=2.0 evm=0.00 t_us=53 epre=+57.8 snr=+69.8 cfo=-0.0 delay=-0.0  ack_tti_tx=471
+    0000: 01 1e c0 01 00 01 28 82 6f c0 67 31 9e 5b e0 0f
+    0010: c0 0b a0 40 00 5e 0e 1c 26 c0 20 40 00 00 00 00
+2026-11-23T03:01:38.590146 [MAC-NR ] [I] [  467] DL 1:  newTX tbs=169, rv=0, ack=OK, ndi=0
+2026-11-23T03:01:38.590202 [PHY0-NR] [I] [  467] PUCCH: cc=0, f=1 prb=4:1 symb=0:14 cs=0 occ=0 rnti=0x4601 ack=1 , tti_tx=471
+2026-11-23T03:01:38.591330 [MAC-NR ] [I] [  468] DL LCID=1 len=30 PAD: len=136
+2026-11-23T03:01:38.591331 [RLC-NR ] [I] SRB1: Rx PDU - N bytes 30
+2026-11-23T03:01:38.591332 [RLC-NR ] [I] SRB1: Rx data PDU SN=1 (30 B)
+    0000: c0 01 00 01 28 82 6f c0 67 31 9e 5b e0 0f c0 0b
+    0010: a0 40 00 5e 0e 1c 26 c0 20 40 00 00 00 00
+2026-11-23T03:01:38.591333 [RLC-NR ] [I] SRB1: status packet requested through polling bit
+2026-11-23T03:01:38.591342 [PDCP-NR] [I] RX SRB1 PDU (28 B), integrity=none, encryption=none
+    0000: 00 01 28 82 6f c0 67 31 9e 5b e0 0f c0 0b a0 40
+    0010: 00 5e 0e 1c 26 c0 20 40 00 00 00 00
+2026-11-23T03:01:38.591352 [RRC-NR ] [I] SRB1 - Rx dlInformationTransfer (22 B)
+2026-11-23T03:01:38.591357 [NAS5G  ] [I] DL PDU (length 19)
+    0000: 7e 03 39 8c f2 df 00 7e 00 5d 02 00 02 f0 70 e1
+    0010: 36 01 02
+2026-11-23T03:01:38.591359 [NAS5G  ] [I] Decrypted DL PDU (length 19)
+    0000: 7e 03 39 8c f2 df 00 7e 00 5d 02 00 02 f0 70 e1
+    0010: 36 01 02
+2026-11-23T03:01:38.591364 [NAS5G  ] [I] Handling Security Mode Command
+2026-11-23T03:01:38.591375 [NAS5G  ] [I] NAS encryption key - k_nas_enc
+    0000: 1d d9 38 ae 60 15 aa 5c bc 62 2b 0f 9f 42 de dc
+    0010: 9d 33 b7 a9 29 6a a1 0b c4 1a db e2 da 2e 45 5b
+2026-11-23T03:01:38.591376 [NAS5G  ] [I] NAS integrity key - k_nas_int
+    0000: 4b 86 1b 83 d2 c8 da 0e 3c 6b 03 17 da 6f c2 bd
+    0010: 59 2a 5d 5a 57 b5 10 56 33 d1 2a 32 a3 f1 5c 4b
+2026-11-23T03:01:38.591378 [NAS5G  ] [I] Integrity check ok. Local: count=0, Received: count=0  [39 8c f2 df]
+2026-11-23T03:01:38.591378 [NAS5G  ] [I] Update local count to estimated count 0
+2026-11-23T03:01:38.591387 [NAS5G  ] [I] Sending Security Mode Complete
+2026-11-23T03:01:38.591391 [RRC-NR ] [I] SRB1 - Tx ulInformationTransfer (59 B)
+2026-11-23T03:01:38.591393 [PDCP-NR] [I] TX SRB1 SDU (59B), integrity=none, encryption=none
+    0000: 3a 1c 3f 02 4e 76 32 fc 80 3f 00 2f 3b 80 04 9a
+    0010: b2 9c 84 29 a3 41 a8 79 b8 80 0f bf 00 20 bc 80
+2026-11-23T03:01:38.591396 [PDCP-NR] [I] TX SRB1 PDU (65B), HFN=0, SN=2, integrity=none, encryption=none
+    0000: 00 02 3a 1c 3f 02 4e 76 32 fc 80 3f 00 2f 3b 80
+    0010: 04 9a b2 9c 84 29 a3 41 a8 79 b8 80 0f bf 00 20
+2026-11-23T03:01:38.591397 [RLC-NR ] [I] SRB1: Tx SDU (65 B, PDCP_SN=2 tx_sdu_queue_len=1)
+    0000: 00 02 3a 1c 3f 02 4e 76 32 fc 80 3f 00 2f 3b 80
+    0010: 04 9a b2 9c 84 29 a3 41 a8 79 b8 80 0f bf 00 20
+2026-11-23T03:01:38.592562 [MAC-NR ] [I] [  469] SR:    Starting procedure
+2026-11-23T03:01:38.596473 [PHY0-NR] [I] [  472] PDCCH: cc=0, c-rnti=0x4601 dci=0_0 ss=common3 L=1 cce=0 f_alloc=0x0 t_alloc=0x0 hop=n mcs=11 ndi=1 rv=0 harq_id=0 tpc=1 
+2026-11-23T03:01:38.596490 [RLC-NR ] [I] SRB1: generating status PDU. Bytes available:20
+2026-11-23T03:01:38.596493 [RLC-NR ] [I] TX status PDU - ACK_SN = 2, N_nack = 0
+2026-11-23T03:01:38.596498 [RLC-NR ] [I] SRB1: trying to build PDU segment from SDU.
+2026-11-23T03:01:38.596499 [RLC-NR ] [I] SRB1: creating new SDU segment. Tx SDU (65 B), nof_bytes=15 B 
+2026-11-23T03:01:38.596503 [RLC-NR ] [I] SRB1: [Data PDU, P=0, SI=first, SN_SIZE=12 bits, SN=2, SO=0]
+2026-11-23T03:01:38.596508 [MAC-NR ] [I] [  472] UL LCID=1 len=3 LCID=1 len=15 SBSR: lcg=0 bs=7
+2026-11-23T03:01:38.596509 [MAC    ] [I] [  472] UL 0:  New TX, rv=0, tbs=24
+2026-11-23T03:01:38.596643 [PHY0-NR] [I] [  472] PUSCH: cc=0 pid=0 c-rnti=0x4601 prb=(0,0) symb=(0,13) CW0: mod=16QAM tbs=24 R=0.394 rv=0  t=36 us cfo=-0 tti_tx=476
+    0000: 01 03 00 02 00 01 0f 90 02 00 02 3a 1c 3f 02 4e
+    0010: 76 32 fc 80 3f 00 3d 07
+2026-11-23T03:01:38.606549 [PHY0-NR] [I] [  480] PDCCH: cc=0, c-rnti=0x4601 dci=0_0 ss=common3 L=1 cce=0 f_alloc=0x68 t_alloc=0x0 hop=n mcs=13 ndi=0 rv=0 harq_id=0 tpc=1 
+2026-11-23T03:01:38.606566 [RLC-NR ] [I] SRB1: continuing SDU segment. SN=2, Tx SDU (65 B), nof_bytes=94 B 
+2026-11-23T03:01:38.606567 [RLC-NR ] [I] SRB1: grant is large enough for full SDU.SDU bytes left 56, nof_bytes 94, 
+2026-11-23T03:01:38.606569 [RLC-NR ] [I] SRB1: Started t-PollRetransmit. POLL_SN=2
+2026-11-23T03:01:38.606572 [RLC-NR ] [I] SRB1: [Data PDU, P=1, SI=last, SN_SIZE=12 bits, SN=2, SO=13]
+2026-11-23T03:01:38.606574 [RLC-NR ] [I] SRB1: grant is large enough for full SDU.Removing current SDU info
+2026-11-23T03:01:38.606576 [RLC-NR ] [I] SRB1: No data available to be sent
+2026-11-23T03:01:38.606580 [MAC-NR ] [I] [  480] UL LCID=1 len=56 SBSR: lcg=0 bs=7 PAD: len=35
+2026-11-23T03:01:38.606581 [MAC    ] [I] [  480] UL 0:  New TX, rv=0, tbs=96
+2026-11-23T03:01:38.606725 [PHY0-NR] [I] [  480] PUSCH: cc=0 pid=0 c-rnti=0x4601 prb=(0,2) symb=(0,13) CW0: mod=16QAM tbs=96 R=0.495 rv=0  t=48 us cfo=-0 tti_tx=484
+    0000: 01 38 e0 02 00 0d 2f 3b 80 04 9a b2 9c 84 29 a3
+    0010: 41 a8 79 b8 80 0f bf 00 20 bc 80 06 80 cc fc 83
+2026-11-23T03:01:38.609384 [PHY0-NR] [I] [  482] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=486
+2026-11-23T03:01:38.616893 [PHY0-NR] [I] [  488] PDCCH: cc=0, c-rnti=0x4601 dci=1_0 ss=common3 L=1 cce=0 f_alloc=0x30 t_alloc=0x0 vrb_to_prb_map=0 mcs=28 ndi=1 rv=0 harq_id=0 dai=0 pucch_tpc=1 pucch_res=0 harq_feedback=3 
+2026-11-23T03:01:38.616908 [PHY0-NR] [I] [  488] PDCCH: cc=0, c-rnti=0x4601 dci=0_0 ss=common3 L=1 cce=2 f_alloc=0x9c t_alloc=0x0 hop=n mcs=10 ndi=1 rv=0 harq_id=0 tpc=1 
+2026-11-23T03:01:38.617011 [PHY0-NR] [I] [  488] PDSCH: cc=0 pid=0 c-rnti=0x4601 prb=(0,1) symb=(1,13) CW0: mod=64QAM tbs=169 R=0.950 rv=0 CRC=OK iter=2.0 evm=0.00 t_us=55 epre=+57.8 snr=+69.8 cfo=-0.0 delay=+0.0  ack_tti_tx=492
+    0000: 01 03 00 03 00 3f 00 00 00 00 00 00 00 00 00 00
+    0010: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+2026-11-23T03:01:38.617015 [MAC-NR ] [I] [  488] DL 0:  newTX tbs=169, rv=0, ack=OK, ndi=1
+2026-11-23T03:01:38.617027 [RLC-NR ] [I] SRB1: No data available to be sent
+2026-11-23T03:01:38.617032 [MAC-NR ] [I] [  488] UL SBSR: lcg=0 bs=0 PAD: len=85
+2026-11-23T03:01:38.617034 [MAC    ] [I] [  488] UL 0:  New TX, rv=0, tbs=88
+2026-11-23T03:01:38.617227 [PHY0-NR] [I] [  488] PUSCH: cc=0 pid=0 c-rnti=0x4601 prb=(0,3) symb=(0,13) CW0: mod=16QAM tbs=88 R=0.341 rv=0 ack=1  t=82 us cfo=-0 tti_tx=492
+    0000: 3d 00 3f 00 00 00 00 00 00 00 00 00 00 00 00 00
+    0010: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+2026-11-23T03:01:38.618334 [MAC-NR ] [I] [  489] DL LCID=1 len=3 PAD: len=163
+2026-11-23T03:01:38.618336 [RLC-NR ] [I] SRB1: Rx PDU - N bytes 3
+2026-11-23T03:01:38.618338 [RLC-NR ] [I] RX status PDU: ACK_SN = 3, N_nack = 0
+2026-11-23T03:01:38.627236 [PHY0-NR] [I] [  496] PDCCH: cc=0, c-rnti=0x4601 dci=1_0 ss=common0 L=2 cce=0 f_alloc=0x60 t_alloc=0x0 vrb_to_prb_map=0 mcs=2 ndi=0 rv=0 harq_id=0 dai=0 pucch_tpc=1 pucch_res=0 harq_feedback=3 
+2026-11-23T03:01:38.627328 [PHY0-NR] [I] [  496] PDSCH: cc=0 pid=0 c-rnti=0x4601 prb=(1,3) symb=(1,13) CW0: mod=QPSK tbs=16 R=0.200 rv=0 CRC=OK iter=1.0 evm=0.00 t_us=40 epre=+57.8 snr=+66.8 cfo=-0.0 delay=+0.0  ack_tti_tx=500
+    0000: 01 0b c0 02 00 02 22 08 10 a4 4c 3d 2d 3f 00 00
+2026-11-23T03:01:38.627333 [MAC-NR ] [I] [  496] DL 0:  newTX tbs=16, rv=0, ack=OK, ndi=0
+2026-11-23T03:01:38.627394 [PHY0-NR] [I] [  496] PUCCH: cc=0, f=1 prb=4:1 symb=0:14 cs=0 occ=0 rnti=0x4601 ack=1 sr=0 , tti_tx=500
+2026-11-23T03:01:38.628520 [MAC-NR ] [I] [  497] DL LCID=1 len=11 PAD: len=2
+2026-11-23T03:01:38.628522 [RLC-NR ] [I] SRB1: Rx PDU - N bytes 11
+2026-11-23T03:01:38.628523 [RLC-NR ] [I] SRB1: Rx data PDU SN=2 (11 B)
+    0000: c0 02 00 02 22 08 10 a4 4c 3d 2d
+2026-11-23T03:01:38.628525 [RLC-NR ] [I] SRB1: status packet requested through polling bit
+2026-11-23T03:01:38.628530 [PDCP-NR] [I] RX SRB1 PDU (9 B), integrity=none, encryption=none
+    0000: 00 02 22 08 10 a4 4c 3d 2d
+2026-11-23T03:01:38.628540 [RRC-NR ] [I] SRB1 - Rx securityModeCommand (3 B)
+2026-11-23T03:01:38.628545 [RRC-NR ] [I] Received Security Mode Command nea: NEA0, nia: 128-NIA2
+2026-11-23T03:01:38.628548 [USIM   ] [I] Generating NR AS Keys. NAS UL COUNT 0
+2026-11-23T03:01:38.628557 [USIM   ] [I] K_gnb
+    0000: 70 70 68 23 93 de a1 d9 0f 22 f8 0e 27 81 51 d8
+    0010: 0e 3f c7 1b 8b ff 29 97 e5 6e 2d 0f 6f ae 4b 36
+2026-11-23T03:01:38.628567 [USIM   ] [I] Initial K_gnb
+    0000: 70 70 68 23 93 de a1 d9 0f 22 f8 0e 27 81 51 d8
+    0010: 0e 3f c7 1b 8b ff 29 97 e5 6e 2d 0f 6f ae 4b 36
+2026-11-23T03:01:38.628567 [USIM   ] [I] NR K_RRC_int
+    0000: a3 49 8b cb 36 87 f5 cb d1 9c 36 6a 8b 0d 05 d9
+    0010: 91 26 6f 72 c1 57 9b 87 81 d0 6f f4 f8 c3 fd bb
+2026-11-23T03:01:38.628568 [USIM   ] [I] NR K_RRC_enc
+    0000: bb 98 a0 3d 9c ff f4 f9 83 33 c9 0b 68 63 ca 3f
+    0010: 2b 76 6e d7 8d 95 a2 fd 04 a9 c2 f2 44 eb ae ec
+2026-11-23T03:01:38.628568 [USIM   ] [I] NR K_UP_int
+    0000: 56 6a 70 66 ec 83 c1 95 81 80 e2 7f b1 49 c2 70
+    0010: d9 40 15 c8 60 0b 96 39 0c cb 83 49 3c 1f ab da
+2026-11-23T03:01:38.628568 [USIM   ] [I] NR K_UP_enc
+    0000: 93 c9 b5 56 38 ec 50 16 72 ad b7 2e ef c1 c7 38
+    0010: cd 27 4e 2a 99 f4 88 84 47 1d 9c 9e ba d9 20 96
+2026-11-23T03:01:38.628569 [RRC-NR ] [I] RRC encryption key - k_rrc_enc
+    0000: bb 98 a0 3d 9c ff f4 f9 83 33 c9 0b 68 63 ca 3f
+    0010: 2b 76 6e d7 8d 95 a2 fd 04 a9 c2 f2 44 eb ae ec
+2026-11-23T03:01:38.628569 [RRC-NR ] [I] RRC integrity key  - k_rrc_int
+    0000: a3 49 8b cb 36 87 f5 cb d1 9c 36 6a 8b 0d 05 d9
+    0010: 91 26 6f 72 c1 57 9b 87 81 d0 6f f4 f8 c3 fd bb
+2026-11-23T03:01:38.628569 [RRC-NR ] [I] UP encryption key  - k_up_enc
+    0000: 93 c9 b5 56 38 ec 50 16 72 ad b7 2e ef c1 c7 38
+    0010: cd 27 4e 2a 99 f4 88 84 47 1d 9c 9e ba d9 20 96
+2026-11-23T03:01:38.628570 [PDCP-NR] [I] Configuring security with 128-EIA2 and EEA0
+2026-11-23T03:01:38.628597 [RRC-NR ] [I] SRB1 - Tx securityModeComplete (2 B)
+2026-11-23T03:01:38.628598 [PDCP-NR] [I] TX SRB1 SDU (2B), integrity=tx/rx, encryption=none
+    0000: 2a 00
+2026-11-23T03:01:38.628602 [PDCP-NR] [I] TX SRB1 PDU (8B), HFN=0, SN=3, integrity=tx/rx, encryption=none
+    0000: 00 03 2a 00 99 ff 3c 84
+2026-11-23T03:01:38.628603 [RLC-NR ] [I] SRB1: Tx SDU (8 B, PDCP_SN=3 tx_sdu_queue_len=1)
+    0000: 00 03 2a 00 99 ff 3c 84
+2026-11-23T03:01:38.629769 [MAC-NR ] [I] [  498] SR:    Starting procedure
+2026-11-23T03:01:38.634852 [PHY0-NR] [I] [  502] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=506
+2026-11-23T03:01:38.651813 [MAC-NR ] [I] [  516] SR:    Signalling PHY sr_counter=1
+2026-11-23T03:01:38.651859 [PHY0-NR] [I] [  516] PUCCH: cc=0, f=1 prb=8:1 symb=0:14 cs=0 occ=0 rnti=0x4601 sr=1 , tti_tx=520
+2026-11-23T03:01:38.659239 [PHY0-NR] [I] [  522] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=526
+2026-11-23T03:01:38.661763 [PHY0-NR] [I] [  524] PDCCH: cc=0, c-rnti=0x4601 dci=0_0 ss=common0 L=2 cce=0 f_alloc=0x4b8 t_alloc=0x0 hop=n mcs=10 ndi=0 rv=0 harq_id=0 tpc=1 
+2026-11-23T03:01:38.661793 [RLC-NR ] [I] SRB1: generating status PDU. Bytes available:523
+2026-11-23T03:01:38.661797 [RLC-NR ] [I] TX status PDU - ACK_SN = 3, N_nack = 0
+2026-11-23T03:01:38.661804 [RLC-NR ] [I] SRB1: Started t-PollRetransmit. POLL_SN=3
+2026-11-23T03:01:38.661806 [RLC-NR ] [I] SRB1: [Data PDU, P=1, SI=full, SN_SIZE=12 bits, SN=3, SO=0]
+2026-11-23T03:01:38.661807 [RLC-NR ] [I] SRB1: No data available to be sent
+2026-11-23T03:01:38.661810 [MAC-NR ] [I] [  524] UL LCID=1 len=3 LCID=1 len=10 SBSR: lcg=0 bs=2 PAD: len=508
+2026-11-23T03:01:38.661811 [MAC    ] [I] [  524] UL 0:  New TX, rv=0, tbs=528
+2026-11-23T03:01:38.662023 [PHY0-NR] [I] [  524] PUSCH: cc=0 pid=0 c-rnti=0x4601 prb=(12,35) symb=(0,13) CW0: mod=16QAM tbs=528 R=0.335 rv=0  t=116 us cfo=-0 tti_tx=528
+    0000: 01 03 00 03 00 01 0a c0 03 00 03 2a 00 99 ff 3c
+    0010: 84 3d 02 3f 00 00 00 00 00 00 00 00 00 00 00 00
+2026-11-23T03:01:38.671732 [PHY0-NR] [I] [  532] PDCCH: cc=0, c-rnti=0x4601 dci=0_0 ss=common0 L=2 cce=0 f_alloc=0x40 t_alloc=0x0 hop=n mcs=6 ndi=1 rv=0 harq_id=0 tpc=1 
+2026-11-23T03:01:38.671747 [RLC-NR ] [I] SRB1: No data available to be sent
+2026-11-23T03:01:38.671751 [MAC-NR ] [I] [  532] UL SBSR: lcg=0 bs=0 PAD: len=25
+2026-11-23T03:01:38.671752 [MAC    ] [I] [  532] UL 0:  New TX, rv=0, tbs=28
+2026-11-23T03:01:38.671865 [PHY0-NR] [I] [  532] PUSCH: cc=0 pid=0 c-rnti=0x4601 prb=(12,13) symb=(0,13) CW0: mod=QPSK tbs=28 R=0.455 rv=0  t=21 us cfo=-0 tti_tx=536
+    0000: 3d 00 3f 00 00 00 00 00 00 00 00 00 00 00 00 00
+    0010: 00 00 00 00 00 00 00 00 00 00 00 00
+2026-11-23T03:01:38.674367 [PHY0-NR] [I] [  534] PDCCH: cc=0, c-rnti=0x4601 dci=1_0 ss=common0 L=2 cce=0 f_alloc=0x90 t_alloc=0x0 vrb_to_prb_map=0 mcs=2 ndi=1 rv=0 harq_id=0 dai=0 pucch_tpc=1 pucch_res=0 harq_feedback=3 
+2026-11-23T03:01:38.674433 [PHY0-NR] [I] [  534] PDSCH: cc=0 pid=0 c-rnti=0x4601 prb=(1,4) symb=(1,13) CW0: mod=QPSK tbs=22 R=0.200 rv=0 CRC=OK iter=1.0 evm=0.00 t_us=31 epre=+57.8 snr=+69.8 cfo=-0.0 delay=-0.0  ack_tti_tx=538
+    0000: 01 03 00 04 00 01 0f 90 03 00 03 34 02 01 20 01
+    0010: 00 08 00 b2 52 19
+2026-11-23T03:01:38.674436 [MAC-NR ] [I] [  534] DL 0:  newTX tbs=22, rv=0, ack=OK, ndi=1
+2026-11-23T03:01:38.674482 [PHY0-NR] [I] [  534] PUCCH: cc=0, f=1 prb=4:1 symb=0:14 cs=0 occ=0 rnti=0x4601 ack=1 , tti_tx=538
+2026-11-23T03:01:38.675566 [MAC-NR ] [I] [  535] DL LCID=1 len=3 LCID=1 len=15
+2026-11-23T03:01:38.675568 [RLC-NR ] [I] SRB1: Rx PDU - N bytes 3
+2026-11-23T03:01:38.675571 [RLC-NR ] [I] RX status PDU: ACK_SN = 4, N_nack = 0
+2026-11-23T03:01:38.675577 [RLC-NR ] [I] SRB1: Rx PDU - N bytes 15
+2026-11-23T03:01:38.675578 [RLC-NR ] [I] SRB1: Rx data PDU SN=3 (15 B)
+    0000: 90 03 00 03 34 02 01 20 01 00 08 00 b2 52 19
+2026-11-23T03:01:38.675732 [PHY0-NR] [I] [  535] PDCCH: cc=0, c-rnti=0x4601 dci=1_0 ss=common0 L=2 cce=0 f_alloc=0x30 t_alloc=0x0 vrb_to_prb_map=0 mcs=2 ndi=1 rv=0 harq_id=1 dai=0 pucch_tpc=1 pucch_res=0 harq_feedback=3 
+2026-11-23T03:01:38.675783 [PHY0-NR] [I] [  535] PDSCH: cc=0 pid=1 c-rnti=0x4601 prb=(1,2) symb=(1,13) CW0: mod=QPSK tbs=11 R=0.217 rv=0 CRC=OK iter=1.0 evm=0.00 t_us=23 epre=+57.8 snr=+69.8 cfo=-0.0 delay=+0.0  ack_tti_tx=539
+    0000: 01 05 e0 03 00 0d 1c 3f 00 00 00
+2026-11-23T03:01:38.675785 [MAC-NR ] [I] [  535] DL 1:  newTX tbs=11, rv=0, ack=OK, ndi=1
+2026-11-23T03:01:38.675826 [PHY0-NR] [I] [  535] PUCCH: cc=0, f=1 prb=4:1 symb=0:14 cs=0 occ=0 rnti=0x4601 ack=1 , tti_tx=539
+2026-11-23T03:01:38.676954 [MAC-NR ] [I] [  536] DL LCID=1 len=5 PAD: len=3
+2026-11-23T03:01:38.676955 [RLC-NR ] [I] SRB1: Rx PDU - N bytes 5
+2026-11-23T03:01:38.676955 [RLC-NR ] [I] SRB1: Rx data PDU SN=3 (5 B)
+    0000: e0 03 00 0d 1c
+2026-11-23T03:01:38.676956 [RLC-NR ] [I] SRB1: status packet requested through polling bit
+2026-11-23T03:01:38.676958 [RLC-NR ] [I] SRB1: Fully received segmented SDU. SN=3.
+2026-11-23T03:01:38.676960 [PDCP-NR] [I] RX SRB1 PDU (14 B), integrity=tx/rx, encryption=tx/rx
+    0000: 00 03 34 02 01 20 01 00 08 00 b2 52 19 1c
+2026-11-23T03:01:38.676975 [RRC-NR ] [I] SRB1 - Rx ueCapabilityEnquiry (8 B)
+2026-11-23T03:01:38.676983 [RRC-NR ] [I] Received UE Capability Enquiry
+2026-11-23T03:01:38.677005 [RRC-NR ] [I] SRB1 - Tx ueCapabilityInformation (30 B)
+2026-11-23T03:01:38.677007 [PDCP-NR] [I] TX SRB1 SDU (30B), integrity=tx/rx, encryption=tx/rx
+    0000: 4c 82 06 a0 40 04 00 01 e0 00 00 00 00 10 00 00
+    0010: 00 02 01 00 20 04 00 0a 00 00 10 00 00 40
+2026-11-23T03:01:38.677009 [PDCP-NR] [I] TX SRB1 PDU (36B), HFN=0, SN=4, integrity=tx/rx, encryption=tx/rx
+    0000: 00 04 4c 82 06 a0 40 04 00 01 e0 00 00 00 00 10
+    0010: 00 00 00 02 01 00 20 04 00 0a 00 00 10 00 00 40
+2026-11-23T03:01:38.677011 [RLC-NR ] [I] SRB1: Tx SDU (36 B, PDCP_SN=4 tx_sdu_queue_len=1)
+    0000: 00 04 4c 82 06 a0 40 04 00 01 e0 00 00 00 00 10
+    0010: 00 00 00 02 01 00 20 04 00 0a 00 00 10 00 00 40
+2026-11-23T03:01:38.678189 [MAC-NR ] [I] [  537] SR:    Starting procedure
+2026-11-23T03:01:38.684229 [PHY0-NR] [I] [  542] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=546
+2026-11-23T03:01:38.701033 [MAC-NR ] [I] [  556] SR:    Signalling PHY sr_counter=1
+2026-11-23T03:01:38.701093 [PHY0-NR] [I] [  556] PUCCH: cc=0, f=1 prb=8:1 symb=0:14 cs=0 occ=0 rnti=0x4601 sr=1 , tti_tx=560
+2026-11-23T03:01:38.708398 [PHY0-NR] [I] [  562] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=566
+2026-11-23T03:01:38.710866 [PHY0-NR] [I] [  564] PDCCH: cc=0, c-rnti=0x4601 dci=0_0 ss=common0 L=2 cce=0 f_alloc=0x41c t_alloc=0x0 hop=n mcs=11 ndi=0 rv=0 harq_id=0 tpc=1 
+2026-11-23T03:01:38.710884 [RLC-NR ] [I] SRB1: generating status PDU. Bytes available:507
+2026-11-23T03:01:38.710887 [RLC-NR ] [I] TX status PDU - ACK_SN = 4, N_nack = 0
+2026-11-23T03:01:38.710894 [RLC-NR ] [I] SRB1: Started t-PollRetransmit. POLL_SN=4
+2026-11-23T03:01:38.710896 [RLC-NR ] [I] SRB1: [Data PDU, P=1, SI=full, SN_SIZE=12 bits, SN=4, SO=0]
+2026-11-23T03:01:38.710897 [RLC-NR ] [I] SRB1: No data available to be sent
+2026-11-23T03:01:38.710899 [MAC-NR ] [I] [  564] UL LCID=1 len=3 LCID=1 len=38 SBSR: lcg=0 bs=6 PAD: len=464
+2026-11-23T03:01:38.710901 [MAC    ] [I] [  564] UL 0:  New TX, rv=0, tbs=512
+2026-11-23T03:01:38.711099 [PHY0-NR] [I] [  564] PUSCH: cc=0 pid=0 c-rnti=0x4601 prb=(12,32) symb=(0,13) CW0: mod=16QAM tbs=512 R=0.372 rv=0  t=102 us cfo=-0 tti_tx=568
+    0000: 01 03 00 04 00 01 26 c0 04 00 04 4c 82 06 a0 40
+    0010: 04 00 01 e0 00 00 00 00 10 00 00 00 02 01 00 20
+2026-11-23T03:01:38.720939 [PHY0-NR] [I] [  572] PDCCH: cc=0, c-rnti=0x4601 dci=0_0 ss=common0 L=2 cce=0 f_alloc=0xa8 t_alloc=0x0 hop=n mcs=7 ndi=1 rv=0 harq_id=0 tpc=1 
+2026-11-23T03:01:38.720955 [RLC-NR ] [I] SRB1: No data available to be sent
+2026-11-23T03:01:38.720960 [MAC-NR ] [I] [  572] UL SBSR: lcg=0 bs=0 PAD: len=66
+2026-11-23T03:01:38.720961 [MAC    ] [I] [  572] UL 0:  New TX, rv=0, tbs=69
+2026-11-23T03:01:38.721078 [PHY0-NR] [I] [  572] PUSCH: cc=0 pid=0 c-rnti=0x4601 prb=(12,15) symb=(0,13) CW0: mod=QPSK tbs=69 R=0.538 rv=0  t=29 us cfo=-0 tti_tx=576
+    0000: 3d 00 3f 00 00 00 00 00 00 00 00 00 00 00 00 00
+    0010: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+2026-11-23T03:01:38.723576 [PHY0-NR] [I] [  574] PDCCH: cc=0, c-rnti=0x4601 dci=1_0 ss=common0 L=2 cce=0 f_alloc=0x1e0 t_alloc=0x0 vrb_to_prb_map=0 mcs=2 ndi=0 rv=0 harq_id=0 dai=0 pucch_tpc=1 pucch_res=0 harq_feedback=3 
+2026-11-23T03:01:38.723672 [PHY0-NR] [I] [  574] PDSCH: cc=0 pid=0 c-rnti=0x4601 prb=(1,11) symb=(1,13) CW0: mod=QPSK tbs=63 R=0.197 rv=0 CRC=OK iter=1.0 evm=0.00 t_us=56 epre=+57.8 snr=+69.8 cfo=-0.0 delay=+0.0  ack_tti_tx=578
+    0000: 01 03 00 05 00 01 38 90 04 00 04 28 85 cf c0 55
+    0010: 00 a1 b4 20 2f c0 08 40 20 2e e0 01 7e 53 3f 20
+2026-11-23T03:01:38.723675 [MAC-NR ] [I] [  574] DL 0:  newTX tbs=63, rv=0, ack=OK, ndi=0
+2026-11-23T03:01:38.723722 [PHY0-NR] [I] [  574] PUCCH: cc=0, f=1 prb=4:1 symb=0:14 cs=0 occ=0 rnti=0x4601 ack=1 , tti_tx=578
+2026-11-23T03:01:38.724832 [MAC-NR ] [I] [  575] DL LCID=1 len=3 LCID=1 len=56
+2026-11-23T03:01:38.724834 [RLC-NR ] [I] SRB1: Rx PDU - N bytes 3
+2026-11-23T03:01:38.724836 [RLC-NR ] [I] RX status PDU: ACK_SN = 5, N_nack = 0
+2026-11-23T03:01:38.724842 [RLC-NR ] [I] SRB1: Rx PDU - N bytes 56
+2026-11-23T03:01:38.724843 [RLC-NR ] [I] SRB1: Rx data PDU SN=4 (56 B)
+    0000: 90 04 00 04 28 85 cf c0 55 00 a1 b4 20 2f c0 08
+    0010: 40 20 2e e0 01 7e 53 3f 20 e0 40 08 18 00 00 d6
+2026-11-23T03:01:38.725026 [PHY0-NR] [I] [  575] PDCCH: cc=0, c-rnti=0x4601 dci=1_0 ss=common0 L=2 cce=0 f_alloc=0x30 t_alloc=0x0 vrb_to_prb_map=0 mcs=2 ndi=0 rv=0 harq_id=1 dai=0 pucch_tpc=1 pucch_res=0 harq_feedback=3 
+2026-11-23T03:01:38.725075 [PHY0-NR] [I] [  575] PDSCH: cc=0 pid=1 c-rnti=0x4601 prb=(1,2) symb=(1,13) CW0: mod=QPSK tbs=11 R=0.217 rv=0 CRC=OK iter=1.0 evm=0.00 t_us=21 epre=+57.8 snr=+69.8 cfo=-0.0 delay=+0.0  ack_tti_tx=579
+    0000: 01 05 e0 04 00 36 e3 3f 00 00 00
+2026-11-23T03:01:38.725077 [MAC-NR ] [I] [  575] DL 1:  newTX tbs=11, rv=0, ack=OK, ndi=0
+2026-11-23T03:01:38.725117 [PHY0-NR] [I] [  575] PUCCH: cc=0, f=1 prb=4:1 symb=0:14 cs=0 occ=0 rnti=0x4601 ack=1 , tti_tx=579
+2026-11-23T03:01:38.726216 [MAC-NR ] [I] [  576] DL LCID=1 len=5 PAD: len=3
+2026-11-23T03:01:38.726217 [RLC-NR ] [I] SRB1: Rx PDU - N bytes 5
+2026-11-23T03:01:38.726217 [RLC-NR ] [I] SRB1: Rx data PDU SN=4 (5 B)
+    0000: e0 04 00 36 e3
+2026-11-23T03:01:38.726218 [RLC-NR ] [I] SRB1: status packet requested through polling bit
+2026-11-23T03:01:38.726219 [RLC-NR ] [I] SRB1: Fully received segmented SDU. SN=4.
+2026-11-23T03:01:38.726221 [PDCP-NR] [I] RX SRB1 PDU (55 B), integrity=tx/rx, encryption=tx/rx
+    0000: 00 04 28 85 cf c0 55 00 a1 b4 20 2f c0 08 40 20
+    0010: 2e e0 01 7e 53 3f 20 e0 40 08 18 00 00 d6 8a 80
+2026-11-23T03:01:38.726234 [RRC-NR ] [I] SRB1 - Rx dlInformationTransfer (49 B)
+2026-11-23T03:01:38.726240 [NAS5G  ] [I] DL PDU (length 46)
+    0000: 7e 02 a8 05 0d a1 01 7e 00 42 01 01 77 00 0b f2
+    0010: 99 f9 07 02 00 40 c0 00 06 b4 54 07 40 99 f9 07
+2026-11-23T03:01:38.726242 [NAS5G  ] [I] Integrity check ok. Local: count=1, Received: count=1  [a8 05 0d a1]
+2026-11-23T03:01:38.726244 [NAS5G  ] [I] Decrypted DL PDU (length 46)
+    0000: 7e 02 a8 05 0d a1 01 7e 00 42 01 01 77 00 0b f2
+    0010: 99 f9 07 02 00 40 c0 00 06 b4 54 07 40 99 f9 07
+2026-11-23T03:01:38.726251 [NAS5G  ] [I] Handling Registration Accept
+2026-11-23T03:01:38.726256 [NAS5G  ] [I] Sending Registration Complete
+2026-11-23T03:01:38.726262 [RRC-NR ] [I] SRB1 - Tx ulInformationTransfer (13 B)
+2026-11-23T03:01:38.726263 [PDCP-NR] [I] TX SRB1 SDU (13B), integrity=tx/rx, encryption=tx/rx
+    0000: 3a 05 3f 01 73 34 a1 52 00 bf 00 21 80
+2026-11-23T03:01:38.726265 [PDCP-NR] [I] TX SRB1 PDU (19B), HFN=0, SN=5, integrity=tx/rx, encryption=tx/rx
+    0000: 00 05 3a 05 3f 01 73 34 a1 52 00 bf 00 21 80 0a
+    0010: 07 4d ce
+2026-11-23T03:01:38.726266 [RLC-NR ] [I] SRB1: Tx SDU (19 B, PDCP_SN=5 tx_sdu_queue_len=1)
+    0000: 00 05 3a 05 3f 01 73 34 a1 52 00 bf 00 21 80 0a
+    0010: 07 4d ce
+2026-11-23T03:01:38.726275 [NAS5G  ] [I] Sending PDU Session Establishment Request in UL NAS transport.
+2026-11-23T03:01:38.726276 [RRC-NR ] [I] SRB1 - Tx ulInformationTransfer (38 B)
+2026-11-23T03:01:38.726276 [PDCP-NR] [I] TX SRB1 SDU (38B), integrity=tx/rx, encryption=tx/rx
+    0000: 3a 11 bf 01 28 90 c3 56 81 3f 00 33 80 80 04 17
+    0010: 00 80 e0 ff ff c8 d0 89 00 c0 92 84 84 34 b7 3a
+2026-11-23T03:01:38.726277 [PDCP-NR] [I] TX SRB1 PDU (44B), HFN=0, SN=6, integrity=tx/rx, encryption=tx/rx
+    0000: 00 06 3a 11 bf 01 28 90 c3 56 81 3f 00 33 80 80
+    0010: 04 17 00 80 e0 ff ff c8 d0 89 00 c0 92 84 84 34
+2026-11-23T03:01:38.726277 [RLC-NR ] [I] SRB1: Tx SDU (44 B, PDCP_SN=6 tx_sdu_queue_len=2)
+    0000: 00 06 3a 11 bf 01 28 90 c3 56 81 3f 00 33 80 80
+    0010: 04 17 00 80 e0 ff ff c8 d0 89 00 c0 92 84 84 34
+2026-11-23T03:01:38.727439 [MAC-NR ] [I] [  577] SR:    Starting procedure
+2026-11-23T03:01:38.733576 [PHY0-NR] [I] [  582] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=586
+2026-11-23T03:01:38.750297 [MAC-NR ] [I] [  596] SR:    Signalling PHY sr_counter=1
+2026-11-23T03:01:38.750341 [PHY0-NR] [I] [  596] PUCCH: cc=0, f=1 prb=8:1 symb=0:14 cs=0 occ=0 rnti=0x4601 sr=1 , tti_tx=600
+2026-11-23T03:01:38.757684 [PHY0-NR] [I] [  602] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=606
+2026-11-23T03:01:38.760223 [PHY0-NR] [I] [  604] PDCCH: cc=0, c-rnti=0x4601 dci=0_0 ss=common0 L=2 cce=0 f_alloc=0x4b8 t_alloc=0x0 hop=n mcs=9 ndi=0 rv=0 harq_id=0 tpc=1 
+2026-11-23T03:01:38.760259 [RLC-NR ] [I] SRB1: generating status PDU. Bytes available:523
+2026-11-23T03:01:38.760263 [RLC-NR ] [I] TX status PDU - ACK_SN = 5, N_nack = 0
+2026-11-23T03:01:38.760271 [RLC-NR ] [I] SRB1: [Data PDU, P=0, SI=full, SN_SIZE=12 bits, SN=5, SO=0]
+2026-11-23T03:01:38.760272 [RLC-NR ] [I] SRB1: Started t-PollRetransmit. POLL_SN=6
+2026-11-23T03:01:38.760273 [RLC-NR ] [I] SRB1: [Data PDU, P=1, SI=full, SN_SIZE=12 bits, SN=6, SO=0]
+2026-11-23T03:01:38.760274 [RLC-NR ] [I] SRB1: No data available to be sent
+2026-11-23T03:01:38.760277 [MAC-NR ] [I] [  604] UL LCID=1 len=3 LCID=1 len=21 LCID=1 len=46 SBSR: lcg=0 bs=7 PAD: len=449
+2026-11-23T03:01:38.760278 [MAC    ] [I] [  604] UL 0:  New TX, rv=0, tbs=528
+2026-11-23T03:01:38.760478 [PHY0-NR] [I] [  604] PUSCH: cc=0 pid=0 c-rnti=0x4601 prb=(12,35) symb=(0,13) CW0: mod=QPSK tbs=528 R=0.670 rv=0  t=95 us cfo=-0 tti_tx=608
+    0000: 01 03 00 05 00 01 15 80 05 00 05 3a 05 3f 01 73
+    0010: 34 a1 52 00 bf 00 21 80 0a 07 4d ce 01 2e c0 06
+2026-11-23T03:01:38.770164 [PHY0-NR] [I] [  612] PDCCH: cc=0, c-rnti=0x4601 dci=0_0 ss=common0 L=2 cce=0 f_alloc=0x110 t_alloc=0x0 hop=n mcs=6 ndi=1 rv=0 harq_id=0 tpc=1 
+2026-11-23T03:01:38.770179 [RLC-NR ] [I] SRB1: No data available to be sent
+2026-11-23T03:01:38.770184 [MAC-NR ] [I] [  612] UL SBSR: lcg=0 bs=0 PAD: len=85
+2026-11-23T03:01:38.770185 [MAC    ] [I] [  612] UL 0:  New TX, rv=0, tbs=88
+2026-11-23T03:01:38.770312 [PHY0-NR] [I] [  612] PUSCH: cc=0 pid=0 c-rnti=0x4601 prb=(12,17) symb=(0,13) CW0: mod=QPSK tbs=88 R=0.455 rv=0  t=34 us cfo=-0 tti_tx=616
+    0000: 3d 00 3f 00 00 00 00 00 00 00 00 00 00 00 00 00
+    0010: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+2026-11-23T03:01:38.772802 [PHY0-NR] [I] [  614] PDCCH: cc=0, c-rnti=0x4601 dci=1_0 ss=common0 L=2 cce=0 f_alloc=0x30 t_alloc=0x0 vrb_to_prb_map=0 mcs=2 ndi=1 rv=0 harq_id=0 dai=0 pucch_tpc=1 pucch_res=0 harq_feedback=3 
+2026-11-23T03:01:38.772865 [PHY0-NR] [I] [  614] PDSCH: cc=0 pid=0 c-rnti=0x4601 prb=(1,2) symb=(1,13) CW0: mod=QPSK tbs=11 R=0.217 rv=0 CRC=OK iter=1.0 evm=0.00 t_us=28 epre=+57.8 snr=+69.8 cfo=-0.0 delay=+0.0  ack_tti_tx=618
+    0000: 01 03 00 07 00 3f 00 00 00 00 00
+2026-11-23T03:01:38.772868 [MAC-NR ] [I] [  614] DL 0:  newTX tbs=11, rv=0, ack=OK, ndi=1
+2026-11-23T03:01:38.772914 [PHY0-NR] [I] [  614] PUCCH: cc=0, f=1 prb=4:1 symb=0:14 cs=0 occ=0 rnti=0x4601 ack=1 , tti_tx=618
+2026-11-23T03:01:38.774079 [MAC-NR ] [I] [  615] DL LCID=1 len=3 PAD: len=5
+2026-11-23T03:01:38.774081 [RLC-NR ] [I] SRB1: Rx PDU - N bytes 3
+2026-11-23T03:01:38.774085 [RLC-NR ] [I] RX status PDU: ACK_SN = 7, N_nack = 0
+2026-11-23T03:01:38.782649 [PHY0-NR] [I] [  622] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=626
+2026-11-23T03:01:38.806661 [PHY0-NR] [I] [  642] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=646
+2026-11-23T03:01:38.830646 [PHY0-NR] [I] [  662] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=666
+2026-11-23T03:01:38.845381 [PHY0-NR] [I] [  674] PDCCH: cc=0, c-rnti=0x4601 dci=1_0 ss=common0 L=2 cce=0 f_alloc=0x210 t_alloc=0x0 vrb_to_prb_map=0 mcs=2 ndi=0 rv=0 harq_id=0 dai=0 pucch_tpc=1 pucch_res=0 harq_feedback=3 
+2026-11-23T03:01:38.845473 [PHY0-NR] [I] [  674] PDSCH: cc=0 pid=0 c-rnti=0x4601 prb=(1,12) symb=(1,13) CW0: mod=QPSK tbs=69 R=0.197 rv=0 CRC=OK iter=1.0 evm=0.00 t_us=47 epre=+57.8 snr=+69.8 cfo=-0.0 delay=+0.0  ack_tti_tx=678
+    0000: 01 3e c0 05 00 05 28 86 6f c0 4a 37 5c a6 40 4f
+    0010: c0 0a 88 61 f2 00 09 e0 0e 00 0c a0 0d c0 06 a0
+2026-11-23T03:01:38.845477 [MAC-NR ] [I] [  674] DL 0:  newTX tbs=69, rv=0, ack=OK, ndi=0
+2026-11-23T03:01:38.845532 [PHY0-NR] [I] [  674] PUCCH: cc=0, f=1 prb=4:1 symb=0:14 cs=0 occ=0 rnti=0x4601 ack=1 , tti_tx=678
+2026-11-23T03:01:38.846654 [MAC-NR ] [I] [  675] DL LCID=1 len=62 PAD: len=4
+2026-11-23T03:01:38.846656 [RLC-NR ] [I] SRB1: Rx PDU - N bytes 62
+2026-11-23T03:01:38.846657 [RLC-NR ] [I] SRB1: Rx data PDU SN=5 (62 B)
+    0000: c0 05 00 05 28 86 6f c0 4a 37 5c a6 40 4f c0 0a
+    0010: 88 61 f2 00 09 e0 0e 00 0c a0 0d c0 06 a0 08 e0
+2026-11-23T03:01:38.846658 [RLC-NR ] [I] SRB1: status packet requested through polling bit
+2026-11-23T03:01:38.846663 [PDCP-NR] [I] RX SRB1 PDU (60 B), integrity=tx/rx, encryption=tx/rx
+    0000: 00 05 28 86 6f c0 4a 37 5c a6 40 4f c0 0a 88 61
+    0010: f2 00 09 e0 0e 00 0c a0 0d c0 06 a0 08 e0 0a 68
+2026-11-23T03:01:38.846678 [RRC-NR ] [I] SRB1 - Rx dlInformationTransfer (54 B)
+2026-11-23T03:01:38.846683 [NAS5G  ] [I] DL PDU (length 51)
+    0000: 7e 02 51 ba e5 32 02 7e 00 54 43 0f 90 00 4f 00
+    0010: 70 00 65 00 6e 00 35 00 47 00 53 45 09 90 00 4e
+2026-11-23T03:01:38.846687 [NAS5G  ] [I] Integrity check ok. Local: count=2, Received: count=2  [51 ba e5 32]
+2026-11-23T03:01:38.846688 [NAS5G  ] [I] Decrypted DL PDU (length 51)
+    0000: 7e 02 51 ba e5 32 02 7e 00 54 43 0f 90 00 4f 00
+    0010: 70 00 65 00 6e 00 35 00 47 00 53 45 09 90 00 4e
+2026-11-23T03:01:38.846691 [NAS5G  ] [I] Handling Configuration Update Command
+2026-11-23T03:01:38.846694 [NAS5G  ] [I] Sending Configuration Update Complete
+2026-11-23T03:01:38.846699 [RRC-NR ] [I] SRB1 - Tx ulInformationTransfer (13 B)
+2026-11-23T03:01:38.846700 [PDCP-NR] [I] TX SRB1 SDU (13B), integrity=tx/rx, encryption=tx/rx
+    0000: 3a 05 3f 01 01 41 89 1d 81 bf 00 2a 80
+2026-11-23T03:01:38.846704 [PDCP-NR] [I] TX SRB1 PDU (19B), HFN=0, SN=7, integrity=tx/rx, encryption=tx/rx
+    0000: 00 07 3a 05 3f 01 01 41 89 1d 81 bf 00 2a 80 7e
+    0010: e1 73 70
+2026-11-23T03:01:38.846705 [RLC-NR ] [I] SRB1: Tx SDU (19 B, PDCP_SN=7 tx_sdu_queue_len=1)
+    0000: 00 07 3a 05 3f 01 01 41 89 1d 81 bf 00 2a 80 7e
+    0010: e1 73 70
+2026-11-23T03:01:38.847872 [MAC-NR ] [I] [  676] SR:    Starting procedure
+2026-11-23T03:01:38.847946 [MAC-NR ] [I] [  676] SR:    Signalling PHY sr_counter=1
+2026-11-23T03:01:38.847991 [PHY0-NR] [I] [  676] PUCCH: cc=0, f=1 prb=8:1 symb=0:14 cs=0 occ=0 rnti=0x4601 sr=1 , tti_tx=680
+2026-11-23T03:01:38.855344 [PHY0-NR] [I] [  682] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=686
+2026-11-23T03:01:38.857811 [PHY0-NR] [I] [  684] PDCCH: cc=0, c-rnti=0x4601 dci=0_0 ss=common0 L=2 cce=0 f_alloc=0x41c t_alloc=0x0 hop=n mcs=11 ndi=0 rv=0 harq_id=0 tpc=1 
+2026-11-23T03:01:38.857837 [RLC-NR ] [I] SRB1: generating status PDU. Bytes available:507
+2026-11-23T03:01:38.857840 [RLC-NR ] [I] TX status PDU - ACK_SN = 6, N_nack = 0
+2026-11-23T03:01:38.857846 [RLC-NR ] [I] SRB1: Started t-PollRetransmit. POLL_SN=7
+2026-11-23T03:01:38.857849 [RLC-NR ] [I] SRB1: [Data PDU, P=1, SI=full, SN_SIZE=12 bits, SN=7, SO=0]
+2026-11-23T03:01:38.857850 [RLC-NR ] [I] SRB1: No data available to be sent
+2026-11-23T03:01:38.857852 [MAC-NR ] [I] [  684] UL LCID=1 len=3 LCID=1 len=21 SBSR: lcg=0 bs=4 PAD: len=481
+2026-11-23T03:01:38.857854 [MAC    ] [I] [  684] UL 0:  New TX, rv=0, tbs=512
+2026-11-23T03:01:38.858054 [PHY0-NR] [I] [  684] PUSCH: cc=0 pid=0 c-rnti=0x4601 prb=(12,32) symb=(0,13) CW0: mod=16QAM tbs=512 R=0.372 rv=0  t=104 us cfo=-0 tti_tx=688
+    0000: 01 03 00 06 00 01 15 c0 07 00 07 3a 05 3f 01 01
+    0010: 41 89 1d 81 bf 00 2a 80 7e e1 73 70 3d 04 3f 00
+2026-11-23T03:01:38.867919 [PHY0-NR] [I] [  692] PDCCH: cc=0, c-rnti=0x4601 dci=0_0 ss=common0 L=2 cce=0 f_alloc=0x40 t_alloc=0x0 hop=n mcs=7 ndi=1 rv=0 harq_id=0 tpc=1 
+2026-11-23T03:01:38.867934 [RLC-NR ] [I] SRB1: No data available to be sent
+2026-11-23T03:01:38.867939 [MAC-NR ] [I] [  692] UL SBSR: lcg=0 bs=0 PAD: len=31
+2026-11-23T03:01:38.867940 [MAC    ] [I] [  692] UL 0:  New TX, rv=0, tbs=34
+2026-11-23T03:01:38.868061 [PHY0-NR] [I] [  692] PUSCH: cc=0 pid=0 c-rnti=0x4601 prb=(12,13) symb=(0,13) CW0: mod=QPSK tbs=34 R=0.545 rv=0  t=23 us cfo=-0 tti_tx=696
+    0000: 3d 00 3f 00 00 00 00 00 00 00 00 00 00 00 00 00
+    0010: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+2026-11-23T03:01:38.870596 [PHY0-NR] [I] [  694] PDCCH: cc=0, c-rnti=0x4601 dci=1_0 ss=common0 L=2 cce=0 f_alloc=0x30 t_alloc=0x0 vrb_to_prb_map=0 mcs=2 ndi=1 rv=0 harq_id=0 dai=0 pucch_tpc=1 pucch_res=0 harq_feedback=3 
+2026-11-23T03:01:38.870660 [PHY0-NR] [I] [  694] PDSCH: cc=0 pid=0 c-rnti=0x4601 prb=(1,2) symb=(1,13) CW0: mod=QPSK tbs=11 R=0.217 rv=0 CRC=OK iter=1.0 evm=0.00 t_us=27 epre=+57.8 snr=+69.8 cfo=-0.0 delay=+0.0  ack_tti_tx=698
+    0000: 01 03 00 08 00 3f 00 00 00 00 00
+2026-11-23T03:01:38.870664 [MAC-NR ] [I] [  694] DL 0:  newTX tbs=11, rv=0, ack=OK, ndi=1
+2026-11-23T03:01:38.870720 [PHY0-NR] [I] [  694] PUCCH: cc=0, f=1 prb=4:1 symb=0:14 cs=0 occ=0 rnti=0x4601 ack=1 , tti_tx=698
+2026-11-23T03:01:38.871829 [MAC-NR ] [I] [  695] DL LCID=1 len=3 PAD: len=5
+2026-11-23T03:01:38.871831 [RLC-NR ] [I] SRB1: Rx PDU - N bytes 3
+2026-11-23T03:01:38.871835 [RLC-NR ] [I] RX status PDU: ACK_SN = 8, N_nack = 0
+2026-11-23T03:01:38.876815 [PHY0-NR] [I] [  699] PDCCH: cc=0, c-rnti=0x4601 dci=1_0 ss=common0 L=2 cce=0 f_alloc=0x3c0 t_alloc=0x0 vrb_to_prb_map=0 mcs=2 ndi=1 rv=0 harq_id=1 dai=0 pucch_tpc=1 pucch_res=0 harq_feedback=3 
+2026-11-23T03:01:38.876942 [PHY0-NR] [I] [  699] PDSCH: cc=0 pid=1 c-rnti=0x4601 prb=(1,21) symb=(1,13) CW0: mod=QPSK tbs=123 R=0.198 rv=0 CRC=OK iter=1.0 evm=0.00 t_us=80 epre=+57.8 snr=+69.8 cfo=-0.0 delay=+0.0  ack_tti_tx=703
+    0000: 01 76 c0 06 00 06 06 8a 80 40 9a 01 e0 02 05 e3
+    0010: b0 a5 00 d2 c0 15 84 88 8b d7 63 80 83 2f 00 05
+2026-11-23T03:01:38.876945 [MAC-NR ] [I] [  699] DL 1:  newTX tbs=123, rv=0, ack=OK, ndi=1
+2026-11-23T03:01:38.876997 [PHY0-NR] [I] [  699] PUCCH: cc=0, f=1 prb=4:1 symb=0:14 cs=0 occ=0 rnti=0x4601 ack=1 , tti_tx=703
+2026-11-23T03:01:38.878075 [MAC-NR ] [I] [  700] DL LCID=1 len=118 PAD: len=2
+2026-11-23T03:01:38.878076 [RLC-NR ] [I] SRB1: Rx PDU - N bytes 118
+2026-11-23T03:01:38.878077 [RLC-NR ] [I] SRB1: Rx data PDU SN=6 (118 B)
+    0000: c0 06 00 06 06 8a 80 40 9a 01 e0 02 05 e3 b0 a5
+    0010: 00 d2 c0 15 84 88 8b d7 63 80 83 2f 00 05 8e 01
+2026-11-23T03:01:38.878079 [RLC-NR ] [I] SRB1: status packet requested through polling bit
+2026-11-23T03:01:38.878082 [PDCP-NR] [I] RX SRB1 PDU (116 B), integrity=tx/rx, encryption=tx/rx
+    0000: 00 06 06 8a 80 40 9a 01 e0 02 05 e3 b0 a5 00 d2
+    0010: c0 15 84 88 8b d7 63 80 83 2f 00 05 8e 01 a6 2a
+2026-11-23T03:01:38.878103 [RRC-NR ] [I] SRB1 - Rx rrcReconfiguration (110 B)
+2026-11-23T03:01:38.878116 [RRC-NR ] [I] Proc "NR Connection Reconfiguration" - Starting...
+2026-11-23T03:01:38.878183 [RRC-NR ] [I] Proc "NR Connection Reconfiguration" - Applying Master Cell Group Cfg.
+2026-11-23T03:01:38.878274 [RLC-NR ] [I] SRB2: AM NR configured - tx_sn_field_length=12, rx_sn_field_length=12, t_poll_retx=45, poll_pdu=-1, poll_byte=-1, max_retx_thresh=8, t_reassembly=35, t_status_prohibit=0, tx_queue_length=256
+2026-11-23T03:01:38.878276 [RLC-NR ] [I] Added NR radio bearer with LCID 2 in Acknowledged Mode
+2026-11-23T03:01:38.878279 [MAC-NR ] [I] [  700] Logical Channel Setup: LCID=2, LCG=0, priority=3, PBR=-1, BSD=5ms, bucket_size=-5
+2026-11-23T03:01:38.878280 [RRC-NR ] [I] Adding lcid 4 and radio bearer ID 1
+2026-11-23T03:01:38.893907 [RLC-NR ] [I] DRB1: AM NR configured - tx_sn_field_length=18, rx_sn_field_length=18, t_poll_retx=100, poll_pdu=16, poll_byte=-1, max_retx_thresh=32, t_reassembly=20, t_status_prohibit=10, tx_queue_length=256
+2026-11-23T03:01:38.893910 [RLC-NR ] [I] Added NR radio bearer with LCID 4 in Acknowledged Mode
+2026-11-23T03:01:38.893914 [MAC-NR ] [I] [  700] Logical Channel Setup: LCID=4, LCG=2, priority=5, PBR=8, BSD=300ms, bucket_size=2400
+2026-11-23T03:01:38.893925 [RRC-NR ] [I] Proc "NR Connection Reconfiguration" - Applying Radio Bearer Cfg.
+2026-11-23T03:01:38.893932 [PDCP-NR] [I] SRB2 PDCP-NR entity configured. SN_LEN=12, Discard timer -1, Re-ordering timer 500, RLC=AM, RAT=NR
+2026-11-23T03:01:38.893933 [PDCP-NR] [I] Add SRB2 (lcid=2, sn_len=12bits)
+2026-11-23T03:01:38.893937 [STCK   ] [I] Bearers: Registered EPS bearer ID 1 for lcid=4 over NR-PDCP
+2026-11-23T03:01:38.893940 [PDCP-NR] [I] DRB1 PDCP-NR entity configured. SN_LEN=18, Discard timer 1500, Re-ordering timer 220, RLC=AM, RAT=NR
+2026-11-23T03:01:38.893940 [PDCP-NR] [I] Add DRB1 (lcid=4, sn_len=18bits)
+2026-11-23T03:01:38.893941 [PDCP-NR] [I] Configuring security with 128-EIA2 and EEA0
+2026-11-23T03:01:38.893950 [RRC-NR ] [I] SRB1 - Tx rrcReconfigurationComplete (2 B)
+2026-11-23T03:01:38.893952 [PDCP-NR] [I] TX SRB1 SDU (2B), integrity=tx/rx, encryption=tx/rx
+    0000: 0e 00
+2026-11-23T03:01:38.893957 [PDCP-NR] [I] TX SRB1 PDU (8B), HFN=0, SN=8, integrity=tx/rx, encryption=tx/rx
+    0000: 00 08 0e 00 96 1f 07 7f
+2026-11-23T03:01:38.893959 [RLC-NR ] [I] SRB1: Tx SDU (8 B, PDCP_SN=8 tx_sdu_queue_len=1)
+    0000: 00 08 0e 00 96 1f 07 7f
+2026-11-23T03:01:38.893963 [NAS5G  ] [I] DL PDU (length 68)
+    0000: 7e 02 e2 c5 ac ab 03 7e 00 68 01 00 35 2e 01 01
+    0010: c2 11 00 09 01 00 06 31 31 01 01 ff 01 06 03 f4
+2026-11-23T03:01:38.893966 [NAS5G  ] [I] Integrity check ok. Local: count=3, Received: count=3  [e2 c5 ac ab]
+2026-11-23T03:01:38.893968 [NAS5G  ] [I] Decrypted DL PDU (length 68)
+    0000: 7e 02 e2 c5 ac ab 03 7e 00 68 01 00 35 2e 01 01
+    0010: c2 11 00 09 01 00 06 31 31 01 01 ff 01 06 03 f4
+2026-11-23T03:01:38.893973 [NAS5G  ] [I] Handling DL NAS transport
+2026-11-23T03:01:38.893973 [NAS5G  ] [I] Payload contents (length 53)
+    0000: 2e 01 01 c2 11 00 09 01 00 06 31 31 01 01 ff 01
+    0010: 06 03 f4 24 03 f4 24 29 05 01 0a 2d 00 02 22 01
+2026-11-23T03:01:38.894017 [GW     ] [I] TUN file descriptor = 19
+2026-11-23T03:01:38.899512 [NAS5G  ] [I] PDU Session Establishment successful. IP: 10.45.0.2
+2026-11-23T03:01:38.899533 [RRC-NR ] [I] Proc "NR Connection Reconfiguration" - Finished NR Connection Reconfiguration successfully
+2026-11-23T03:01:38.899564 [MAC-NR ] [I] [  701] SR:    Starting procedure
+2026-11-23T03:01:38.899734 [GW     ] [I] GW IP packet receiver thread run_enable
+2026-11-23T03:01:38.899749 [GW     ] [I] TX PDU
+    0000: 60 00 00 00 00 08 3a ff fe 80 00 00 00 00 00 00
+    0010: ea 29 56 ce 68 04 4d 0b ff 02 00 00 00 00 00 00
+2026-11-23T03:01:38.899759 [PHY0-NR] [I] [  702] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=706
+2026-11-23T03:01:38.899789 [PDCP-NR] [I] TX DRB1 SDU (48B), integrity=none, encryption=tx/rx
+    0000: 60 00 00 00 00 08 3a ff fe 80 00 00 00 00 00 00
+    0010: ea 29 56 ce 68 04 4d 0b ff 02 00 00 00 00 00 00
+2026-11-23T03:01:38.899792 [PDCP-NR] [I] TX DRB1 PDU (51B), HFN=0, SN=0, integrity=none, encryption=tx/rx
+    0000: 80 00 00 60 00 00 00 00 08 3a ff fe 80 00 00 00
+    0010: 00 00 00 ea 29 56 ce 68 04 4d 0b ff 02 00 00 00
+2026-11-23T03:01:38.899793 [RLC-NR ] [I] DRB1: Tx SDU (51 B, PDCP_SN=0 tx_sdu_queue_len=1)
+    0000: 80 00 00 60 00 00 00 00 08 3a ff fe 80 00 00 00
+    0010: 00 00 00 ea 29 56 ce 68 04 4d 0b ff 02 00 00 00
+2026-11-23T03:01:38.916771 [MAC-NR ] [I] [  716] SR:    Signalling PHY sr_counter=1
+2026-11-23T03:01:38.916822 [PHY0-NR] [I] [  716] PUCCH: cc=0, f=1 prb=8:1 symb=0:14 cs=0 occ=0 rnti=0x4601 sr=1 , tti_tx=720
+2026-11-23T03:01:38.924095 [PHY0-NR] [I] [  722] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=726
+2026-11-23T03:01:38.926568 [PHY0-NR] [I] [  724] PDCCH: cc=0, c-rnti=0x4601 dci=0_0 ss=common0 L=2 cce=0 f_alloc=0x41c t_alloc=0x0 hop=n mcs=11 ndi=0 rv=0 harq_id=0 tpc=1 
+2026-11-23T03:01:38.926587 [RLC-NR ] [I] SRB1: generating status PDU. Bytes available:509
+2026-11-23T03:01:38.926590 [RLC-NR ] [I] TX status PDU - ACK_SN = 7, N_nack = 0
+2026-11-23T03:01:38.926596 [RLC-NR ] [I] SRB1: Started t-PollRetransmit. POLL_SN=8
+2026-11-23T03:01:38.926599 [RLC-NR ] [I] SRB1: [Data PDU, P=1, SI=full, SN_SIZE=12 bits, SN=8, SO=0]
+2026-11-23T03:01:38.926599 [RLC-NR ] [I] SRB1: No data available to be sent
+2026-11-23T03:01:38.926600 [RLC-NR ] [I] SRB2: No data available to be sent
+2026-11-23T03:01:38.926603 [RLC-NR ] [I] DRB1: Started t-PollRetransmit. POLL_SN=0
+2026-11-23T03:01:38.926603 [RLC-NR ] [I] DRB1: [Data PDU, P=1, SI=full, SN_SIZE=18 bits, SN=0, SO=0]
+2026-11-23T03:01:38.926604 [RLC-NR ] [I] DRB1: No data available to be sent
+2026-11-23T03:01:38.926607 [MAC-NR ] [I] [  724] UL LCID=1 len=3 LCID=1 len=10 LCID=4 len=54 SBSR: lcg=2 bs=7 PAD: len=436
+2026-11-23T03:01:38.926608 [MAC    ] [I] [  724] UL 0:  New TX, rv=0, tbs=512
+2026-11-23T03:01:38.926808 [PHY0-NR] [I] [  724] PUSCH: cc=0 pid=0 c-rnti=0x4601 prb=(12,32) symb=(0,13) CW0: mod=16QAM tbs=512 R=0.372 rv=0  t=102 us cfo=-0 tti_tx=728
+    0000: 01 03 00 07 00 01 0a c0 08 00 08 0e 00 96 1f 07
+    0010: 7f 04 36 c0 00 00 80 00 00 60 00 00 00 00 08 3a
+2026-11-23T03:01:38.936382 [PHY0-NR] [I] [  732] PDCCH: cc=0, c-rnti=0x4601 dci=1_0 ss=common3 L=1 cce=0 f_alloc=0x30 t_alloc=0x0 vrb_to_prb_map=0 mcs=26 ndi=0 rv=0 harq_id=0 dai=0 pucch_tpc=1 pucch_res=0 harq_feedback=3 
+2026-11-23T03:01:38.936395 [PHY0-NR] [I] [  732] PDCCH: cc=0, c-rnti=0x4601 dci=0_0 ss=common3 L=1 cce=2 f_alloc=0xd5 t_alloc=0x0 hop=n mcs=7 ndi=1 rv=0 harq_id=0 tpc=1 
+2026-11-23T03:01:38.936459 [PHY0-NR] [I] [  732] PDSCH: cc=0 pid=0 c-rnti=0x4601 prb=(0,1) symb=(1,13) CW0: mod=64QAM tbs=153 R=0.906 rv=0 CRC=OK iter=1.0 evm=0.00 t_us=33 epre=+57.8 snr=+69.8 cfo=-0.0 delay=+0.0  ack_tti_tx=736
+    0000: 01 03 00 09 00 3f 00 00 00 00 00 00 00 00 00 00
+    0010: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+2026-11-23T03:01:38.936463 [MAC-NR ] [I] [  732] DL 0:  newTX tbs=153, rv=0, ack=OK, ndi=0
+2026-11-23T03:01:38.936472 [RLC-NR ] [I] SRB1: No data available to be sent
+2026-11-23T03:01:38.936473 [RLC-NR ] [I] SRB2: No data available to be sent
+2026-11-23T03:01:38.936474 [RLC-NR ] [I] DRB1: No data available to be sent
+2026-11-23T03:01:38.936478 [MAC-NR ] [I] [  732] UL SBSR: lcg=0 bs=0 PAD: len=81
+2026-11-23T03:01:38.936479 [MAC    ] [I] [  732] UL 0:  New TX, rv=0, tbs=84
+2026-11-23T03:01:38.936627 [PHY0-NR] [I] [  732] PUSCH: cc=0 pid=0 c-rnti=0x4601 prb=(5,9) symb=(0,13) CW0: mod=QPSK tbs=84 R=0.521 rv=0 ack=1  t=37 us cfo=-0 tti_tx=736
+    0000: 3d 00 3f 00 00 00 00 00 00 00 00 00 00 00 00 00
+    0010: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+2026-11-23T03:01:38.937711 [MAC-NR ] [I] [  733] DL LCID=1 len=3 PAD: len=147
+2026-11-23T03:01:38.937712 [RLC-NR ] [I] SRB1: Rx PDU - N bytes 3
+2026-11-23T03:01:38.937715 [RLC-NR ] [I] RX status PDU: ACK_SN = 9, N_nack = 0
+2026-11-23T03:01:38.937853 [PHY0-NR] [I] [  733] PDCCH: cc=0, c-rnti=0x4601 dci=1_0 ss=common3 L=1 cce=0 f_alloc=0x30 t_alloc=0x0 vrb_to_prb_map=0 mcs=26 ndi=0 rv=0 harq_id=1 dai=0 pucch_tpc=1 pucch_res=0 harq_feedback=3 
+2026-11-23T03:01:38.937909 [PHY0-NR] [I] [  733] PDSCH: cc=0 pid=1 c-rnti=0x4601 prb=(0,1) symb=(1,13) CW0: mod=64QAM tbs=153 R=0.906 rv=0 CRC=OK iter=1.0 evm=0.00 t_us=28 epre=+57.8 snr=+69.8 cfo=-0.0 delay=+0.0  ack_tti_tx=737
+    0000: 04 03 00 00 04 3f 00 00 00 00 00 00 00 00 00 00
+    0010: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+2026-11-23T03:01:38.937911 [MAC-NR ] [I] [  733] DL 1:  newTX tbs=153, rv=0, ack=OK, ndi=0
+2026-11-23T03:01:38.937952 [PHY0-NR] [I] [  733] PUCCH: cc=0, f=1 prb=4:1 symb=0:14 cs=0 occ=0 rnti=0x4601 ack=1 , tti_tx=737
+2026-11-23T03:01:38.939124 [MAC-NR ] [I] [  734] DL LCID=4 len=3 PAD: len=147
+2026-11-23T03:01:38.939125 [RLC-NR ] [I] DRB1: Rx PDU - N bytes 3
+2026-11-23T03:01:38.939126 [RLC-NR ] [I] RX status PDU: ACK_SN = 1, N_nack = 0
+2026-11-23T03:01:38.948823 [PHY0-NR] [I] [  742] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=746
+2026-11-23T03:01:38.972913 [PHY0-NR] [I] [  762] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=766
+2026-11-23T03:01:38.996714 [PHY0-NR] [I] [  782] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=786
+2026-11-23T03:01:39.021178 [PHY0-NR] [I] [  802] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=806
+2026-11-23T03:01:39.045236 [PHY0-NR] [I] [  822] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=826
+2026-11-23T03:01:39.069406 [PHY0-NR] [I] [  842] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=846
+2026-11-23T03:01:39.093652 [PHY0-NR] [I] [  862] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=866
+2026-11-23T03:01:39.117729 [PHY0-NR] [I] [  882] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=886
+2026-11-23T03:01:39.142012 [PHY0-NR] [I] [  902] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=906
+2026-11-23T03:01:39.166251 [PHY0-NR] [I] [  922] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=926
+2026-11-23T03:01:39.190477 [PHY0-NR] [I] [  942] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=946
+2026-11-23T03:01:39.214654 [PHY0-NR] [I] [  962] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=966
+2026-11-23T03:01:39.238417 [PHY0-NR] [I] [  982] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=986
+2026-11-23T03:01:39.262407 [PHY0-NR] [I] [ 1002] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1006
+2026-11-23T03:01:39.286372 [PHY0-NR] [I] [ 1022] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1026
+2026-11-23T03:01:39.310348 [PHY0-NR] [I] [ 1042] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1046
+2026-11-23T03:01:39.334313 [PHY0-NR] [I] [ 1062] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1066
+2026-11-23T03:01:39.358261 [PHY0-NR] [I] [ 1082] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1086
+2026-11-23T03:01:39.382543 [PHY0-NR] [I] [ 1102] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1106
+2026-11-23T03:01:39.400419 [MAC    ] [I] [ 1117] BSR:   triggered_bsr_type=none, LCID QUEUE status: 0: 0 1: 0 
+2026-11-23T03:01:39.406613 [PHY0-NR] [I] [ 1122] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1126
+2026-11-23T03:01:39.429433 [STCK   ] [I] tti_tprof: {mean, max, min} = {0.00, 0, 0} msec
+2026-11-23T03:01:39.430760 [PHY0-NR] [I] [ 1142] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1146
+2026-11-23T03:01:39.454844 [PHY0-NR] [I] [ 1162] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1166
+2026-11-23T03:01:39.479087 [PHY0-NR] [I] [ 1182] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1186
+2026-11-23T03:01:39.502897 [PHY0-NR] [I] [ 1202] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1206
+2026-11-23T03:01:39.526800 [PHY0-NR] [I] [ 1222] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1226
+2026-11-23T03:01:39.550493 [PHY0-NR] [I] [ 1242] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1246
+2026-11-23T03:01:39.574408 [PHY0-NR] [I] [ 1262] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1266
+2026-11-23T03:01:39.598515 [PHY0-NR] [I] [ 1282] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1286
+2026-11-23T03:01:39.623290 [PHY0-NR] [I] [ 1302] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1306
+2026-11-23T03:01:39.647863 [PHY0-NR] [I] [ 1322] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1326
+2026-11-23T03:01:39.672769 [PHY0-NR] [I] [ 1342] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1346
+2026-11-23T03:01:39.697398 [PHY0-NR] [I] [ 1362] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1366
+2026-11-23T03:01:39.722256 [PHY0-NR] [I] [ 1382] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1386
+2026-11-23T03:01:39.746469 [PHY0-NR] [I] [ 1402] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1406
+2026-11-23T03:01:39.770542 [PHY0-NR] [I] [ 1422] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1426
+2026-11-23T03:01:39.794738 [PHY0-NR] [I] [ 1442] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1446
+2026-11-23T03:01:39.818826 [PHY0-NR] [I] [ 1462] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1466
+2026-11-23T03:01:39.842970 [PHY0-NR] [I] [ 1482] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1486
+2026-11-23T03:01:39.867256 [PHY0-NR] [I] [ 1502] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1506
+2026-11-23T03:01:39.891408 [PHY0-NR] [I] [ 1522] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1526
+2026-11-23T03:01:39.915575 [PHY0-NR] [I] [ 1542] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1546
+2026-11-23T03:01:39.939607 [PHY0-NR] [I] [ 1562] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1566
+2026-11-23T03:01:39.963771 [PHY0-NR] [I] [ 1582] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1586
+2026-11-23T03:01:39.988007 [PHY0-NR] [I] [ 1602] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1606
+2026-11-23T03:01:40.012309 [PHY0-NR] [I] [ 1622] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1626
+2026-11-23T03:01:40.036488 [PHY0-NR] [I] [ 1642] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1646
+2026-11-23T03:01:40.060688 [PHY0-NR] [I] [ 1662] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1666
+2026-11-23T03:01:40.084830 [PHY0-NR] [I] [ 1682] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1686
+2026-11-23T03:01:40.109033 [PHY0-NR] [I] [ 1702] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1706
+2026-11-23T03:01:40.133396 [PHY0-NR] [I] [ 1722] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1726
+2026-11-23T03:01:40.157679 [PHY0-NR] [I] [ 1742] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1746
+2026-11-23T03:01:40.181826 [PHY0-NR] [I] [ 1762] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1766
+2026-11-23T03:01:40.205843 [PHY0-NR] [I] [ 1782] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1786
+2026-11-23T03:01:40.230051 [PHY0-NR] [I] [ 1802] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1806
+2026-11-23T03:01:40.254339 [PHY0-NR] [I] [ 1822] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1826
+2026-11-23T03:01:40.278815 [PHY0-NR] [I] [ 1842] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1846
+2026-11-23T03:01:40.303138 [PHY0-NR] [I] [ 1862] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1866
+2026-11-23T03:01:40.327318 [PHY0-NR] [I] [ 1882] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1886
+2026-11-23T03:01:40.351244 [PHY0-NR] [I] [ 1902] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1906
+2026-11-23T03:01:40.375264 [PHY0-NR] [I] [ 1922] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1926
+2026-11-23T03:01:40.399466 [PHY0-NR] [I] [ 1942] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1946
+2026-11-23T03:01:40.423779 [PHY0-NR] [I] [ 1962] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1966
+2026-11-23T03:01:40.447469 [PHY0-NR] [I] [ 1982] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=1986
+2026-11-23T03:01:40.471492 [PHY0-NR] [I] [ 2002] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2006
+2026-11-23T03:01:40.495757 [PHY0-NR] [I] [ 2022] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2026
+2026-11-23T03:01:40.519773 [PHY0-NR] [I] [ 2042] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2046
+2026-11-23T03:01:40.543853 [PHY0-NR] [I] [ 2062] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2066
+2026-11-23T03:01:40.568120 [PHY0-NR] [I] [ 2082] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2086
+2026-11-23T03:01:40.592323 [PHY0-NR] [I] [ 2102] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2106
+2026-11-23T03:01:40.609165 [MAC    ] [I] [ 2116] BSR:   triggered_bsr_type=none, LCID QUEUE status: 0: 0 1: 0 
+2026-11-23T03:01:40.616409 [PHY0-NR] [I] [ 2122] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2126
+2026-11-23T03:01:40.640502 [PHY0-NR] [I] [ 2142] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2146
+2026-11-23T03:01:40.664750 [PHY0-NR] [I] [ 2162] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2166
+2026-11-23T03:01:40.668284 [STCK   ] [I] tti_tprof: {mean, max, min} = {0.00, 0, 0} msec
+2026-11-23T03:01:40.688794 [PHY0-NR] [I] [ 2182] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2186
+2026-11-23T03:01:40.712634 [PHY0-NR] [I] [ 2202] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2206
+2026-11-23T03:01:40.736430 [PHY0-NR] [I] [ 2222] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2226
+2026-11-23T03:01:40.760611 [PHY0-NR] [I] [ 2242] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2246
+2026-11-23T03:01:40.784790 [PHY0-NR] [I] [ 2262] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2266
+2026-11-23T03:01:40.808906 [PHY0-NR] [I] [ 2282] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2286
+2026-11-23T03:01:40.833195 [PHY0-NR] [I] [ 2302] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2306
+2026-11-23T03:01:40.857291 [PHY0-NR] [I] [ 2322] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2326
+2026-11-23T03:01:40.881377 [PHY0-NR] [I] [ 2342] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2346
+2026-11-23T03:01:40.905517 [PHY0-NR] [I] [ 2362] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2366
+2026-11-23T03:01:40.929681 [PHY0-NR] [I] [ 2382] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2386
+2026-11-23T03:01:40.954080 [PHY0-NR] [I] [ 2402] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2406
+2026-11-23T03:01:40.978238 [PHY0-NR] [I] [ 2422] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2426
+2026-11-23T03:01:41.002326 [PHY0-NR] [I] [ 2442] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2446
+2026-11-23T03:01:41.026353 [PHY0-NR] [I] [ 2462] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2466
+2026-11-23T03:01:41.050580 [PHY0-NR] [I] [ 2482] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2486
+2026-11-23T03:01:41.074990 [PHY0-NR] [I] [ 2502] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2506
+2026-11-23T03:01:41.099277 [PHY0-NR] [I] [ 2522] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2526
+2026-11-23T03:01:41.123380 [PHY0-NR] [I] [ 2542] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2546
+2026-11-23T03:01:41.147580 [PHY0-NR] [I] [ 2562] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2566
+2026-11-23T03:01:41.171738 [PHY0-NR] [I] [ 2582] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2586
+2026-11-23T03:01:41.195936 [PHY0-NR] [I] [ 2602] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2606
+2026-11-23T03:01:41.220121 [PHY0-NR] [I] [ 2622] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2626
+2026-11-23T03:01:41.244216 [PHY0-NR] [I] [ 2642] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2646
+2026-11-23T03:01:41.268515 [PHY0-NR] [I] [ 2662] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2666
+2026-11-23T03:01:41.292699 [PHY0-NR] [I] [ 2682] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2686
+2026-11-23T03:01:41.316903 [PHY0-NR] [I] [ 2702] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2706
+2026-11-23T03:01:41.340814 [PHY0-NR] [I] [ 2722] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2726
+2026-11-23T03:01:41.364964 [PHY0-NR] [I] [ 2742] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2746
+2026-11-23T03:01:41.389090 [PHY0-NR] [I] [ 2762] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2766
+2026-11-23T03:01:41.413239 [PHY0-NR] [I] [ 2782] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2786
+2026-11-23T03:01:41.437414 [PHY0-NR] [I] [ 2802] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2806
+2026-11-23T03:01:41.461620 [PHY0-NR] [I] [ 2822] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2826
+2026-11-23T03:01:41.485762 [PHY0-NR] [I] [ 2842] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2846
+2026-11-23T03:01:41.509986 [PHY0-NR] [I] [ 2862] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2866
+2026-11-23T03:01:41.534223 [PHY0-NR] [I] [ 2882] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2886
+2026-11-23T03:01:41.558417 [PHY0-NR] [I] [ 2902] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2906
+2026-11-23T03:01:41.582675 [PHY0-NR] [I] [ 2922] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2926
+2026-11-23T03:01:41.606772 [PHY0-NR] [I] [ 2942] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2946
+2026-11-23T03:01:41.630718 [PHY0-NR] [I] [ 2962] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2966
+2026-11-23T03:01:41.654492 [PHY0-NR] [I] [ 2982] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=2986
+2026-11-23T03:01:41.678214 [PHY0-NR] [I] [ 3002] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3006
+2026-11-23T03:01:41.702325 [PHY0-NR] [I] [ 3022] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3026
+2026-11-23T03:01:41.726243 [PHY0-NR] [I] [ 3042] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3046
+2026-11-23T03:01:41.750060 [PHY0-NR] [I] [ 3062] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3066
+2026-11-23T03:01:41.774342 [PHY0-NR] [I] [ 3082] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3086
+2026-11-23T03:01:41.798244 [PHY0-NR] [I] [ 3102] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3106
+2026-11-23T03:01:41.813744 [MAC    ] [I] [ 3115] BSR:   triggered_bsr_type=none, LCID QUEUE status: 0: 0 1: 0 
+2026-11-23T03:01:41.822358 [PHY0-NR] [I] [ 3122] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3126
+2026-11-23T03:01:41.846362 [PHY0-NR] [I] [ 3142] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3146
+2026-11-23T03:01:41.870493 [PHY0-NR] [I] [ 3162] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3166
+2026-11-23T03:01:41.894415 [PHY0-NR] [I] [ 3182] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3186
+2026-11-23T03:01:41.902728 [STCK   ] [I] tti_tprof: {mean, max, min} = {0.00, 0, 0} msec
+2026-11-23T03:01:41.918600 [PHY0-NR] [I] [ 3202] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3206
+2026-11-23T03:01:41.942806 [PHY0-NR] [I] [ 3222] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3226
+2026-11-23T03:01:41.966880 [PHY0-NR] [I] [ 3242] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3246
+2026-11-23T03:01:41.991087 [PHY0-NR] [I] [ 3262] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3266
+2026-11-23T03:01:42.015260 [PHY0-NR] [I] [ 3282] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3286
+2026-11-23T03:01:42.039462 [PHY0-NR] [I] [ 3302] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3306
+2026-11-23T03:01:42.063558 [PHY0-NR] [I] [ 3322] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3326
+2026-11-23T03:01:42.087671 [PHY0-NR] [I] [ 3342] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3346
+2026-11-23T03:01:42.111939 [PHY0-NR] [I] [ 3362] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3366
+2026-11-23T03:01:42.136082 [PHY0-NR] [I] [ 3382] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3386
+2026-11-23T03:01:42.160040 [PHY0-NR] [I] [ 3402] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3406
+2026-11-23T03:01:42.184333 [PHY0-NR] [I] [ 3422] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3426
+2026-11-23T03:01:42.208461 [PHY0-NR] [I] [ 3442] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3446
+2026-11-23T03:01:42.232531 [PHY0-NR] [I] [ 3462] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3466
+2026-11-23T03:01:42.256727 [PHY0-NR] [I] [ 3482] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3486
+2026-11-23T03:01:42.280517 [PHY0-NR] [I] [ 3502] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3506
+2026-11-23T03:01:42.304780 [PHY0-NR] [I] [ 3522] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3526
+2026-11-23T03:01:42.328921 [PHY0-NR] [I] [ 3542] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3546
+2026-11-23T03:01:42.352994 [PHY0-NR] [I] [ 3562] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3566
+2026-11-23T03:01:42.376770 [PHY0-NR] [I] [ 3582] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3586
+2026-11-23T03:01:42.400656 [PHY0-NR] [I] [ 3602] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3606
+2026-11-23T03:01:42.424660 [PHY0-NR] [I] [ 3622] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3626
+2026-11-23T03:01:42.448758 [PHY0-NR] [I] [ 3642] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3646
+2026-11-23T03:01:42.472845 [PHY0-NR] [I] [ 3662] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3666
+2026-11-23T03:01:42.496742 [PHY0-NR] [I] [ 3682] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3686
+2026-11-23T03:01:42.521068 [PHY0-NR] [I] [ 3702] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3706
+2026-11-23T03:01:42.545087 [PHY0-NR] [I] [ 3722] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3726
+2026-11-23T03:01:42.569113 [PHY0-NR] [I] [ 3742] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3746
+2026-11-23T03:01:42.593203 [PHY0-NR] [I] [ 3762] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3766
+2026-11-23T03:01:42.617469 [PHY0-NR] [I] [ 3782] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3786
+2026-11-23T03:01:42.641666 [PHY0-NR] [I] [ 3802] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3806
+2026-11-23T03:01:42.665659 [PHY0-NR] [I] [ 3822] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3826
+2026-11-23T03:01:42.689832 [PHY0-NR] [I] [ 3842] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3846
+2026-11-23T03:01:42.714112 [PHY0-NR] [I] [ 3862] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3866
+2026-11-23T03:01:42.738078 [PHY0-NR] [I] [ 3882] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3886
+2026-11-23T03:01:42.761967 [PHY0-NR] [I] [ 3902] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3906
+2026-11-23T03:01:42.786045 [PHY0-NR] [I] [ 3922] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3926
+2026-11-23T03:01:42.809820 [PHY0-NR] [I] [ 3942] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3946
+2026-11-23T03:01:42.833897 [PHY0-NR] [I] [ 3962] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3966
+2026-11-23T03:01:42.857748 [PHY0-NR] [I] [ 3982] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=3986
+2026-11-23T03:01:42.881926 [PHY0-NR] [I] [ 4002] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4006
+2026-11-23T03:01:42.905890 [PHY0-NR] [I] [ 4022] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4026
+2026-11-23T03:01:42.929960 [PHY0-NR] [I] [ 4042] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4046
+2026-11-23T03:01:42.954110 [PHY0-NR] [I] [ 4062] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4066
+2026-11-23T03:01:42.978120 [PHY0-NR] [I] [ 4082] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4086
+2026-11-23T03:01:43.002152 [PHY0-NR] [I] [ 4102] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4106
+2026-11-23T03:01:43.016454 [MAC    ] [I] [ 4114] BSR:   triggered_bsr_type=none, LCID QUEUE status: 0: 0 1: 0 
+2026-11-23T03:01:43.026206 [PHY0-NR] [I] [ 4122] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4126
+2026-11-23T03:01:43.049943 [PHY0-NR] [I] [ 4142] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4146
+2026-11-23T03:01:43.073883 [PHY0-NR] [I] [ 4162] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4166
+2026-11-23T03:01:43.097937 [PHY0-NR] [I] [ 4182] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4186
+2026-11-23T03:01:43.122268 [PHY0-NR] [I] [ 4202] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4206
+2026-11-23T03:01:43.135554 [STCK   ] [I] tti_tprof: {mean, max, min} = {0.00, 0, 0} msec
+2026-11-23T03:01:43.146527 [PHY0-NR] [I] [ 4222] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4226
+2026-11-23T03:01:43.170691 [PHY0-NR] [I] [ 4242] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4246
+2026-11-23T03:01:43.194821 [PHY0-NR] [I] [ 4262] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4266
+2026-11-23T03:01:43.219135 [PHY0-NR] [I] [ 4282] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4286
+2026-11-23T03:01:43.243221 [PHY0-NR] [I] [ 4302] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4306
+2026-11-23T03:01:43.267579 [PHY0-NR] [I] [ 4322] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4326
+2026-11-23T03:01:43.291862 [PHY0-NR] [I] [ 4342] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4346
+2026-11-23T03:01:43.316049 [PHY0-NR] [I] [ 4362] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4366
+2026-11-23T03:01:43.339942 [PHY0-NR] [I] [ 4382] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4386
+2026-11-23T03:01:43.364241 [PHY0-NR] [I] [ 4402] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4406
+2026-11-23T03:01:43.388542 [PHY0-NR] [I] [ 4422] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4426
+2026-11-23T03:01:43.412755 [PHY0-NR] [I] [ 4442] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4446
+2026-11-23T03:01:43.436891 [PHY0-NR] [I] [ 4462] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4466
+2026-11-23T03:01:43.461166 [PHY0-NR] [I] [ 4482] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4486
+2026-11-23T03:01:43.485341 [PHY0-NR] [I] [ 4502] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4506
+2026-11-23T03:01:43.509498 [PHY0-NR] [I] [ 4522] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4526
+2026-11-23T03:01:43.533637 [PHY0-NR] [I] [ 4542] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4546
+2026-11-23T03:01:43.557757 [PHY0-NR] [I] [ 4562] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4566
+2026-11-23T03:01:43.581984 [PHY0-NR] [I] [ 4582] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4586
+2026-11-23T03:01:43.606168 [PHY0-NR] [I] [ 4602] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4606
+2026-11-23T03:01:43.630237 [PHY0-NR] [I] [ 4622] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4626
+2026-11-23T03:01:43.654065 [PHY0-NR] [I] [ 4642] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4646
+2026-11-23T03:01:43.678244 [PHY0-NR] [I] [ 4662] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4666
+2026-11-23T03:01:43.702490 [PHY0-NR] [I] [ 4682] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4686
+2026-11-23T03:01:43.726572 [PHY0-NR] [I] [ 4702] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4706
+2026-11-23T03:01:43.750526 [PHY0-NR] [I] [ 4722] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4726
+2026-11-23T03:01:43.774777 [PHY0-NR] [I] [ 4742] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4746
+2026-11-23T03:01:43.798785 [PHY0-NR] [I] [ 4762] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4766
+2026-11-23T03:01:43.822558 [PHY0-NR] [I] [ 4782] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4786
+2026-11-23T03:01:43.846882 [PHY0-NR] [I] [ 4802] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4806
+2026-11-23T03:01:43.871022 [PHY0-NR] [I] [ 4822] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4826
+2026-11-23T03:01:43.895085 [PHY0-NR] [I] [ 4842] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4846
+2026-11-23T03:01:43.919384 [PHY0-NR] [I] [ 4862] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4866
+2026-11-23T03:01:43.943421 [PHY0-NR] [I] [ 4882] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4886
+2026-11-23T03:01:43.967578 [PHY0-NR] [I] [ 4902] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4906
+2026-11-23T03:01:43.991608 [PHY0-NR] [I] [ 4922] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4926
+2026-11-23T03:01:44.015846 [PHY0-NR] [I] [ 4942] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4946
+2026-11-23T03:01:44.040248 [PHY0-NR] [I] [ 4962] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4966
+2026-11-23T03:01:44.064436 [PHY0-NR] [I] [ 4982] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=4986
+2026-11-23T03:01:44.088349 [PHY0-NR] [I] [ 5002] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5006
+2026-11-23T03:01:44.112396 [PHY0-NR] [I] [ 5022] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5026
+2026-11-23T03:01:44.136565 [PHY0-NR] [I] [ 5042] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5046
+2026-11-23T03:01:44.160711 [PHY0-NR] [I] [ 5062] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5066
+2026-11-23T03:01:44.184948 [PHY0-NR] [I] [ 5082] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5086
+2026-11-23T03:01:44.209175 [PHY0-NR] [I] [ 5102] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5106
+2026-11-23T03:01:44.222451 [MAC    ] [I] [ 5113] BSR:   triggered_bsr_type=none, LCID QUEUE status: 0: 0 1: 0 
+2026-11-23T03:01:44.233240 [PHY0-NR] [I] [ 5122] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5126
+2026-11-23T03:01:44.257202 [PHY0-NR] [I] [ 5142] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5146
+2026-11-23T03:01:44.281176 [PHY0-NR] [I] [ 5162] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5166
+2026-11-23T03:01:44.305353 [PHY0-NR] [I] [ 5182] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5186
+2026-11-23T03:01:44.329670 [PHY0-NR] [I] [ 5202] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5206
+2026-11-23T03:01:44.353837 [PHY0-NR] [I] [ 5222] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5226
+2026-11-23T03:01:44.371739 [STCK   ] [I] tti_tprof: {mean, max, min} = {0.00, 0, 0} msec
+2026-11-23T03:01:44.377883 [PHY0-NR] [I] [ 5242] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5246
+2026-11-23T03:01:44.401657 [PHY0-NR] [I] [ 5262] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5266
+2026-11-23T03:01:44.425889 [PHY0-NR] [I] [ 5282] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5286
+2026-11-23T03:01:44.449669 [PHY0-NR] [I] [ 5302] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5306
+2026-11-23T03:01:44.473636 [PHY0-NR] [I] [ 5322] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5326
+2026-11-23T03:01:44.497505 [PHY0-NR] [I] [ 5342] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5346
+2026-11-23T03:01:44.521765 [PHY0-NR] [I] [ 5362] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5366
+2026-11-23T03:01:44.546146 [PHY0-NR] [I] [ 5382] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5386
+2026-11-23T03:01:44.570423 [PHY0-NR] [I] [ 5402] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5406
+2026-11-23T03:01:44.594592 [PHY0-NR] [I] [ 5422] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5426
+2026-11-23T03:01:44.618703 [PHY0-NR] [I] [ 5442] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5446
+2026-11-23T03:01:44.642751 [PHY0-NR] [I] [ 5462] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5466
+2026-11-23T03:01:44.667014 [PHY0-NR] [I] [ 5482] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5486
+2026-11-23T03:01:44.691197 [PHY0-NR] [I] [ 5502] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5506
+2026-11-23T03:01:44.715307 [PHY0-NR] [I] [ 5522] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5526
+2026-11-23T03:01:44.739284 [PHY0-NR] [I] [ 5542] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5546
+2026-11-23T03:01:44.763871 [PHY0-NR] [I] [ 5562] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5566
+2026-11-23T03:01:44.787945 [PHY0-NR] [I] [ 5582] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5586
+2026-11-23T03:01:44.812175 [PHY0-NR] [I] [ 5602] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5606
+2026-11-23T03:01:44.836404 [PHY0-NR] [I] [ 5622] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5626
+2026-11-23T03:01:44.860616 [PHY0-NR] [I] [ 5642] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5646
+2026-11-23T03:01:44.884575 [PHY0-NR] [I] [ 5662] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5666
+2026-11-23T03:01:44.908342 [PHY0-NR] [I] [ 5682] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5686
+2026-11-23T03:01:44.932232 [PHY0-NR] [I] [ 5702] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5706
+2026-11-23T03:01:44.956179 [PHY0-NR] [I] [ 5722] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5726
+2026-11-23T03:01:44.980452 [PHY0-NR] [I] [ 5742] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5746
+2026-11-23T03:01:45.004798 [PHY0-NR] [I] [ 5762] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5766
+2026-11-23T03:01:45.028885 [PHY0-NR] [I] [ 5782] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5786
+2026-11-23T03:01:45.052721 [PHY0-NR] [I] [ 5802] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5806
+2026-11-23T03:01:45.076971 [PHY0-NR] [I] [ 5822] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5826
+2026-11-23T03:01:45.101203 [PHY0-NR] [I] [ 5842] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5846
+2026-11-23T03:01:45.125383 [PHY0-NR] [I] [ 5862] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5866
+2026-11-23T03:01:45.149549 [PHY0-NR] [I] [ 5882] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5886
+2026-11-23T03:01:45.174081 [PHY0-NR] [I] [ 5902] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5906
+2026-11-23T03:01:45.198231 [PHY0-NR] [I] [ 5922] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5926
+2026-11-23T03:01:45.222488 [PHY0-NR] [I] [ 5942] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5946
+2026-11-23T03:01:45.246379 [PHY0-NR] [I] [ 5962] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5966
+2026-11-23T03:01:45.270608 [PHY0-NR] [I] [ 5982] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=5986
+2026-11-23T03:01:45.294780 [PHY0-NR] [I] [ 6002] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=6006
+2026-11-23T03:01:45.319046 [PHY0-NR] [I] [ 6022] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=6026
+2026-11-23T03:01:45.343384 [PHY0-NR] [I] [ 6042] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=6046
+2026-11-23T03:01:45.367546 [PHY0-NR] [I] [ 6062] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=6066
+2026-11-23T03:01:45.391818 [PHY0-NR] [I] [ 6082] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=6086
+2026-11-23T03:01:45.415833 [PHY0-NR] [I] [ 6102] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=6106
+2026-11-23T03:01:45.427770 [MAC    ] [I] [ 6112] BSR:   triggered_bsr_type=none, LCID QUEUE status: 0: 0 1: 0 
+2026-11-23T03:01:45.440026 [PHY0-NR] [I] [ 6122] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=6126
+2026-11-23T03:01:45.464539 [PHY0-NR] [I] [ 6142] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=6146
+2026-11-23T03:01:45.488648 [PHY0-NR] [I] [ 6162] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=6166
+2026-11-23T03:01:45.512869 [PHY0-NR] [I] [ 6182] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=6186
+2026-11-23T03:01:45.537032 [PHY0-NR] [I] [ 6202] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=6206
+2026-11-23T03:01:45.561331 [PHY0-NR] [I] [ 6222] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=6226
+2026-11-23T03:01:45.585642 [PHY0-NR] [I] [ 6242] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=6246
+2026-11-23T03:01:45.608461 [STCK   ] [I] tti_tprof: {mean, max, min} = {0.00, 0, 0} msec
+2026-11-23T03:01:45.609822 [PHY0-NR] [I] [ 6262] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=6266
+2026-11-23T03:01:45.634119 [PHY0-NR] [I] [ 6282] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=6286
+2026-11-23T03:01:45.658274 [PHY0-NR] [I] [ 6302] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=6306
+2026-11-23T03:01:45.682180 [PHY0-NR] [I] [ 6322] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=6326
+2026-11-23T03:01:45.706747 [PHY0-NR] [I] [ 6342] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=6346
+2026-11-23T03:01:45.731060 [PHY0-NR] [I] [ 6362] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=6366
+2026-11-23T03:01:45.755316 [PHY0-NR] [I] [ 6382] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=6386
+2026-11-23T03:01:45.779644 [PHY0-NR] [I] [ 6402] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=6406
+2026-11-23T03:01:45.803816 [PHY0-NR] [I] [ 6422] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=6426
+2026-11-23T03:01:45.827940 [PHY0-NR] [I] [ 6442] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=6446
+2026-11-23T03:01:45.852167 [PHY0-NR] [I] [ 6462] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=6466
+2026-11-23T03:01:45.876358 [PHY0-NR] [I] [ 6482] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=6486
+2026-11-23T03:01:45.900565 [PHY0-NR] [I] [ 6502] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=6506
+2026-11-23T03:01:45.924661 [PHY0-NR] [I] [ 6522] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=6526
+2026-11-23T03:01:45.948821 [PHY0-NR] [I] [ 6542] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=6546
+2026-11-23T03:01:45.973284 [PHY0-NR] [I] [ 6562] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=6566
+2026-11-23T03:01:45.997335 [PHY0-NR] [I] [ 6582] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=6586
+2026-11-23T03:01:46.021606 [PHY0-NR] [I] [ 6602] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=6606
+2026-11-23T03:01:46.023487 [NAS    ] [I] Switching off
+2026-11-23T03:01:46.045741 [PHY0-NR] [I] [ 6622] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=6626
+2026-11-23T03:01:46.069975 [PHY0-NR] [I] [ 6642] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=6646
+2026-11-23T03:01:46.094067 [PHY0-NR] [I] [ 6662] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=6666
+2026-11-23T03:01:46.118135 [PHY0-NR] [I] [ 6682] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=6686
+2026-11-23T03:01:46.142344 [PHY0-NR] [I] [ 6702] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=6706
+2026-11-23T03:01:46.166537 [PHY0-NR] [I] [ 6722] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=6726
+2026-11-23T03:01:46.190558 [PHY0-NR] [I] [ 6742] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=6746
+2026-11-23T03:01:46.214832 [PHY0-NR] [I] [ 6762] PUCCH: cc=0, f=2 prb=11:1 symb=4:2 rnti=0x4601 cqi=15 , tti_tx=6766

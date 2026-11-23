@@ -1,0 +1,59 @@
+# lab4: od NG Setup do pierwszego pakietu
+# Pliki: current/pcap/ gnb_mac, gnb_rlc, gnb_f1ap, gnb_e1ap, gnb_ngap, gnb_n3_gtpu, ue_mac_nr, ue_nas
+# Terminale: T1 serwer WWW, T2 gNB, T3 UE, T4 ruch z UE
+
+
+### 0. Przygotowanie (raz po starcie maszyny; "File exists" oznacza, że już jest)
+
+sudo ip netns add ue1
+sudo ip addr add 127.0.0.100/8 dev lo      # adres gNB (N2, N3)
+# plik 50 kB do pobrania
+head -c 50000 /dev/urandom > ~/5gs/repo/lab/lab4/config/www/plik50k.bin
+
+
+### 1. Czysty start
+
+cd ~/5gs/repo/lab/lab4
+sudo rm -rf current/pcap current/log current/core_log current/core_config
+mkdir -p current/{pcap,log,core_log,core_config}
+
+sudo systemctl stop open5gs-amfd open5gs-smfd open5gs-upfd open5gs-ausfd open5gs-udmd open5gs-udrd open5gs-pcfd open5gs-nssfd open5gs-bsfd open5gs-nrfd
+sudo rm -f /var/log/open5gs/*.log*
+sudo systemctl start open5gs-nrfd
+sleep 1
+sudo systemctl start open5gs-udrd open5gs-udmd open5gs-ausfd open5gs-pcfd open5gs-nssfd open5gs-bsfd open5gs-upfd open5gs-smfd open5gs-amfd
+
+
+### 2. Przebieg
+
+# T1: serwer WWW na adresie bramy puli UE (ogstun)
+cd ~/5gs/repo/lab/lab4/config/www
+python3 -m http.server 8080 --bind 10.45.0.1
+
+# T2: gNB
+step "1 start gNB"
+sudo gnb -c ./config/gnb_zmq.yml
+
+# T3: UE
+step "2 start UE"
+sudo srsue ./config/ue_zmq.conf
+# poczekać na adres IP UE w konsoli srsue
+
+# T4: ruch z przestrzeni sieciowej UE (z katalogu labu)
+step "3 ping";            sudo ip netns exec ue1 ping -c 3 10.45.0.1
+step "4 Hello World";     sudo ip netns exec ue1 curl -v http://10.45.0.1:8080/
+step "5 plik 50 kB";      sudo ip netns exec ue1 curl -s -o /dev/null http://10.45.0.1:8080/plik50k.bin
+
+# T2, konsola gNB: zwolnienie kontekstu UE (C-RNTI z konsoli albo logu gNB)
+#   release 1 0x4601
+step "6 release"
+
+# T3: Ctrl+C, T2: Ctrl+C, T1: Ctrl+C
+step "7 koniec"
+
+
+### 3. Zapis
+
+sudo cp -R /etc/open5gs/. current/core_config/
+sudo cp -R /var/log/open5gs/. current/core_log/
+sudo chown -R $USER: current
