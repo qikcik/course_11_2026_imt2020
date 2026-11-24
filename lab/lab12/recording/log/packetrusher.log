@@ -1,0 +1,136 @@
+2026-11-23T13:25:50.188Z	info	Loaded config at: ./config/packetrusher.yml
+2026-11-23T13:25:50.188Z	info	[TESTER] Using the userspace tunnel backend
+2026-11-23T13:25:50.188Z	info	PacketRusher version v0.0.0-20261008212308-78360917e6f7
+2026-11-23T13:25:50.188Z	info	---------------------------------------
+2026-11-23T13:25:50.188Z	info	[TESTER] Starting test function: Testing registration of multiple UEs
+2026-11-23T13:25:50.188Z	info	[TESTER][UE] Number of UEs: 1
+2026-11-23T13:25:50.188Z	info	[TESTER][GNB] gNodeB control interface IP/Port: 127.0.0.100:9487~
+2026-11-23T13:25:50.188Z	info	[TESTER][GNB] gNodeB data interface IP/Port: 127.0.0.100:2152
+2026-11-23T13:25:50.188Z	info	[TESTER][AMF] AMF IP/Port: 127.0.0.5:38412
+2026-11-23T13:25:50.188Z	info	---------------------------------------
+2026-11-23T13:25:50.189Z	info	[GNB] InitGnb called with N2 IP: 127.0.0.100:9487
+2026-11-23T13:25:50.189Z	info	[GNB] Attempting connection with N2 IP: 127.0.0.100:9487
+2026-11-23T13:25:50.189Z	info	[GNB][SCTP] Initializing connection: local=127.0.0.100:9487 remote=127.0.0.5:38412
+2026-11-23T13:25:50.189Z	info	[GNB][SCTP] Attempting SCTP dial...
+2026-11-23T13:25:50.189Z	info	[GNB][SCTP] SCTP connection established successfully
+2026-11-23T13:25:50.189Z	info	[GNB][SCTP] Starting GnbListen goroutine...
+2026-11-23T13:25:50.189Z	info	[GNB] SCTP/NGAP service is running
+2026-11-23T13:25:50.189Z	info	[GNB] Sending NG Setup Request...
+2026-11-23T13:25:50.189Z	info	[GNB] Initiating NG Setup Request
+2026-11-23T13:25:50.190Z	info	[GNB] NG Setup Request sent, waiting for response...
+2026-11-23T13:25:50.204Z	info	[GNB][SCTP] Receive message in 0 stream
+
+2026-11-23T13:25:50.204Z	info	[GNB][AMF] AMF Name: open5gs-amf0
+2026-11-23T13:25:50.204Z	info	[GNB][AMF] State of AMF: Active
+2026-11-23T13:25:50.204Z	info	[GNB][AMF] Capacity of AMF: 255
+2026-11-23T13:25:50.204Z	info	[GNB][AMF] PLMNs Identities Supported by AMF -- mcc: 999 mnc:70
+2026-11-23T13:25:50.204Z	info	[GNB][AMF] List of AMF slices Supported by AMF -- sst:01 sd:was not informed
+2026-11-23T13:25:50.290Z	info	[GNB] NG Setup successful with N2 IP: 127.0.0.100:9487
+2026-11-23T13:25:50.290Z	info	[GNB] InitGnb called with N2 IP: 127.0.0.101:9487
+2026-11-23T13:25:50.290Z	info	[GNB] Attempting connection with N2 IP: 127.0.0.101:9487
+2026-11-23T13:25:50.290Z	info	[GNB][SCTP] Initializing connection: local=127.0.0.101:9488 remote=127.0.0.5:38412
+2026-11-23T13:25:50.290Z	info	[GNB][SCTP] Attempting SCTP dial...
+2026-11-23T13:25:50.291Z	info	[GNB][SCTP] SCTP connection established successfully
+2026-11-23T13:25:50.291Z	info	[GNB][SCTP] Starting GnbListen goroutine...
+2026-11-23T13:25:50.291Z	info	[GNB] SCTP/NGAP service is running
+2026-11-23T13:25:50.291Z	info	[GNB] Sending NG Setup Request...
+2026-11-23T13:25:50.291Z	info	[GNB] Initiating NG Setup Request
+2026-11-23T13:25:50.291Z	info	[GNB] NG Setup Request sent, waiting for response...
+2026-11-23T13:25:50.307Z	info	[GNB][SCTP] Receive message in 0 stream
+
+2026-11-23T13:25:50.307Z	info	[GNB][AMF] AMF Name: open5gs-amf0
+2026-11-23T13:25:50.307Z	info	[GNB][AMF] State of AMF: Active
+2026-11-23T13:25:50.307Z	info	[GNB][AMF] Capacity of AMF: 255
+2026-11-23T13:25:50.307Z	info	[GNB][AMF] PLMNs Identities Supported by AMF -- mcc: 999 mnc:70
+2026-11-23T13:25:50.307Z	info	[GNB][AMF] List of AMF slices Supported by AMF -- sst:01 sd:was not informed
+2026-11-23T13:25:50.391Z	info	[GNB] NG Setup successful with N2 IP: 127.0.0.101:9487
+2026-11-23T13:25:51.392Z	info	[TESTER] TESTING REGISTRATION USING IMSI 0000000001 UE
+2026-11-23T13:25:51.392Z	info	[GNB] Received incoming connection from new UE
+2026-11-23T13:25:51.392Z	info	[UE] Initiating Registration
+2026-11-23T13:25:51.392Z	info	[UE] Switched from state 0 to state 1
+2026-11-23T13:25:51.396Z	info	[GNB][SCTP] Receive message in 1 stream
+
+2026-11-23T13:25:51.397Z	info	[UE][NAS] Receive AuthReq
+2026-11-23T13:25:51.397Z	info	[UE] Switched from state 1 to state 2
+2026-11-23T13:25:51.402Z	info	[GNB][SCTP] Receive message in 1 stream
+
+2026-11-23T13:25:51.402Z	info	[UE][NAS] Receive SecModeCmd
+2026-11-23T13:25:51.413Z	info	[GNB][SCTP] Receive message in 1 stream
+
+2026-11-23T13:25:51.413Z	info	[GNB][UE] UE Context was created with successful
+2026-11-23T13:25:51.413Z	info	[GNB][UE] UE RAN ID 1
+2026-11-23T13:25:51.413Z	info	[GNB][UE] UE AMF ID 1
+2026-11-23T13:25:51.413Z	info	[GNB][UE] UE Mobility Restrict --Plmn-- Mcc: not informed Mnc: not informed
+2026-11-23T13:25:51.413Z	info	[GNB][UE] UE Masked Imeisv: 0000000000ffff01
+2026-11-23T13:25:51.413Z	info	[GNB][UE] Allowed Nssai-- Sst: [01] Sd: [not informed]
+2026-11-23T13:25:51.413Z	info	[GNB][NGAP][AMF] Send Initial Context Setup Response.
+2026-11-23T13:25:51.413Z	info	[GNB] Initiating Initial Context Setup Response
+2026-11-23T13:25:51.413Z	info	[GNB][NGAP] No PDU Session to set up in InitialContextSetupResponse.
+2026-11-23T13:25:51.413Z	info	[UE][NAS] Receive RegAccept
+2026-11-23T13:25:51.413Z	info	[UE] Switched from state 2 to state 3
+2026-11-23T13:25:51.413Z	info	[UE] Initiating New PDU Session
+2026-11-23T13:25:51.619Z	info	[GNB][SCTP] Receive message in 1 stream
+
+2026-11-23T13:25:51.620Z	info	[UE][NAS] Receive CfgUpdateCmd
+2026-11-23T13:25:51.620Z	info	[UE] Initiating Configuration Update Complete
+2026-11-23T13:25:51.630Z	info	[GNB][SCTP] Receive message in 1 stream
+
+2026-11-23T13:25:51.630Z	info	[GNB][NGAP][UE] PDU Session was created with successful.
+2026-11-23T13:25:51.630Z	info	[GNB][NGAP][UE] PDU Session Id: 1
+2026-11-23T13:25:51.631Z	info	[GNB][NGAP][UE] NSSAI Selected --- sst: 01 sd: not informed
+2026-11-23T13:25:51.631Z	info	[GNB][NGAP][UE] PDU Session Type: ipv4
+2026-11-23T13:25:51.631Z	info	[GNB][NGAP][UE] QOS Flow Identifier: 1
+2026-11-23T13:25:51.631Z	info	[GNB][NGAP][UE] Uplink Teid: 65236
+2026-11-23T13:25:51.631Z	info	[GNB][NGAP][UE] Downlink Teid: 1
+2026-11-23T13:25:51.631Z	info	[GNB][NGAP][UE] Non-Dynamic-5QI: 9
+2026-11-23T13:25:51.631Z	info	[GNB][NGAP][UE] Priority Level ARP: 8
+2026-11-23T13:25:51.631Z	info	[GNB][NGAP][UE] UPF Address: 127.0.0.7 :2152
+2026-11-23T13:25:51.631Z	info	[GNB] Initiating PDU Session Resource Setup Response
+2026-11-23T13:25:51.631Z	info	[UE][NAS] Receive DLNASTransport
+2026-11-23T13:25:51.631Z	info	[UE][NAS] PDU session 1 address: 10.45.0.2
+2026-11-23T13:25:51.631Z	info	[UE][NAS] PDU session DNN: internet
+2026-11-23T13:25:51.631Z	info	[UE][NAS] PDU session NSSAI: SST 1, SD 
+2026-11-23T13:25:51.631Z	info	[UE][NAS] PDU session QoS rules: add QosRule[ID:1,DQF:true,prec:255,QFI:1,MatchAll]
+2026-11-23T13:25:51.638Z	info	[UE][GTP] Interface gtp00000000001 has successfully been configured for UE 10.45.0.2
+2026-11-23T13:25:51.638Z	info	[UE][GTP] You can do traffic for this UE using VRF vrf0000000001, eg:
+2026-11-23T13:25:51.638Z	info	[UE][GTP] sudo ip vrf exec vrf0000000001 iperf3 -c IPERF_SERVER -p PORT -t 9000
+2026-11-23T13:26:31.686Z	info	[GNB] Initiating NGAP UE Handover
+2026-11-23T13:26:31.689Z	info	[GNB][SCTP] Receive message in 1 stream
+
+2026-11-23T13:26:31.689Z	info	[GNB] Initiating Handover Request Acknowledge
+2026-11-23T13:26:31.690Z	info	[GNB][SCTP] Receive message in 1 stream
+
+2026-11-23T13:26:31.691Z	info	[UE] gNodeB is telling us to use another gNodeB
+2026-11-23T13:26:31.691Z	info	[GNB] Initiating Handover Notify
+2026-11-23T13:26:31.691Z	info	[GNB] Cleaning up context on current gNb for UE 1
+2026-11-23T13:26:31.695Z	info	[UE][GTP] Interface gtp10000000001 has successfully been configured for UE 10.45.0.2
+2026-11-23T13:26:31.695Z	info	[UE][GTP] You can do traffic for this UE using VRF vrf0000000001, eg:
+2026-11-23T13:26:31.695Z	info	[UE][GTP] sudo ip vrf exec vrf0000000001 iperf3 -c IPERF_SERVER -p PORT -t 9000
+2026-11-23T13:26:32.192Z	info	[GNB][SCTP] Receive message in 1 stream
+
+2026-11-23T13:26:32.192Z	info	[GNB][NGAP] Releasing UE Context for UE 1, cause: radioNetwork: Successful handover
+2026-11-23T13:26:32.192Z	info	[GNB] Initiating UE Context Complete
+2026-11-23T13:26:39.097Z	info	[GNB] Initiating Xn UE Handover
+2026-11-23T13:26:39.098Z	info	[UE] gNodeB is telling us to use another gNodeB
+2026-11-23T13:26:39.098Z	info	[GNB] Cleaning up context on current gNb for UE 1
+2026-11-23T13:26:39.098Z	info	[GNB] Received incoming handover for UE from another gNodeB
+2026-11-23T13:26:39.098Z	info	[GNB] Initiating Path Switch Request
+2026-11-23T13:26:39.100Z	info	[GNB][SCTP] Receive message in 1 stream
+
+2026-11-23T13:26:39.100Z	info	[GNB] Handover completed successfully for UE 2
+2026-11-23T13:26:39.105Z	info	[UE][GTP] Interface gtp00000000001 has successfully been configured for UE 10.45.0.2
+2026-11-23T13:26:39.105Z	info	[UE][GTP] You can do traffic for this UE using VRF vrf0000000001, eg:
+2026-11-23T13:26:39.105Z	info	[UE][GTP] sudo ip vrf exec vrf0000000001 iperf3 -c IPERF_SERVER -p PORT -t 9000
+2026-11-23T13:27:08.491Z	info	[UE] Terminating UE as requested
+2026-11-23T13:27:08.491Z	info	[UE] Initiating Release of PDU Session 1
+2026-11-23T13:27:08.493Z	info	[GNB][SCTP] Receive message in 1 stream
+
+2026-11-23T13:27:08.494Z	info	[GNB][NGAP] Successfully deleted PDU Session 1 from UE Context
+2026-11-23T13:27:08.494Z	info	[GNB] Initiating PDU Session Release Response
+2026-11-23T13:27:08.992Z	info	[UE] Initiating Deregistration
+2026-11-23T13:27:08.992Z	info	[UE] Switched from state 3 to state 1
+2026-11-23T13:27:09.006Z	info	[GNB][SCTP] Receive message in 1 stream
+
+2026-11-23T13:27:09.007Z	info	[GNB][NGAP] Releasing UE Context for UE 2, cause: nas: Deregister
+2026-11-23T13:27:09.007Z	info	[GNB] Initiating UE Context Complete
+2026-11-23T13:27:09.040Z	info	[UE] UE Terminated

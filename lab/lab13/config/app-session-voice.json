@@ -1,0 +1,30 @@
+{
+  "ascReqData": {
+    "afAppId": "lab11-voice",
+    "notifUri": "http://127.0.0.250:7777/lab11-af/v1/notify",
+    "suppFeat": "12",
+    "ueIpv4": "UE_IP",
+    "dnn": "ims",
+    "medComponents": {
+      "1": {
+        "medCompN": 1,
+        "medType": "AUDIO",
+        "fStatus": "ENABLED",
+        "marBwDl": "128 Kbps",
+        "marBwUl": "128 Kbps",
+        "mirBwDl": "80 Kbps",
+        "mirBwUl": "80 Kbps",
+        "medSubComps": {
+          "1": {
+            "fNum": 1,
+            "flowUsage": "NO_INFO",
+            "fDescs": [
+              "permit out 17 from 10.45.0.1 to UE_IP 5201",
+              "permit in 17 from UE_IP 5201 to 10.45.0.1"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

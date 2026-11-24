@@ -1,0 +1,49 @@
+gnodeb:
+  controlif:
+    ip: "127.0.0.100"
+    port: 9487
+  dataif:
+    ip: "127.0.0.100"
+    port: 2152
+  plmnlist:
+    mcc: "999"
+    mnc: "70"
+    tac: "000001"
+    gnbidlength: 24
+    cellid: 0
+    gnbid: "000008"
+  slicesupportlist:
+    sst: "01"
+ue:
+  hplmn:
+    mcc: "999"
+    mnc: "70"
+  msin: "0000000001"
+  routingindicator: "0000"
+  protectionScheme: 1
+  homeNetworkPublicKey: "e421686f6fb2d70e3fa28d940494095686c3179fef53514667a6ed106b8a7d3d"
+  homeNetworkPublicKeyID: 1
+  pdusessiontype: IPv4
+  tunnelmtu: 0
+  key: "465B5CE8B199B49FAA5F0A2EE238A6BC"
+  opc: "E8ED289DEBA952E4283B54E88E6183CA"
+  amf: "8000"
+  sqn: "00000000"
+  dnn: "internet"
+  snssai:
+    sst: "01"
+  integrity:
+    nia0: false
+    nia1: false
+    nia2: true
+    nia3: false
+  ciphering:
+    nea0: true
+    nea1: false
+    nea2: true
+    nea3: false
+amfif:
+  - ip: "127.0.0.5"
+    port: 38412
+logs:
+  level: 4

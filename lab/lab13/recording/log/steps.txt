@@ -1,0 +1,8 @@
+13:29:31.744 1 start 5GC
+13:30:28.321 2 sesje ims i internet
+13:30:37.219 3 AF: PCF dla adresu UE
+13:30:55.139 4 AF: sesja aplikacji audio
+13:31:13.723 5 strumień 20 s i ping
+13:31:37.856 6 AF: koniec sesji
+13:31:44.411 7 strumień po zwolnieniu
+13:31:51.721 8 wyrejestrowanie

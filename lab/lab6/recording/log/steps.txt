@@ -1,0 +1,5 @@
+12:31:54.344 1 jedno żądanie
+12:31:59.403 2 strona z zasobami
+12:32:05.128 3 małe okno odbioru
+12:32:09.969 4 to samo żądanie dwa razy
+12:32:18.518 5 koniec

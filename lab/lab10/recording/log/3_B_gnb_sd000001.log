@@ -1,0 +1,89 @@
+2026-11-23T13:56:19.629Z	info	Loaded config at: ./config/packetrusher_B_gnb_sd000001.yml
+2026-11-23T13:56:19.629Z	info	PacketRusher version v0.0.0-20261008212308-78360917e6f7+dirty
+2026-11-23T13:56:19.629Z	info	---------------------------------------
+2026-11-23T13:56:19.629Z	info	[TESTER] Starting test function: Testing registration of multiple UEs
+2026-11-23T13:56:19.629Z	info	[TESTER][UE] Number of UEs: 1
+2026-11-23T13:56:19.629Z	info	[TESTER][GNB] gNodeB control interface IP/Port: 127.0.0.100:9487~
+2026-11-23T13:56:19.629Z	info	[TESTER][GNB] gNodeB data interface IP/Port: 127.0.0.100:2152
+2026-11-23T13:56:19.629Z	info	[TESTER][AMF] AMF IP/Port: 127.0.0.5:38412
+2026-11-23T13:56:19.629Z	info	---------------------------------------
+2026-11-23T13:56:19.629Z	info	[GNB] InitGnb called with N2 IP: 127.0.0.100:9487
+2026-11-23T13:56:19.629Z	info	[GNB] Attempting connection with N2 IP: 127.0.0.100:9487
+2026-11-23T13:56:19.629Z	info	[GNB][SCTP] Initializing connection: local=127.0.0.100:9487 remote=127.0.0.5:38412
+2026-11-23T13:56:19.629Z	info	[GNB][SCTP] Attempting SCTP dial...
+2026-11-23T13:56:19.630Z	info	[GNB][SCTP] SCTP connection established successfully
+2026-11-23T13:56:19.630Z	info	[GNB][SCTP] Starting GnbListen goroutine...
+2026-11-23T13:56:19.630Z	info	[GNB] SCTP/NGAP service is running
+2026-11-23T13:56:19.630Z	info	[GNB] Sending NG Setup Request...
+2026-11-23T13:56:19.630Z	info	[GNB] Initiating NG Setup Request
+2026-11-23T13:56:19.630Z	info	[GNB] NG Setup Request sent, waiting for response...
+2026-11-23T13:56:19.655Z	info	[GNB][SCTP] Receive message in 0 stream
+
+2026-11-23T13:56:19.656Z	error	[GNB][NGAP] Received failure from AMF: radioNetwork: Slice not supported
+2026-11-23T13:56:19.656Z	info	[GNB][NGAP] AMF is inactive
+2026-11-23T13:56:21.630Z	warn	[GNB] NG Setup timeout after 2s (attempt 1/5), AMF state: 0
+2026-11-23T13:56:21.630Z	info	[GNB] Closing SCTP connection...
+2026-11-23T13:56:21.631Z	info	[GNB] Retrying with N2 IP: 127.0.0.101:9487, N3 IP: 127.0.0.101:2152
+2026-11-23T13:56:21.631Z	info	[GNB][SCTP] Initializing connection: local=127.0.0.101:9488 remote=127.0.0.5:38412
+2026-11-23T13:56:21.631Z	info	[GNB][SCTP] Attempting SCTP dial...
+2026-11-23T13:56:21.631Z	info	[GNB][SCTP] SCTP connection established successfully
+2026-11-23T13:56:21.631Z	info	[GNB][SCTP] Starting GnbListen goroutine...
+2026-11-23T13:56:21.631Z	info	[GNB] SCTP/NGAP service is running
+2026-11-23T13:56:21.631Z	info	[GNB] Sending NG Setup Request...
+2026-11-23T13:56:21.631Z	info	[GNB] Initiating NG Setup Request
+2026-11-23T13:56:21.631Z	info	[GNB] NG Setup Request sent, waiting for response...
+2026-11-23T13:56:21.692Z	info	[GNB][SCTP] Receive message in 0 stream
+
+2026-11-23T13:56:21.692Z	error	[GNB][NGAP] Received failure from AMF: radioNetwork: Slice not supported
+2026-11-23T13:56:21.692Z	info	[GNB][NGAP] AMF is inactive
+2026-11-23T13:56:23.631Z	warn	[GNB] NG Setup timeout after 2s (attempt 2/5), AMF state: 0
+2026-11-23T13:56:23.632Z	info	[GNB] Closing SCTP connection...
+2026-11-23T13:56:23.632Z	info	[GNB] Retrying with N2 IP: 127.0.0.102:9487, N3 IP: 127.0.0.102:2152
+2026-11-23T13:56:23.632Z	info	[GNB][SCTP] Initializing connection: local=127.0.0.102:9489 remote=127.0.0.5:38412
+2026-11-23T13:56:23.632Z	info	[GNB][SCTP] Attempting SCTP dial...
+2026-11-23T13:56:23.632Z	info	[GNB][SCTP] SCTP connection established successfully
+2026-11-23T13:56:23.632Z	info	[GNB][SCTP] Starting GnbListen goroutine...
+2026-11-23T13:56:23.632Z	info	[GNB] SCTP/NGAP service is running
+2026-11-23T13:56:23.632Z	info	[GNB] Sending NG Setup Request...
+2026-11-23T13:56:23.632Z	info	[GNB] Initiating NG Setup Request
+2026-11-23T13:56:23.632Z	info	[GNB] NG Setup Request sent, waiting for response...
+2026-11-23T13:56:23.645Z	info	[GNB][SCTP] Receive message in 0 stream
+
+2026-11-23T13:56:23.645Z	error	[GNB][NGAP] Received failure from AMF: radioNetwork: Slice not supported
+2026-11-23T13:56:23.645Z	info	[GNB][NGAP] AMF is inactive
+2026-11-23T13:56:25.633Z	warn	[GNB] NG Setup timeout after 2s (attempt 3/5), AMF state: 0
+2026-11-23T13:56:25.633Z	info	[GNB] Closing SCTP connection...
+2026-11-23T13:56:25.633Z	info	[GNB] Retrying with N2 IP: 127.0.0.103:9487, N3 IP: 127.0.0.103:2152
+2026-11-23T13:56:25.633Z	info	[GNB][SCTP] Initializing connection: local=127.0.0.103:9490 remote=127.0.0.5:38412
+2026-11-23T13:56:25.633Z	info	[GNB][SCTP] Attempting SCTP dial...
+2026-11-23T13:56:25.634Z	info	[GNB][SCTP] SCTP connection established successfully
+2026-11-23T13:56:25.634Z	info	[GNB][SCTP] Starting GnbListen goroutine...
+2026-11-23T13:56:25.634Z	info	[GNB] SCTP/NGAP service is running
+2026-11-23T13:56:25.634Z	info	[GNB] Sending NG Setup Request...
+2026-11-23T13:56:25.634Z	info	[GNB] Initiating NG Setup Request
+2026-11-23T13:56:25.634Z	info	[GNB] NG Setup Request sent, waiting for response...
+2026-11-23T13:56:25.651Z	info	[GNB][SCTP] Receive message in 0 stream
+
+2026-11-23T13:56:25.651Z	error	[GNB][NGAP] Received failure from AMF: radioNetwork: Slice not supported
+2026-11-23T13:56:25.651Z	info	[GNB][NGAP] AMF is inactive
+2026-11-23T13:56:27.634Z	warn	[GNB] NG Setup timeout after 2s (attempt 4/5), AMF state: 0
+2026-11-23T13:56:27.635Z	info	[GNB] Closing SCTP connection...
+2026-11-23T13:56:27.635Z	info	[GNB] Retrying with N2 IP: 127.0.0.104:9487, N3 IP: 127.0.0.104:2152
+2026-11-23T13:56:27.635Z	info	[GNB][SCTP] Initializing connection: local=127.0.0.104:9491 remote=127.0.0.5:38412
+2026-11-23T13:56:27.635Z	info	[GNB][SCTP] Attempting SCTP dial...
+2026-11-23T13:56:27.635Z	info	[GNB][SCTP] SCTP connection established successfully
+2026-11-23T13:56:27.635Z	info	[GNB][SCTP] Starting GnbListen goroutine...
+2026-11-23T13:56:27.635Z	info	[GNB] SCTP/NGAP service is running
+2026-11-23T13:56:27.635Z	info	[GNB] Sending NG Setup Request...
+2026-11-23T13:56:27.635Z	info	[GNB] Initiating NG Setup Request
+2026-11-23T13:56:27.635Z	info	[GNB] NG Setup Request sent, waiting for response...
+2026-11-23T13:56:27.665Z	info	[GNB][SCTP] Receive message in 0 stream
+
+2026-11-23T13:56:27.665Z	error	[GNB][NGAP] Received failure from AMF: radioNetwork: Slice not supported
+2026-11-23T13:56:27.665Z	info	[GNB][NGAP] AMF is inactive
+2026-11-23T13:56:29.636Z	warn	[GNB] NG Setup timeout after 2s (attempt 5/5), AMF state: 0
+2026-11-23T13:56:29.636Z	info	[GNB] Closing SCTP connection...
+2026-11-23T13:56:29.636Z	info	[GNB][UE] NAS channel Terminated
+2026-11-23T13:56:29.636Z	info	[GNB][AMF] N2/TNLA Terminated
+2026-11-23T13:56:29.636Z	info	GNB Terminated
+2026-11-23T13:56:29.636Z	fatal	gNB 000008 failed to establish connection with AMF 127.0.0.5:38412 after 5 retries: NG Setup did not complete within 2s

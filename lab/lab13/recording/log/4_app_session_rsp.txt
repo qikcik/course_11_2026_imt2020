@@ -1,0 +1,8 @@
+HTTP/2 201 
+server: Open5GS v2.8.0
+date: Mon, 23 Nov 2026 13:30:55 GMT
+content-length: 463
+location: http://127.0.0.13:7777/npcf-policyauthorization/v1/app-sessions/1
+content-type: application/json
+
+{"ascReqData":{"afAppId":"lab11-voice","dnn":"ims","medComponents":{"1":{"fStatus":"ENABLED","marBwDl":"128 Kbps","marBwUl":"128 Kbps","medCompN":1,"medSubComps":{"1":{"fNum":1,"fDescs":["permit out 17 from 10.45.0.1 to 10.45.0.2 5201","permit in 17 from 10.45.0.2 5201 to 10.45.0.1"],"flowUsage":"NO_INFO"}},"medType":"AUDIO","mirBwDl":"80 Kbps","mirBwUl":"80 Kbps"}},"notifUri":"http://127.0.0.250:7777/lab11-af/v1/notify","suppFeat":"12","ueIpv4":"10.45.0.2"}}

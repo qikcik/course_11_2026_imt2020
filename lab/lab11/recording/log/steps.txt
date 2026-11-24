@@ -1,0 +1,7 @@
+13:22:37.609 1 start 5GC
+13:23:28.573 2 UE zarejestrowane
+13:23:36.853 3 ruch
+13:23:44.599 4 idle
+13:23:53.022 5 ping do UE w CM-IDLE
+13:24:03.990 6 ruch po pagingu
+13:24:12.809 7 wyrejestrowanie

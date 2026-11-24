@@ -1,0 +1,34 @@
+# lab6: HTTP/2 od środka
+# Pliki: current/pcap/ http2.pcap
+# Terminale: T1 tcpdump, T2 serwer, T3 klient
+# Wireshark: Analyze → Decode As → TCP 8080 → HTTP2
+
+
+### 1. Czysty start
+
+cd ~/5gs/repo/lab/lab6
+sudo rm -rf current/pcap current/log current/core_log current/core_config
+mkdir -p current/{pcap,log,core_log,core_config}
+
+
+### 2. Przebieg
+
+# T1: nagranie (przed serwerem)
+sudo tcpdump -i lo -n -w current/pcap/http2.pcap "tcp port 8080"
+
+# T2: serwer HTTP/2 bez TLS (h2c)
+nghttpd --no-tls -v -d ./config/www 8080 | tee current/log/nghttpd.log
+
+# T3: klient
+step "1 jedno żądanie";        nghttp -v http://127.0.0.1:8080/index.html
+step "2 strona z zasobami";    nghttp -nva http://127.0.0.1:8080/index.html
+step "3 małe okno odbioru";    nghttp -nv -w 10 http://127.0.0.1:8080/intro_map.jpg
+step "4 to samo żądanie dwa razy"; nghttp -nv -m 2 http://127.0.0.1:8080/style.css
+
+# T2: Ctrl+C, T1: Ctrl+C
+step "5 koniec"
+
+
+### 3. Zapis
+
+sudo chown -R $USER: current

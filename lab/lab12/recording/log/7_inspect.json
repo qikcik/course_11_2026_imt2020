@@ -1,0 +1,21 @@
+{
+  "ues": [
+    {
+      "ue": 1,
+      "state": "parked",
+      "connected": false,
+      "ready": false,
+      "active_pdu_sessions": []
+    }
+  ],
+  "gnbs": [
+    {
+      "id": "000008",
+      "ready": true
+    },
+    {
+      "id": "000009",
+      "ready": true
+    }
+  ]
+}

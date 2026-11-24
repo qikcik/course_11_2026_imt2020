@@ -1,0 +1,602 @@
+diff --git a/internal/control_test_engine/gnb/context/ue.go b/internal/control_test_engine/gnb/context/ue.go
+index 46e06b8..2ec28f4 100644
+--- a/internal/control_test_engine/gnb/context/ue.go
++++ b/internal/control_test_engine/gnb/context/ue.go
+@@ -73,6 +73,9 @@ type GnbPDUSession struct {
+ 	qosId        int64
+ 	fiveQi       int64
+ 	priArp       int64
++	// qosFlows lists every QoS flow accepted for the session (TS 38.413: the
++	// responses report all of them); qosId stays the flow used for uplink.
++	qosFlows []int64
+ }
+ 
+ type mobility struct {
+@@ -371,6 +374,52 @@ func (pduSession *GnbPDUSession) GetQosId() int64 {
+ 	return pduSession.qosId
+ }
+ 
++// GetQosFlows returns the QFIs of all accepted QoS flows, or the single
++// qosId when no list was recorded.
++func (pduSession *GnbPDUSession) GetQosFlows() []int64 {
++	pduSession.tunnelMu.RLock()
++	defer pduSession.tunnelMu.RUnlock()
++	if len(pduSession.qosFlows) == 0 {
++		return []int64{pduSession.qosId}
++	}
++	return append([]int64(nil), pduSession.qosFlows...)
++}
++
++// AddQosFlows records QoS flows set up or modified for the session.
++func (pduSession *GnbPDUSession) AddQosFlows(qfis []int64) {
++	pduSession.tunnelMu.Lock()
++	defer pduSession.tunnelMu.Unlock()
++	if len(pduSession.qosFlows) == 0 {
++		pduSession.qosFlows = []int64{pduSession.qosId}
++	}
++	for _, qfi := range qfis {
++		known := false
++		for _, existing := range pduSession.qosFlows {
++			known = known || existing == qfi
++		}
++		if !known {
++			pduSession.qosFlows = append(pduSession.qosFlows, qfi)
++		}
++	}
++}
++
++// RemoveQosFlows forgets QoS flows released from the session.
++func (pduSession *GnbPDUSession) RemoveQosFlows(qfis []int64) {
++	pduSession.tunnelMu.Lock()
++	defer pduSession.tunnelMu.Unlock()
++	kept := pduSession.qosFlows[:0]
++	for _, existing := range pduSession.qosFlows {
++		released := false
++		for _, qfi := range qfis {
++			released = released || existing == qfi
++		}
++		if !released {
++			kept = append(kept, existing)
++		}
++	}
++	pduSession.qosFlows = kept
++}
++
+ func (pduSession *GnbPDUSession) GetFiveQI() int64 {
+ 	return pduSession.fiveQi
+ }
+diff --git a/internal/control_test_engine/gnb/ngap/dispatcher.go b/internal/control_test_engine/gnb/ngap/dispatcher.go
+index c2721b7..29141a9 100644
+--- a/internal/control_test_engine/gnb/ngap/dispatcher.go
++++ b/internal/control_test_engine/gnb/ngap/dispatcher.go
+@@ -52,6 +52,8 @@ func messageUE(gnb *context.GNBContext, message ngapmsg.Message) *context.GNBUe
+ 		ranID, amfID = value.RANUENGAPID, value.AMFUENGAPID
+ 	case *ngapmsg.PDUSessionResourceReleaseCommand:
+ 		ranID, amfID = value.RANUENGAPID, value.AMFUENGAPID
++	case *ngapmsg.PDUSessionResourceModifyRequest:
++		ranID, amfID = value.RANUENGAPID, value.AMFUENGAPID
+ 	case *ngapmsg.ErrorIndication:
+ 		ranID, amfID = value.RANUENGAPID, value.AMFUENGAPID
+ 	case *ngapmsg.PathSwitchRequestAcknowledge:
+@@ -92,6 +94,8 @@ func handleMessage(amf *context.GNBAmf, gnb *context.GNBContext, msg ngapmsg.Mes
+ 		HandlerPduSessionResourceSetupRequest(gnb, value)
+ 	case *ngapmsg.PDUSessionResourceReleaseCommand:
+ 		HandlerPduSessionReleaseCommand(gnb, value)
++	case *ngapmsg.PDUSessionResourceModifyRequest:
++		HandlerPduSessionResourceModifyRequest(gnb, value)
+ 	case *ngapmsg.UEContextReleaseCommand:
+ 		HandlerUeContextReleaseCommand(gnb, value)
+ 	case *ngapmsg.AMFConfigurationUpdate:
+diff --git a/internal/control_test_engine/gnb/ngap/handler.go b/internal/control_test_engine/gnb/ngap/handler.go
+index aea002c..c6af6eb 100644
+--- a/internal/control_test_engine/gnb/ngap/handler.go
++++ b/internal/control_test_engine/gnb/ngap/handler.go
+@@ -193,9 +193,19 @@ func HandlerInitialContextSetupRequest(gnb *context.GNBContext, message *ngapmsg
+ 			var gtpTunnel *ngapType.GTPTunnel
+ 			var upfIp string
+ 			var teidUplink aper.OctetString
++			var qfis []int64
+ 			for _, ie := range pDUSessionResourceSetupRequestTransfer.ProtocolIEs.List {
+ 				switch ie.Id().Value {
+ 
++				case ngapType.ProtocolIEIDQosFlowSetupRequestList:
++					if ie.QosFlowSetupRequestList != nil {
++						for _, flow := range ie.QosFlowSetupRequestList.List {
++							if flow.QosFlowIdentifier != nil {
++								qfis = append(qfis, flow.QosFlowIdentifier.Value)
++							}
++						}
++					}
++
+ 				case ngapType.ProtocolIEIDULNGUUPTNLInformation:
+ 					uLNGUUPTNLInformation := ie.ULNGUUPTNLInformation
+ 
+@@ -215,9 +225,18 @@ func HandlerInitialContextSetupRequest(gnb *context.GNBContext, message *ngapmsg
+ 				continue
+ 			}
+ 
+-			_, err = ue.CreatePduSession(pduSessionId, upfIp, sst, sd, 0, 1, 0, 0, binary.BigEndian.Uint32(teidUplink), gnb.GetUeTeid(ue))
++			// After a Service Request the session can carry more than the default
++			// QoS flow, for example a GBR flow; all of them are accepted and reported.
++			qosId := int64(1)
++			if len(qfis) > 0 {
++				qosId = qfis[0]
++			}
++			pduSession, err := ue.CreatePduSession(pduSessionId, upfIp, sst, sd, 0, qosId, 0, 0, binary.BigEndian.Uint32(teidUplink), gnb.GetUeTeid(ue))
+ 			if err != nil {
+ 				log.Error("[GNB] ", err)
++			} else {
++				pduSession.AddQosFlows(qfis)
++				log.Info("[GNB][NGAP][UE] PDU Session ", pduSessionId, " QoS flows: ", pduSession.GetQosFlows())
+ 			}
+ 
+ 			if pDUSessionResourceSetupItemCtxReq.NASPDU != nil {
+@@ -283,6 +302,7 @@ func HandlerPduSessionResourceSetupRequest(gnb *context.GNBContext, message *nga
+ 		var qosId int64
+ 		var fiveQi int64
+ 		var priArp int64
++		var qfis []int64
+ 
+ 		// check PDU Session NAS PDU.
+ 		// NAS PDU is optional (TS 38.413 V19.0.0.0 section 9.2.1.1)
+@@ -330,6 +350,11 @@ func HandlerPduSessionResourceSetupRequest(gnb *context.GNBContext, message *nga
+ 
+ 					case ngapType.ProtocolIEIDQosFlowSetupRequestList:
+ 						for _, itemsQos := range ies.QosFlowSetupRequestList.List {
++							qfis = append(qfis, itemsQos.QosFlowIdentifier.Value)
++							// The first flow (the default one) gives the uplink QFI, 5QI and ARP.
++							if len(qfis) > 1 {
++								continue
++							}
+ 							qosId = itemsQos.QosFlowIdentifier.Value
+ 							// QoS Characteristics is a CHOICE: a dynamic 5QI leaves NonDynamic5QI
+ 							// nil and carries its 5QI only optionally.
+@@ -388,6 +413,7 @@ func HandlerPduSessionResourceSetupRequest(gnb *context.GNBContext, message *nga
+ 				continue
+ 			}
+ 		}
++		pduSession.AddQosFlows(qfis)
+ 		configuredPduSessions = append(configuredPduSessions, pduSession)
+ 
+ 		log.Info("[GNB][NGAP][UE] PDU Session was created with successful.")
+@@ -1453,3 +1479,122 @@ func causeMiscToString(misc *ngapType.CauseMisc) string {
+ 		return "Unknown cause for miscellaneous"
+ 	}
+ }
++
++// HandlerPduSessionResourceModifyRequest handles a network-initiated PDU session
++// modification (TS 38.413 8.2.3), for example a new GBR QoS flow for voice after
++// the PCF installs a new PCC rule. The simulated radio has no resources to
++// reserve, so every requested QoS flow is accepted: the gNB forwards the NAS
++// PDU Session Modification Command to the UE and answers with the QFIs it took.
++func HandlerPduSessionResourceModifyRequest(gnb *context.GNBContext, message *ngapmsg.PDUSessionResourceModifyRequest) {
++	var amfUeId int64
++	var ranUeId int64
++
++	if message.AMFUENGAPID != nil {
++		amfUeId = message.AMFUENGAPID.Value
++	}
++	if message.RANUENGAPID != nil {
++		ranUeId = message.RANUENGAPID.Value
++	}
++	if message.PDUSessionResourceModifyListModReq == nil {
++		log.Error("[GNB][NGAP] PDU Session Resource Modify Request is missing mandatory PDU SESSION RESOURCE MODIFY LIST MOD REQ")
++		return
++	}
++
++	ue := getUeFromContext(gnb, ranUeId, amfUeId)
++	if ue == nil {
++		log.Warn("[GNB][NGAP] Cannot modify PDU Session for unknown or terminated UE with RANUEID ", ranUeId, ", ignoring request")
++		return
++	}
++
++	var modified []trigger.ModifiedPduSession
++	for _, item := range message.PDUSessionResourceModifyListModReq.List {
++		if item.PDUSessionID == nil {
++			continue
++		}
++		pduSessionId := item.PDUSessionID.Value
++		pduSession, err := ue.GetPduSession(pduSessionId)
++		if err != nil || pduSession == nil {
++			log.Error("[GNB][NGAP] PDU Session ", pduSessionId, " to modify was not found, skipping")
++			continue
++		}
++
++		var qfis, released []int64
++		if item.PDUSessionResourceModifyRequestTransfer != nil {
++			transfer := &ngapType.PDUSessionResourceModifyRequestTransfer{}
++			if err := ngapConvert.Unmarshal(item.PDUSessionResourceModifyRequestTransfer, transfer); err != nil {
++				log.Error("[GNB][NGAP] Error in decode PDU Session Resource Modify Request Transfer: ", err)
++			} else if transfer.ProtocolIEs != nil {
++				for _, ies := range transfer.ProtocolIEs.List {
++					if ies.Id().Value == ngapType.ProtocolIEIDQosFlowToReleaseList && ies.QosFlowToReleaseList != nil {
++						for _, flow := range ies.QosFlowToReleaseList.List {
++							if flow.QosFlowIdentifier != nil {
++								released = append(released, flow.QosFlowIdentifier.Value)
++							}
++						}
++						continue
++					}
++					if ies.Id().Value != ngapType.ProtocolIEIDQosFlowAddOrModifyRequestList || ies.QosFlowAddOrModifyRequestList == nil {
++						continue
++					}
++					for _, flow := range ies.QosFlowAddOrModifyRequestList.List {
++						if flow.QosFlowIdentifier == nil {
++							continue
++						}
++						qfis = append(qfis, flow.QosFlowIdentifier.Value)
++						logModifiedQosFlow(pduSessionId, &flow)
++					}
++				}
++			}
++		}
++		pduSession.AddQosFlows(qfis)
++		pduSession.RemoveQosFlows(released)
++		log.Info("[GNB][NGAP][UE] PDU Session ", pduSessionId, " QoS flows: ", pduSession.GetQosFlows())
++		modified = append(modified, trigger.ModifiedPduSession{Id: pduSessionId, Qfis: qfis})
++
++		// The NAS PDU (PDU Session Modification Command) is optional in each item.
++		if item.NASPDU != nil {
++			sender.SendToUe(ue, item.NASPDU.Value)
++		}
++	}
++
++	if len(modified) == 0 {
++		log.Error("[GNB][NGAP] No PDU session could be modified for RAN UE ", ue.GetRanUeId(),
++			"; sending no Modify Response (failed-to-modify reporting is unimplemented)")
++		return
++	}
++	trigger.SendPduSessionResourceModifyResponse(modified, ue)
++}
++
++func logModifiedQosFlow(pduSessionId int64, flow *ngapType.QosFlowAddOrModifyRequestItem) {
++	log.Info("[GNB][NGAP][UE] PDU Session ", pduSessionId, ": add or modify QoS flow QFI ", flow.QosFlowIdentifier.Value)
++	params := flow.QosFlowLevelQosParameters
++	if params == nil {
++		return
++	}
++	if params.QosCharacteristics != nil {
++		switch descriptor := params.QosCharacteristics.Choice.(type) {
++		case *ngapType.NonDynamic5QIDescriptor:
++			if descriptor.FiveQI != nil {
++				log.Info("[GNB][NGAP][UE]   5QI: ", descriptor.FiveQI.Value)
++			}
++		case *ngapType.Dynamic5QIDescriptor:
++			if descriptor.FiveQI != nil {
++				log.Info("[GNB][NGAP][UE]   5QI (dynamic): ", descriptor.FiveQI.Value)
++			}
++		}
++	}
++	if params.AllocationAndRetentionPriority != nil && params.AllocationAndRetentionPriority.PriorityLevelARP != nil {
++		log.Info("[GNB][NGAP][UE]   Priority Level ARP: ", params.AllocationAndRetentionPriority.PriorityLevelARP.Value)
++	}
++	if gbr := params.GBRQosInformation; gbr != nil {
++		log.Info("[GNB][NGAP][UE]   GBR flow, MFBR DL/UL: ", bitRate(gbr.MaximumFlowBitRateDL), "/", bitRate(gbr.MaximumFlowBitRateUL),
++			" bit/s, GFBR DL/UL: ", bitRate(gbr.GuaranteedFlowBitRateDL), "/", bitRate(gbr.GuaranteedFlowBitRateUL), " bit/s")
++	}
++}
++
++func bitRate(rate *ngapType.BitRate) int64 {
++	if rate == nil {
++		return 0
++	}
++	return rate.Value
++}
+diff --git a/internal/control_test_engine/gnb/ngap/message/ngap_control/pdu_session_management/pdu-session-resource-modify-response.go b/internal/control_test_engine/gnb/ngap/message/ngap_control/pdu_session_management/pdu-session-resource-modify-response.go
+new file mode 100644
+index 0000000..a201690
+--- /dev/null
++++ b/internal/control_test_engine/gnb/ngap/message/ngap_control/pdu_session_management/pdu-session-resource-modify-response.go
+@@ -0,0 +1,59 @@
++/**
++ * SPDX-License-Identifier: Apache-2.0
++ * PDU Session Resource Modify Response (TS 38.413 9.2.1.6), for the training lab fork.
++ */
++package pdu_session_management
++
++import (
++	"fmt"
++
++	"my5G-RANTester/internal/control_test_engine/gnb/context"
++	ngapConvert "my5G-RANTester/lib/ngap"
++
++	ngapType "github.com/free5gc/ngap/ie"
++	ngap "github.com/free5gc/ngap/message"
++)
++
++// ModifiedPduSession is one PDU session of a Modify Request, with the QFIs
++// of the QoS flows the gNB added or modified in it.
++type ModifiedPduSession struct {
++	Id   int64
++	Qfis []int64
++}
++
++func PDUSessionResourceModifyResponse(sessions []ModifiedPduSession, ue *context.GNBUe) ([]byte, error) {
++	pdu := &ngap.PDUSessionResourceModifyResponse{
++		AMFUENGAPID:                        &ngapType.AMFUENGAPID{Value: ue.GetAmfUeId()},
++		RANUENGAPID:                        &ngapType.RANUENGAPID{Value: ue.GetRanUeId()},
++		PDUSessionResourceModifyListModRes: &ngapType.PDUSessionResourceModifyListModRes{},
++	}
++	for _, session := range sessions {
++		transfer, err := GetPDUSessionResourceModifyResponseTransfer(session.Qfis)
++		if err != nil {
++			return nil, fmt.Errorf("PDU session %d: %w", session.Id, err)
++		}
++		pdu.PDUSessionResourceModifyListModRes.List = append(pdu.PDUSessionResourceModifyListModRes.List,
++			ngapType.PDUSessionResourceModifyItemModRes{
++				PDUSessionID:                             &ngapType.PDUSessionID{Value: session.Id},
++				PDUSessionResourceModifyResponseTransfer: ngapConvert.Octets(transfer),
++			})
++	}
++	return pdu.MarshalBinary()
++}
++
++// GetPDUSessionResourceModifyResponseTransfer lists the accepted QoS flows. All IEs
++// of the transfer are optional; an empty list is not allowed, so it is left out
++// when no QoS flow was requested.
++func GetPDUSessionResourceModifyResponseTransfer(qfis []int64) ([]byte, error) {
++	data := ngapType.PDUSessionResourceModifyResponseTransfer{}
++	if len(qfis) > 0 {
++		list := &ngapType.QosFlowAddOrModifyResponseList{}
++		for _, qfi := range qfis {
++			list.List = append(list.List, ngapType.QosFlowAddOrModifyResponseItem{
++				QosFlowIdentifier: &ngapType.QosFlowIdentifier{Value: qfi},
++			})
++		}
++		data.QosFlowAddOrModifyResponseList = list
++	}
++	return ngapConvert.Marshal(&data)
++}
+diff --git a/internal/control_test_engine/gnb/ngap/message/ngap_control/pdu_session_management/pdu-session-resource-setup-response.go b/internal/control_test_engine/gnb/ngap/message/ngap_control/pdu_session_management/pdu-session-resource-setup-response.go
+index 2260e78..b261fc6 100644
+--- a/internal/control_test_engine/gnb/ngap/message/ngap_control/pdu_session_management/pdu-session-resource-setup-response.go
++++ b/internal/control_test_engine/gnb/ngap/message/ngap_control/pdu_session_management/pdu-session-resource-setup-response.go
+@@ -60,7 +60,7 @@ func (builder *PDUSessionResourceSetupResponseBuilder) SetPDUSessionResourceSetu
+ 		// PDU Session ID : This is an unique identifier generated by UE. Can’t be same as any existing PDU session.
+ 		pDUSessionResourceSetupItemSURes.PDUSessionID = &ngapType.PDUSessionID{Value: pduSession.GetPduSessionId()}
+ 
+-		pDUSessionResourceSetupItemSURes.PDUSessionResourceSetupResponseTransfer = ngapConvert.Octets(GetPDUSessionResourceSetupResponseTransfer(gnb.GetN3GnbIp(), pduSession.GetTeidDownlink(), pduSession.GetQosId()))
++		pDUSessionResourceSetupItemSURes.PDUSessionResourceSetupResponseTransfer = ngapConvert.Octets(GetPDUSessionResourceSetupResponseTransfer(gnb.GetN3GnbIp(), pduSession.GetTeidDownlink(), pduSession.GetQosFlows()))
+ 
+ 		pDUSessionResourceSetupListSURes.List = append(pDUSessionResourceSetupListSURes.List, pDUSessionResourceSetupItemSURes)
+ 	}
+@@ -96,16 +96,22 @@ func (builder *PDUSessionResourceSetupResponseBuilder) Build() ([]byte, error) {
+ 	return builder.pdu.MarshalBinary()
+ }
+ 
+-func GetPDUSessionResourceSetupResponseTransfer(ipv4 netip.Addr, teid uint32, qosId int64) []byte {
+-	data := buildPDUSessionResourceSetupResponseTransfer(ipv4, teid, qosId)
++func GetPDUSessionResourceSetupResponseTransfer(ipv4 netip.Addr, teid uint32, qfis []int64) []byte {
++	data := buildPDUSessionResourceSetupResponseTransfer(ipv4, teid, qfis)
+ 	encodeData, _ := ngapConvert.Marshal(&data)
+ 	return encodeData
+ }
+ 
+-func buildPDUSessionResourceSetupResponseTransfer(ipv4 netip.Addr, teid uint32, qosId int64) (data ngapType.PDUSessionResourceSetupResponseTransfer) {
++// The Associated QoS Flow List names every accepted QoS flow (TS 38.413 9.3.4.2):
++// the SMF forwards downlink only for the flows listed here.
++func buildPDUSessionResourceSetupResponseTransfer(ipv4 netip.Addr, teid uint32, qfis []int64) (data ngapType.PDUSessionResourceSetupResponseTransfer) {
++	flows := &ngapType.AssociatedQosFlowList{}
++	for _, qfi := range qfis {
++		flows.List = append(flows.List, ngapType.AssociatedQosFlowItem{QosFlowIdentifier: &ngapType.QosFlowIdentifier{Value: qfi}})
++	}
+ 	data.DLQosFlowPerTNLInformation = &ngapType.QosFlowPerTNLInformation{
+ 		UPTransportLayerInformation: ngapConvert.UPTransport(ipv4, teid),
+-		AssociatedQosFlowList:       &ngapType.AssociatedQosFlowList{List: []ngapType.AssociatedQosFlowItem{{QosFlowIdentifier: &ngapType.QosFlowIdentifier{Value: qosId}}}},
++		AssociatedQosFlowList:       flows,
+ 	}
+ 	return data
+ }
+diff --git a/internal/control_test_engine/gnb/ngap/message/ngap_control/ue_context_management/initial-context-setup-response.go b/internal/control_test_engine/gnb/ngap/message/ngap_control/ue_context_management/initial-context-setup-response.go
+index ef7d98a..31ab2c1 100644
+--- a/internal/control_test_engine/gnb/ngap/message/ngap_control/ue_context_management/initial-context-setup-response.go
++++ b/internal/control_test_engine/gnb/ngap/message/ngap_control/ue_context_management/initial-context-setup-response.go
+@@ -55,7 +55,7 @@ func (builder *InitialContextSetupResponseBuilder) SetPDUSessionResourceSetupLis
+ 		pDUSessionResourceSetupItemCxtRes := ngapType.PDUSessionResourceSetupItemCxtRes{}
+ 
+ 		pDUSessionResourceSetupItemCxtRes.PDUSessionID = &ngapType.PDUSessionID{Value: pduSession.GetPduSessionId()}
+-		pDUSessionResourceSetupItemCxtRes.PDUSessionResourceSetupResponseTransfer = ngapConvert.Octets(pdu_session_management.GetPDUSessionResourceSetupResponseTransfer(gnb.GetN3GnbIp(), pduSession.GetTeidDownlink(), pduSession.GetQosId()))
++		pDUSessionResourceSetupItemCxtRes.PDUSessionResourceSetupResponseTransfer = ngapConvert.Octets(pdu_session_management.GetPDUSessionResourceSetupResponseTransfer(gnb.GetN3GnbIp(), pduSession.GetTeidDownlink(), pduSession.GetQosFlows()))
+ 		PDUSessionResourceSetupListCxtRes.List = append(PDUSessionResourceSetupListCxtRes.List, pDUSessionResourceSetupItemCxtRes)
+ 	}
+ 
+diff --git a/internal/control_test_engine/gnb/ngap/message/ngap_control/ue_mobility_management/path-switch-request.go b/internal/control_test_engine/gnb/ngap/message/ngap_control/ue_mobility_management/path-switch-request.go
+index 098e162..1f1cd87 100644
+--- a/internal/control_test_engine/gnb/ngap/message/ngap_control/ue_mobility_management/path-switch-request.go
++++ b/internal/control_test_engine/gnb/ngap/message/ngap_control/ue_mobility_management/path-switch-request.go
+@@ -60,9 +60,13 @@ func (builder *PathSwitchRequestBuilder) PathSwitchRequestTransfer(gnbN3Ip netip
+ 		if session == nil {
+ 			continue
+ 		}
++		accepted := &ngapType.QosFlowAcceptedList{}
++		for _, qfi := range session.GetQosFlows() {
++			accepted.List = append(accepted.List, ngapType.QosFlowAcceptedItem{QosFlowIdentifier: &ngapType.QosFlowIdentifier{Value: qfi}})
++		}
+ 		transfer := &ngapType.PathSwitchRequestTransfer{
+ 			DLNGUUPTNLInformation: ngapConvert.UPTransport(gnbN3Ip, session.GetTeidDownlink()),
+-			QosFlowAcceptedList:   &ngapType.QosFlowAcceptedList{List: []ngapType.QosFlowAcceptedItem{{QosFlowIdentifier: &ngapType.QosFlowIdentifier{Value: session.GetQosId()}}}},
++			QosFlowAcceptedList:   accepted,
+ 		}
+ 		encoded, err := ngapConvert.Marshal(transfer)
+ 		if err != nil {
+diff --git a/internal/control_test_engine/gnb/ngap/trigger/trigger.go b/internal/control_test_engine/gnb/ngap/trigger/trigger.go
+index 30013c3..96ca1ca 100644
+--- a/internal/control_test_engine/gnb/ngap/trigger/trigger.go
++++ b/internal/control_test_engine/gnb/ngap/trigger/trigger.go
+@@ -40,6 +40,25 @@ func SendPduSessionResourceSetupResponse(pduSessions []*context.GnbPDUSession, u
+ 	}
+ }
+ 
++// ModifiedPduSession is one PDU session accepted in a PDU Session Resource Modify Request.
++type ModifiedPduSession = pdu_session_management.ModifiedPduSession
++
++func SendPduSessionResourceModifyResponse(sessions []ModifiedPduSession, ue *context.GNBUe) {
++	log.Info("[GNB] Initiating PDU Session Resource Modify Response")
++
++	ngapMsg, err := pdu_session_management.PDUSessionResourceModifyResponse(sessions, ue)
++	if err != nil {
++		log.Error("[GNB][NGAP] Error building PDU Session Resource Modify Response: ", err)
++		return
++	}
++
++	conn := ue.GetSCTP()
++	err = sender.SendToAmF(ngapMsg, conn)
++	if err != nil {
++		log.Error("[GNB][NGAP] Error sending PDU Session Resource Modify Response: ", err)
++	}
++}
++
+ func SendPduSessionReleaseResponse(pduSessionIds []*ngapType.PDUSessionID, ue *context.GNBUe) {
+ 	log.Info("[GNB] Initiating PDU Session Release Response")
+ 
+diff --git a/internal/control_test_engine/ue/nas/handler/handler.go b/internal/control_test_engine/ue/nas/handler/handler.go
+index a7d3300..9475aba 100644
+--- a/internal/control_test_engine/ue/nas/handler/handler.go
++++ b/internal/control_test_engine/ue/nas/handler/handler.go
+@@ -142,6 +142,25 @@ func HandlerDlNasTransportPduaccept(ue *context.UEContext, msg *nas.DLNASTranspo
+ 		}
+ 		ue.DeletePduSession(m.PDUSessId)
+ 		trigger.InitPduSessionReleaseComplete(ue, session)
++	case *nas.PDUSessModCmd:
++		// Network-initiated modification (TS 24.501 6.3.2), for example a new GBR
++		// QoS flow for voice. The UE accepts every rule; the userspace tunnel does
++		// not separate traffic by QFI, so the new rules are only logged.
++		if session, err := ue.GetPduSession(m.PDUSessId); err != nil || session == nil {
++			log.Errorf("[UE][NAS] Unknown PDU session %d in PDU Session Modification Command", m.PDUSessId)
++			return
++		}
++		log.Infof("[UE][NAS] PDU session %d modification command, PTI %d", m.PDUSessId, m.PTI)
++		if m.AuthoQosRules != nil {
++			log.Infof("[UE][NAS] PDU session %d new QoS rules: %+v", m.PDUSessId, m.AuthoQosRules)
++		}
++		if m.AuthoQosFlowDescs != nil {
++			log.Infof("[UE][NAS] PDU session %d new QoS flow descriptions: %+v", m.PDUSessId, m.AuthoQosFlowDescs)
++		}
++		if m.SessAMBR != nil {
++			log.Infof("[UE][NAS] PDU session %d new session AMBR: %+v", m.PDUSessId, m.SessAMBR)
++		}
++		trigger.InitPduSessionModificationComplete(ue, m.PDUSessId, m.PTI)
+ 	case *nas.PDUSessEstRej:
+ 		log.Errorf("[UE][NAS] PDU session %d rejected: %s", m.PDUSessId, m.Cause5GSM)
+ 		handleEstablishmentReject(ue, m)
+@@ -158,5 +177,16 @@ func HandlerIdentityRequest(ue *context.UEContext, msg *nas.IdReq) {
+ 	trigger.InitIdentifyResponse(ue)
+ }
+ func HandlerConfigurationUpdateCommand(ue *context.UEContext, msg *nas.CfgUpdateCmd) {
+-	trigger.InitConfigurationUpdateComplete(ue)
++	// TS 24.501 5.4.4.3: a new 5G-GUTI replaces the old one. Without this, the
++	// next Service Request carries the old 5G-S-TMSI and the AMF answers
++	// Service Reject #9 (UE identity cannot be derived by the network).
++	if msg.GUTI5G != nil {
++		ue.Set5gGuti(msg.GUTI5G)
++		log.Info("[UE][NAS] New 5G-GUTI from Configuration Update Command")
++	}
++	// TS 24.501 5.4.4.3: CONFIGURATION UPDATE COMPLETE only when the network
++	// requests an acknowledgement.
++	if msg.CfgUpdateInd != nil && msg.CfgUpdateInd.ACK {
++		trigger.InitConfigurationUpdateComplete(ue)
++	}
+ }
+diff --git a/internal/control_test_engine/ue/nas/message/nas_control/mm_5gs/ul-nas-transport.go b/internal/control_test_engine/ue/nas/message/nas_control/mm_5gs/ul-nas-transport.go
+index dfca1a6..68721ba 100644
+--- a/internal/control_test_engine/ue/nas/message/nas_control/mm_5gs/ul-nas-transport.go
++++ b/internal/control_test_engine/ue/nas/message/nas_control/mm_5gs/ul-nas-transport.go
+@@ -13,11 +13,24 @@ import (
+ 	"my5G-RANTester/internal/control_test_engine/ue/context"
+ 	"my5G-RANTester/internal/control_test_engine/ue/nas/message/nas_control"
+ 	"my5G-RANTester/internal/control_test_engine/ue/nas/message/nas_control/sm_5gs"
++	"strings"
+ )
+ 
++// dnnForSession lets ue.dnn list several DNNs separated by commas: PDU session N
++// uses the Nth one, wrapping around. For example "ims,internet" with --nPdu 2
++// gives an IMS session (ID 1, the one with the tunnel) and an internet session (ID 2).
++func dnnForSession(dnns string, id uint8) string {
++	list := strings.Split(dnns, ",")
++	index := 0
++	if id > 0 {
++		index = (int(id) - 1) % len(list)
++	}
++	return strings.TrimSpace(list[index])
++}
++
+ func Request_UlNasTransport(pduSession *context.UEPDUSession, ue *context.UEContext) ([]byte, error) {
+ 
+-	pdu := getUlNasTransport_PduSessionEstablishmentRequest(pduSession.Id, ue.Dnn, &ue.Snssai, ue.PDUSessionType.NAS())
++	pdu := getUlNasTransport_PduSessionEstablishmentRequest(pduSession.Id, dnnForSession(ue.Dnn, pduSession.Id), &ue.Snssai, ue.PDUSessionType.NAS())
+ 	if pdu == nil {
+ 		return nil, fmt.Errorf("Error encoding %s IMSI UE PduSession Establishment Request Msg", ue.UeSecurity.Supi)
+ 	}
+@@ -45,7 +58,7 @@ func Release_UlNasTransport(pduSession *context.UEPDUSession, ue *context.UECont
+ 
+ func ReleasComplete_UlNasTransport(pduSession *context.UEPDUSession, ue *context.UEContext) ([]byte, error) {
+ 
+-	pdu := getUlNasTransport_PduSessionReleaseComplete(pduSession.Id, ue.Dnn, &ue.Snssai)
++	pdu := getUlNasTransport_PduSessionReleaseComplete(pduSession.Id, dnnForSession(ue.Dnn, pduSession.Id), &ue.Snssai)
+ 	if pdu == nil {
+ 		return nil, fmt.Errorf("Error encoding %s IMSI UE PduSession Establishment Request Msg", ue.UeSecurity.Supi)
+ 	}
+@@ -57,6 +70,20 @@ func ReleasComplete_UlNasTransport(pduSession *context.UEPDUSession, ue *context
+ 	return pdu, nil
+ }
+ 
++func ModificationComplete_UlNasTransport(pduSessionId uint8, pti uint8, ue *context.UEContext) ([]byte, error) {
++
++	pdu := transport(pduSessionId, sm_5gs.GetPduSessionModificationComplete(pduSessionId, pti), nil, "", nil)
++	if pdu == nil {
++		return nil, fmt.Errorf("Error encoding %s IMSI UE PduSession Modification Complete Msg", ue.UeSecurity.Supi)
++	}
++	pdu, err := nas_control.EncodeNasPduWithSecurity(ue, pdu, nas.SecHdrTypeIntegrityProtectedAndCiphered, true, false)
++	if err != nil {
++		return nil, fmt.Errorf("Error encoding %s IMSI UE PduSession Modification Complete Msg", ue.UeSecurity.Supi)
++	}
++
++	return pdu, nil
++}
++
+ func transport(id uint8, payload []byte, request *ie.ReqType, dnn string, snssai *models.Snssai) []byte {
+ 	msg := &nas.ULNASTransport{
+ 		PayloadCntrType: &ie.PayloadCntrType{Value: ie.PayloadCntrType_N1SMInfo},
+diff --git a/internal/control_test_engine/ue/nas/message/nas_control/sm_5gs/pdu-session-modification-complete.go b/internal/control_test_engine/ue/nas/message/nas_control/sm_5gs/pdu-session-modification-complete.go
+new file mode 100644
+index 0000000..d9cd733
+--- /dev/null
++++ b/internal/control_test_engine/ue/nas/message/nas_control/sm_5gs/pdu-session-modification-complete.go
+@@ -0,0 +1,13 @@
++/**
++ * SPDX-License-Identifier: Apache-2.0
++ * PDU Session Modification Complete (TS 24.501 8.3.10), for the training lab fork.
++ */
++package sm_5gs
++
++import nas "github.com/free5gc/nas/message"
++
++// GetPduSessionModificationComplete answers a PDU Session Modification Command.
++// The PTI repeats the one of the command: 0 for a network-initiated modification.
++func GetPduSessionModificationComplete(id uint8, pti uint8) []byte {
++	return encodePlain(&nas.PDUSessModComplete{PDUSessId: id, PTI: pti})
++}
+diff --git a/internal/control_test_engine/ue/nas/trigger/trigger.go b/internal/control_test_engine/ue/nas/trigger/trigger.go
+index 59a7ed6..e364025 100644
+--- a/internal/control_test_engine/ue/nas/trigger/trigger.go
++++ b/internal/control_test_engine/ue/nas/trigger/trigger.go
+@@ -144,6 +144,19 @@ func InitPduSessionReleaseComplete(ue *context.UEContext, pduSession *context.UE
+ 	sender.SendToGnb(ue, ulNasTransport)
+ }
+ 
++func InitPduSessionModificationComplete(ue *context.UEContext, pduSessionId uint8, pti uint8) {
++	log.Info("[UE] Initiating PDU Session Modification Complete for PDU Session ", pduSessionId)
++
++	ulNasTransport, err := mm_5gs.ModificationComplete_UlNasTransport(pduSessionId, pti, ue)
++	if err != nil {
++		log.Error("[UE][NAS] Error sending ul nas transport and pdu session modification complete: ", err)
++		return
++	}
++
++	// sending to GNB
++	sender.SendToGnb(ue, ulNasTransport)
++}
++
+ func InitDeregistration(ue *context.UEContext) {
+ 	log.Info("[UE] Initiating Deregistration")
+ 

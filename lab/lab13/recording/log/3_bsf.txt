@@ -1,0 +1,7 @@
+HTTP/2 200 
+server: Open5GS v2.8.0
+date: Mon, 23 Nov 2026 13:30:37 GMT
+content-length: 92
+content-type: application/json
+
+{"dnn":"ims","pcfIpEndPoints":[{"ipv4Address":"127.0.0.13","port":7777}],"snssai":{"sst":1}}

@@ -1,0 +1,128 @@
+# lab7: NRF przy starcie 5GC i ręcznie przez curl
+# Pliki: current/pcap/ core_all.pcapng
+# Terminale: T1 tcpdump, T2 5GC i curl
+
+
+### 1. Czysty start
+
+cd ~/5gs/repo/lab/lab7
+sudo rm -rf current/pcap current/log current/core_log current/core_config
+mkdir -p current/{pcap,log,core_log,core_config}
+
+sudo systemctl stop open5gs-amfd open5gs-smfd open5gs-upfd open5gs-ausfd open5gs-udmd open5gs-udrd open5gs-pcfd open5gs-nssfd open5gs-bsfd open5gs-nrfd
+sudo rm -f /var/log/open5gs/*.log*
+
+# sbi <nazwa> <opcje curl>: curl po HTTP/2 bez TLS; nagłówki odpowiedzi na żółto, JSON przez jq,
+#   kopie w current/log/<nazwa>.headers i <nazwa>.json
+sbi() {
+  local log=current/log/$1; shift
+  curl --http2-prior-knowledge -s -D $log.headers -o $log.json "$@"
+  printf '\e[33m%s\e[0m\n' "$(tr -d '\r' < $log.headers)"
+  [ -s $log.json ] && jq -C . $log.json
+}
+
+
+### 2. Przebieg
+
+# T1: nagranie (przed startem 5GC)
+sudo tcpdump -i lo -n -w current/pcap/core_all.pcapng "tcp port 7777"
+
+# T2: start 5GC: każda NF rejestruje się w NRF
+step "1 start NRF"
+sudo systemctl start open5gs-nrfd
+step "2 start pozostałych NF"
+sudo systemctl start open5gs-udrd open5gs-udmd open5gs-ausfd open5gs-pcfd open5gs-nssfd open5gs-bsfd open5gs-upfd open5gs-smfd open5gs-amfd
+
+# T2: jakie SMF zna NRF (NFDiscover)
+step "3 NFDiscover"
+sbi 3_discover "http://127.0.0.10:7777/nnrf-disc/v1/nf-instances?target-nf-type=SMF&requester-nf-type=AMF"
+
+# T2: to samo zapytanie ramka po ramce HTTP/2
+nghttp -v "http://127.0.0.10:7777/nnrf-disc/v1/nf-instances?target-nf-type=SMF&requester-nf-type=AMF"
+
+# T2: rejestracja własnej, fałszywej NF (NFRegister)
+step "4 NFRegister"
+sbi 4_register -X PUT "http://127.0.0.10:7777/nnrf-nfm/v1/nf-instances/11111111-2222-3333-4444-555555555555" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "nfInstanceId": "11111111-2222-3333-4444-555555555555",
+    "nfType": "SMF",
+    "nfStatus": "REGISTERED",
+    "heartBeatTimer": 60,
+    "plmnList": [{"mcc": "999", "mnc": "70"}],
+    "ipv4Addresses": ["127.0.0.99"],
+    "load": 25,
+    "nfServices": [
+      {
+        "serviceInstanceId": "serv-inst-99",
+        "serviceName": "nsmf-pdusession",
+        "versions": [{"apiVersionInUri": "v1", "apiFullVersion": "1.0.0"}],
+        "scheme": "http",
+        "nfServiceStatus": "REGISTERED",
+        "ipEndPoints": [{"ipv4Address": "127.0.0.99", "port": 7777}]
+      }
+    ]
+  }'
+
+# T2: NFDiscover jeszcze raz: fałszywa NF jest na liście SMF
+step "5 NFDiscover"
+sbi 5_discover "http://127.0.0.10:7777/nnrf-disc/v1/nf-instances?target-nf-type=SMF&requester-nf-type=AMF"
+
+# T2: aktualizacja stanu (Heart-Beat, PATCH)
+step "6 Heart-Beat"
+sbi 6_patch -X PATCH "http://127.0.0.10:7777/nnrf-nfm/v1/nf-instances/11111111-2222-3333-4444-555555555555" \
+  -H "Content-Type: application/json-patch+json" \
+  -d '[{"op": "replace", "path": "/load", "value": 85}]'
+
+# T2: wpis fałszywej NF w NRF: load 85
+sbi 6_wpis "http://127.0.0.10:7777/nnrf-nfm/v1/nf-instances/11111111-2222-3333-4444-555555555555"
+
+# T2: usunięcie wpisu (NFDeregister, DELETE)
+step "7 NFDeregister"
+sbi 7_delete -X DELETE "http://127.0.0.10:7777/nnrf-nfm/v1/nf-instances/11111111-2222-3333-4444-555555555555"
+
+# T2: wpis fałszywej NF w NRF: 404
+sbi 7_wpis "http://127.0.0.10:7777/nnrf-nfm/v1/nf-instances/11111111-2222-3333-4444-555555555555"
+
+# T2: ponowna rejestracja fałszywej NF (NFRegister)
+step "8 NFRegister"
+sbi 8_register -X PUT "http://127.0.0.10:7777/nnrf-nfm/v1/nf-instances/11111111-2222-3333-4444-555555555555" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "nfInstanceId": "11111111-2222-3333-4444-555555555555",
+    "nfType": "SMF",
+    "nfStatus": "REGISTERED",
+    "heartBeatTimer": 60,
+    "plmnList": [{"mcc": "999", "mnc": "70"}],
+    "ipv4Addresses": ["127.0.0.99"],
+    "load": 25,
+    "nfServices": [
+      {
+        "serviceInstanceId": "serv-inst-99",
+        "serviceName": "nsmf-pdusession",
+        "versions": [{"apiVersionInUri": "v1", "apiFullVersion": "1.0.0"}],
+        "scheme": "http",
+        "nfServiceStatus": "REGISTERED",
+        "ipEndPoints": [{"ipv4Address": "127.0.0.99", "port": 7777}]
+      }
+    ]
+  }'
+
+# T2: bez Heart-Beat: co 10 s kod odpowiedzi dla wpisu; 200, a po heartBeatTimer 404 (Ctrl+C)
+step "9 brak Heart-Beat"
+while true; do
+  date +%T
+  curl --http2-prior-knowledge -s -o /dev/null -w '%{http_code}\n' \
+    "http://127.0.0.10:7777/nnrf-nfm/v1/nf-instances/11111111-2222-3333-4444-555555555555"
+  sleep 10
+done | tee current/log/9_brak_heartbeat.txt
+
+# T1: Ctrl+C
+step "10 koniec"
+
+
+### 3. Zapis
+
+sudo cp -R /etc/open5gs/. current/core_config/
+sudo cp -R /var/log/open5gs/. current/core_log/
+sudo chown -R $USER: current

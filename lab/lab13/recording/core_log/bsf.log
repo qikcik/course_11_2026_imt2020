@@ -1,0 +1,11 @@
+Open5GS daemon v2.8.0
+
+11/23 13:29:32.889: [app] INFO: Configuration: '/etc/open5gs/bsf.yaml' (../lib/app/ogs-init.c:144)
+11/23 13:29:32.889: [app] INFO: File Logging: '/var/log/open5gs/bsf.log' (../lib/app/ogs-init.c:147)
+11/23 13:29:32.892: [sbi] INFO: Setup NF EndPoint(addr) [127.0.0.10:7777] (../lib/sbi/context.c:451)
+11/23 13:29:32.893: [sbi] INFO: NF Service [nbsf-management] (../lib/sbi/context.c:2012)
+11/23 13:29:32.893: [sbi] INFO: nghttp2_server() [http://127.0.0.15]:7777 (../lib/sbi/nghttp2-server.c:454)
+11/23 13:29:32.893: [app] INFO: BSF initialize...done (../src/bsf/app.c:31)
+11/23 13:29:32.894: [sbi] INFO: [eb2181be-e741-41f1-a2de-4982981b1a49] NF registered [Heartbeat:10s] (../lib/sbi/nf-sm.c:368)
+11/23 13:29:32.895: [sbi] INFO: Setup NF EndPoint(addr) [127.0.0.10:7777] (../lib/sbi/nnrf-handler.c:1113)
+11/23 13:29:32.895: [sbi] INFO: [eb21d10a-e741-41f1-9cfc-f1d5e1dd5b5b] Subscription created until 2026-11-24T13:29:32.894877+00:00 [duration:86400000000,validity:86400.000000,patch:43200.000000] (../lib/sbi/nnrf-handler.c:1032)

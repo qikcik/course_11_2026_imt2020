@@ -1,0 +1,17 @@
+Open5GS daemon v2.8.0
+
+11/23 13:29:32.903: [app] INFO: Configuration: '/etc/open5gs/upf.yaml' (../lib/app/ogs-init.c:144)
+11/23 13:29:32.903: [app] INFO: File Logging: '/var/log/open5gs/upf.log' (../lib/app/ogs-init.c:147)
+11/23 13:29:32.953: [metrics] INFO: metrics_server() [http://127.0.0.7]:9090 (../lib/metrics/prometheus/context.c:392)
+11/23 13:29:32.953: [pfcp] INFO: pfcp_server() [127.0.0.7]:8805 (../lib/pfcp/path.c:30)
+11/23 13:29:32.953: [gtp] INFO: gtp_server() [127.0.0.7]:2152 (../lib/gtp/path.c:30)
+11/23 13:29:32.954: [app] INFO: UPF initialize...done (../src/upf/app.c:31)
+11/23 13:29:33.016: [upf] INFO: PFCP associated [127.0.0.4]:8805 (../src/upf/pfcp-sm.c:168)
+11/23 13:29:40.524: [upf] INFO: [Added] Number of UPF-Sessions is now 1 (../src/upf/context.c:212)
+11/23 13:29:40.524: [gtp] INFO: gtp_connect() [127.0.0.4]:2152 (../lib/gtp/path.c:60)
+11/23 13:29:40.524: [upf] INFO: UE F-SEID[UP:0xb1e CP:0x851] APN[ims] PDN-Type[1] IPv4[10.45.0.2] IPv6[] (../src/upf/context.c:498)
+11/23 13:29:40.525: [upf] INFO: [Added] Number of UPF-Sessions is now 2 (../src/upf/context.c:212)
+11/23 13:29:40.525: [upf] INFO: UE F-SEID[UP:0x970 CP:0x9f2] APN[internet] PDN-Type[1] IPv4[10.45.0.3] IPv6[] (../src/upf/context.c:498)
+11/23 13:29:40.527: [gtp] INFO: gtp_connect() [127.0.0.100]:2152 (../lib/gtp/path.c:60)
+11/23 13:31:51.751: [upf] INFO: [Removed] Number of UPF-sessions is now 1 (../src/upf/context.c:256)
+11/23 13:31:52.252: [upf] INFO: [Removed] Number of UPF-sessions is now 0 (../src/upf/context.c:256)

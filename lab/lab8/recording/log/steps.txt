@@ -1,0 +1,8 @@
+12:51:11.654 1 start 5GC
+12:51:36.597 2 start gNB
+12:51:48.100 3 start UE
+12:52:08.736 4 ping
+12:52:16.733 5 Hello World
+12:52:31.083 6 ping MTU
+12:52:35.625 7 ping MTU+1
+12:52:42.887 8 plik 50 kB

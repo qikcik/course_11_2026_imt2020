@@ -1,0 +1,7 @@
+13:25:44.346 1 start 5GC
+13:26:14.501 2 UE w gNB 000008
+13:26:21.402 3 ciągły ping
+13:26:31.654 4 handover N2 do 000009
+13:26:39.067 5 handover Xn do 000008
+13:26:46.624 6 koniec pingu
+13:27:08.456 7 wyrejestrowanie

@@ -1,0 +1,60 @@
+2026-11-23T13:56:35.244Z	info	Loaded config at: ./config/packetrusher_C_sesja_sst2.yml
+2026-11-23T13:56:35.244Z	info	PacketRusher version v0.0.0-20261008212308-78360917e6f7+dirty
+2026-11-23T13:56:35.244Z	info	---------------------------------------
+2026-11-23T13:56:35.244Z	info	[TESTER] Starting test function: Testing registration of multiple UEs
+2026-11-23T13:56:35.244Z	info	[TESTER][UE] Number of UEs: 1
+2026-11-23T13:56:35.244Z	info	[TESTER][GNB] gNodeB control interface IP/Port: 127.0.0.100:9487~
+2026-11-23T13:56:35.244Z	info	[TESTER][GNB] gNodeB data interface IP/Port: 127.0.0.100:2152
+2026-11-23T13:56:35.244Z	info	[TESTER][AMF] AMF IP/Port: 127.0.0.5:38412
+2026-11-23T13:56:35.244Z	info	---------------------------------------
+2026-11-23T13:56:35.245Z	info	[GNB] InitGnb called with N2 IP: 127.0.0.100:9487
+2026-11-23T13:56:35.245Z	info	[GNB] Attempting connection with N2 IP: 127.0.0.100:9487
+2026-11-23T13:56:35.245Z	info	[GNB][SCTP] Initializing connection: local=127.0.0.100:9487 remote=127.0.0.5:38412
+2026-11-23T13:56:35.245Z	info	[GNB][SCTP] Attempting SCTP dial...
+2026-11-23T13:56:35.245Z	info	[GNB][SCTP] SCTP connection established successfully
+2026-11-23T13:56:35.245Z	info	[GNB][SCTP] Starting GnbListen goroutine...
+2026-11-23T13:56:35.245Z	info	[GNB] SCTP/NGAP service is running
+2026-11-23T13:56:35.245Z	info	[GNB] Sending NG Setup Request...
+2026-11-23T13:56:35.245Z	info	[GNB] Initiating NG Setup Request
+2026-11-23T13:56:35.245Z	info	[GNB] NG Setup Request sent, waiting for response...
+2026-11-23T13:56:35.304Z	info	[GNB][SCTP] Receive message in 0 stream
+
+2026-11-23T13:56:35.304Z	info	[GNB][AMF] AMF Name: open5gs-amf0
+2026-11-23T13:56:35.304Z	info	[GNB][AMF] State of AMF: Active
+2026-11-23T13:56:35.304Z	info	[GNB][AMF] Capacity of AMF: 255
+2026-11-23T13:56:35.304Z	info	[GNB][AMF] PLMNs Identities Supported by AMF -- mcc: 999 mnc:70
+2026-11-23T13:56:35.304Z	info	[GNB][AMF] List of AMF slices Supported by AMF -- sst:01 sd:was not informed
+2026-11-23T13:56:35.346Z	info	[GNB] NG Setup successful with N2 IP: 127.0.0.100:9487
+2026-11-23T13:56:36.347Z	info	[TESTER] TESTING REGISTRATION USING IMSI 0000000001 UE
+2026-11-23T13:56:36.347Z	info	[GNB] Received incoming connection from new UE
+2026-11-23T13:56:36.347Z	info	[UE] Initiating Registration
+2026-11-23T13:56:36.348Z	info	[UE] Switched from state 0 to state 1
+2026-11-23T13:56:36.358Z	info	[GNB][SCTP] Receive message in 1 stream
+
+2026-11-23T13:56:36.359Z	info	[UE][NAS] Receive AuthReq
+2026-11-23T13:56:36.360Z	info	[UE] Switched from state 1 to state 2
+2026-11-23T13:56:36.365Z	info	[GNB][SCTP] Receive message in 1 stream
+
+2026-11-23T13:56:36.365Z	info	[UE][NAS] Receive SecModeCmd
+2026-11-23T13:56:36.376Z	info	[GNB][SCTP] Receive message in 1 stream
+
+2026-11-23T13:56:36.377Z	info	[GNB][UE] UE Context was created with successful
+2026-11-23T13:56:36.377Z	info	[GNB][UE] UE RAN ID 1
+2026-11-23T13:56:36.377Z	info	[GNB][UE] UE AMF ID 2
+2026-11-23T13:56:36.377Z	info	[GNB][UE] UE Mobility Restrict --Plmn-- Mcc: not informed Mnc: not informed
+2026-11-23T13:56:36.377Z	info	[GNB][UE] UE Masked Imeisv: 0000000000ffff01
+2026-11-23T13:56:36.377Z	info	[GNB][UE] Allowed Nssai-- Sst: [01] Sd: [not informed]
+2026-11-23T13:56:36.377Z	info	[GNB][NGAP][AMF] Send Initial Context Setup Response.
+2026-11-23T13:56:36.377Z	info	[GNB] Initiating Initial Context Setup Response
+2026-11-23T13:56:36.377Z	info	[GNB][NGAP] No PDU Session to set up in InitialContextSetupResponse.
+2026-11-23T13:56:36.377Z	info	[UE][NAS] Receive RegAccept
+2026-11-23T13:56:36.377Z	info	[UE] Switched from state 2 to state 3
+2026-11-23T13:56:36.377Z	info	[UE] Initiating New PDU Session
+2026-11-23T13:56:36.580Z	info	[GNB][SCTP] Receive message in 1 stream
+
+2026-11-23T13:56:36.580Z	info	[GNB][SCTP] Receive message in 1 stream
+
+2026-11-23T13:56:36.580Z	info	[UE][NAS] Receive CfgUpdateCmd
+2026-11-23T13:56:36.580Z	info	[UE] Initiating Configuration Update Complete
+2026-11-23T13:56:36.580Z	info	[UE][NAS] Receive Status5GMM
+2026-11-23T13:56:36.580Z	error	[UE][NAS] 5GMM status: DNN Not Supported Or Not Subscribed In The Slice

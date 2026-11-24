@@ -1,0 +1,5 @@
+13:55:57.986 1 start 5GC
+13:56:05.180 2 A: gNB i UE w slice SST 1
+13:56:19.593 3 B: gNB obsługuje tylko SST 1 SD 000001
+13:56:35.227 4 C: UE prosi o sesję w SST 2
+13:56:48.255 5 koniec

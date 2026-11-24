@@ -1,0 +1,5 @@
+13:08:19.509 1 start 5GC
+13:08:31.551 2 SUCI profil A
+13:08:53.558 3 nieznany IMSI
+13:09:04.994 4 zły klucz K
+13:09:14.487 5 koniec

@@ -1,0 +1,11 @@
+12:47:04.877 1 start NRF
+12:47:09.147 2 start pozostałych NF
+12:47:16.250 3 NFDiscover
+12:47:29.377 3 NFDiscover
+12:47:51.870 4 NFRegister
+12:47:56.893 5 NFDiscover
+12:48:08.998 6 Heart-Beat
+12:48:30.935 7 NFDeregister
+12:48:45.725 8 NFRegister
+12:48:56.479 9 brak Heart-Beat
+12:50:06.421 10 koniec

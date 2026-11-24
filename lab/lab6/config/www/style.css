@@ -1,0 +1,29 @@
+body {
+  background-color: #e8f0f8;
+  font-family: Arial, sans-serif;
+}
+
+.ramka {
+  width: 800px;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: white;
+  border: 2px solid #336699;
+  border-radius: 10px;
+}
+
+h1 {
+  color: #336699;
+  text-align: center;
+}
+
+img {
+  width: 100%;
+  border: 1px solid gray;
+}
+
+.stopka {
+  color: gray;
+  font-size: 12px;
+  text-align: center;
+}

@@ -1,0 +1,51 @@
+# lab9: rejestracja i abonent w UDM: SUCI, nieznany IMSI, zły klucz
+# Pliki: current/pcap/ core_all.pcapng
+# Terminale: T1 tcpdump, T2 5GC i PacketRusher
+
+
+### 0. Przygotowanie (raz po starcie maszyny; "File exists" oznacza, że już jest)
+
+sudo ip addr add 127.0.0.100/8 dev lo      # gNB PacketRusher (N2, N3)
+
+# klucz publiczny sieci (profil A, id 1) ma być równy homeNetworkPublicKey w config/packetrusher_1_suci.yml
+sudo openssl pkey -in /etc/open5gs/hnet/curve25519-1.key -pubout -outform DER | tail -c 32 | od -An -tx1 | tr -d ' \n'; echo
+
+
+### 1. Czysty start
+
+cd ~/5gs/repo/lab/lab9
+sudo rm -rf current/pcap current/log current/core_log current/core_config
+mkdir -p current/{pcap,log,core_log,core_config}
+
+sudo systemctl stop open5gs-amfd open5gs-smfd open5gs-upfd open5gs-ausfd open5gs-udmd open5gs-udrd open5gs-pcfd open5gs-nssfd open5gs-bsfd open5gs-nrfd
+sudo rm -f /var/log/open5gs/*.log*
+
+
+### 2. Przebieg
+
+# T1: nagranie (przed startem 5GC)
+sudo tcpdump -i lo -n -w current/pcap/core_all.pcapng "tcp port 7777 or udp port 8805 or udp port 2152 or sctp"
+
+# T2: start 5GC
+step "1 start 5GC"
+sudo systemctl start open5gs-nrfd
+sleep 1
+sudo systemctl start open5gs-udrd open5gs-udmd open5gs-ausfd open5gs-pcfd open5gs-nssfd open5gs-bsfd open5gs-upfd open5gs-smfd open5gs-amfd
+
+# T2: trzy próby rejestracji; każda ok. 10 s, potem Ctrl+C
+step "2 SUCI profil A"
+sudo ~/5gs/PacketRusher/packetrusher --config ./config/packetrusher_1_suci.yml multi-ue -n 1 -d 2>&1 | tee current/log/2_suci.log
+step "3 nieznany IMSI"
+sudo ~/5gs/PacketRusher/packetrusher --config ./config/packetrusher_2_nieznany_imsi.yml multi-ue -n 1 -d 2>&1 | tee current/log/3_nieznany_imsi.log
+step "4 zły klucz K"
+sudo ~/5gs/PacketRusher/packetrusher --config ./config/packetrusher_3_zly_klucz.yml multi-ue -n 1 -d 2>&1 | tee current/log/4_zly_klucz.log
+
+# T1: Ctrl+C
+step "5 koniec"
+
+
+### 3. Zapis
+
+sudo cp -R /etc/open5gs/. current/core_config/
+sudo cp -R /var/log/open5gs/. current/core_log/
+sudo chown -R $USER: current

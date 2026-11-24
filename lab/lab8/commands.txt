@@ -1,0 +1,66 @@
+# lab8: sesja PDU od strony Core
+# Pliki: current/pcap/ core_all.pcapng, core_n6.pcapng, gnb_ngap.pcap, gnb_n3_gtpu.pcap
+# Terminale: T1 tcpdump lo, T2 tcpdump ogstun, T3 serwer WWW, T4 gNB, T5 UE, T6 ruch z UE
+
+
+### 0. Przygotowanie (raz po starcie maszyny; "File exists" oznacza, że już jest)
+
+sudo ip netns add ue1
+sudo ip addr add 127.0.0.100/8 dev lo      # adres gNB (N2, N3)
+head -c 50000 /dev/urandom > ~/5gs/repo/lab/lab8/config/www/plik50k.bin
+
+
+### 1. Czysty start
+
+cd ~/5gs/repo/lab/lab8
+sudo rm -rf current/pcap current/log current/core_log current/core_config
+mkdir -p current/{pcap,log,core_log,core_config}
+
+sudo systemctl stop open5gs-amfd open5gs-smfd open5gs-upfd open5gs-ausfd open5gs-udmd open5gs-udrd open5gs-pcfd open5gs-nssfd open5gs-bsfd open5gs-nrfd
+sudo rm -f /var/log/open5gs/*.log*
+
+
+### 2. Przebieg
+
+# T1, T2: nagranie po stronie Core (przed startem 5GC)
+sudo tcpdump -i lo -n -w current/pcap/core_all.pcapng "tcp port 7777 or udp port 8805 or udp port 2152 or sctp"
+sudo tcpdump -i ogstun -n -w current/pcap/core_n6.pcapng
+
+# T6: start 5GC
+step "1 start 5GC"
+sudo systemctl start open5gs-nrfd
+sleep 1
+sudo systemctl start open5gs-udrd open5gs-udmd open5gs-ausfd open5gs-pcfd open5gs-nssfd open5gs-bsfd open5gs-upfd open5gs-smfd open5gs-amfd
+
+# T3: serwer WWW na adresie bramy puli UE (ogstun)
+cd ~/5gs/repo/lab/lab8/config/www && python3 -m http.server 8080 --bind 10.45.0.1
+
+# T4: gNB
+step "2 start gNB"
+sudo gnb -c ./config/gnb_zmq.yml
+
+# T5: UE (poczekać na adres IP UE w konsoli srsue)
+step "3 start UE"
+sudo srsue ./config/ue_zmq.conf
+
+# T6: ruch z przestrzeni sieciowej UE
+step "4 ping";                 sudo ip netns exec ue1 ping -c 3 10.45.0.1
+step "5 Hello World";          sudo ip netns exec ue1 curl -s http://10.45.0.1:8080/
+MTU=$(sudo ip -n ue1 -o link show tun_srsue | grep -o 'mtu [0-9]*' | cut -d' ' -f2); echo "MTU $MTU" | tee current/log/ue_mtu.txt
+step "6 ping MTU";             sudo ip netns exec ue1 ping -c 1 -M do -s $((MTU-28)) 10.45.0.1
+step "7 ping MTU+1";           sudo ip netns exec ue1 ping -c 1 -M do -s $((MTU-27)) 10.45.0.1
+step "8 plik 50 kB";           sudo ip netns exec ue1 curl -s -o /dev/null http://10.45.0.1:8080/plik50k.bin
+
+# T4, konsola gNB: zwolnienie kontekstu UE (C-RNTI z konsoli albo logu gNB)
+#   release 1 0x4601
+step "9 release"
+
+# T5: Ctrl+C, T4: Ctrl+C, T3: Ctrl+C, T2: Ctrl+C, T1: Ctrl+C
+step "10 koniec"
+
+
+### 3. Zapis
+
+sudo cp -R /etc/open5gs/. current/core_config/
+sudo cp -R /var/log/open5gs/. current/core_log/
+sudo chown -R $USER: current

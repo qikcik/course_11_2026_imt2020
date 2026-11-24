@@ -1,0 +1,68 @@
+# lab12: handover N2 i Xn od strony 5GC
+# Pliki: current/pcap/ core_all.pcapng, core_n6.pcapng
+# Terminale: T1 tcpdump lo, T2 tcpdump ogstun, T3 PacketRusher, T4 5GC i sterowanie
+
+
+### 0. Przygotowanie (raz po starcie maszyny; "File exists" oznacza, że już jest)
+
+sudo ip addr add 127.0.0.100/8 dev lo      # gNB 000008
+sudo ip addr add 127.0.0.101/8 dev lo      # gNB 000009
+sudo ip -4 rule add pref 32765 table local # VRF UE widzi 10.45.0.1 przez tunel, a nie jako adres lokalny
+sudo ip -4 rule del pref 0
+ip rule                                    # 1000 l3mdev, 32765 local, 32766 main
+cd ~/5gs/PacketRusher && git diff --stat -- internal; cd - >/dev/null
+# pusto: kod bez łatki z lab13; inaczej: (cd ~/5gs/PacketRusher && git checkout -- internal && git clean -f internal && go build -o packetrusher ./cmd)
+
+
+### 1. Czysty start
+
+cd ~/5gs/repo/lab/lab12
+sudo rm -rf current/pcap current/log current/core_log current/core_config
+mkdir -p current/{pcap,log,core_log,core_config}
+
+sudo systemctl stop open5gs-amfd open5gs-smfd open5gs-upfd open5gs-ausfd open5gs-udmd open5gs-udrd open5gs-pcfd open5gs-nssfd open5gs-bsfd open5gs-nrfd
+sudo rm -f /var/log/open5gs/*.log*
+
+
+### 2. Przebieg
+
+# T1, T2: nagranie (przed startem 5GC)
+sudo tcpdump -i lo -n -w current/pcap/core_all.pcapng "tcp port 7777 or udp port 8805 or udp port 2152 or sctp"
+sudo tcpdump -i ogstun -n -w current/pcap/core_n6.pcapng
+
+# T4: start 5GC
+step "1 start 5GC"
+sudo systemctl start open5gs-nrfd
+sleep 1
+sudo systemctl start open5gs-udrd open5gs-udmd open5gs-ausfd open5gs-pcfd open5gs-nssfd open5gs-bsfd open5gs-upfd open5gs-smfd open5gs-amfd
+
+# T3: PacketRusher (czekać na "Interface gtp... has successfully been configured for UE 10.45.0.Y")
+sudo rm -f /tmp/pr.sock
+sudo ~/5gs/PacketRusher/packetrusher --tunnel-backend userspace --config ./config/packetrusher.yml \
+     multi-ue -n 1 -d --number-of-gnbs 2 --tunnel --control-socket /tmp/pr.sock 2>&1 | tee current/log/packetrusher.log
+
+# T4: kroki (UE = adres z logu T3)
+UE=10.45.0.Y
+PR="sudo $HOME/5gs/PacketRusher/packetrusher control --socket /tmp/pr.sock --ue 1"
+step "2 UE w gNB 000008";         $PR --action inspect | tee current/log/2_inspect.json
+step "3 ciągły ping";             sudo ip vrf exec vrf0000000001 ping -D -i 0.2 10.45.0.1 > current/log/ping_ul.txt 2>&1 &
+                                  ping -D -i 0.2 $UE > current/log/ping_dl.txt 2>&1 &
+sleep 5
+step "4 handover N2 do 000009";   $PR --action ng-handover --target 000009 | tee current/log/4_inspect.json
+sleep 5
+step "5 handover Xn do 000008";   $PR --action xn-handover --target 000008 | tee current/log/5_inspect.json
+sleep 5
+step "6 koniec pingu";            sudo pkill -INT -f "ping -D -i 0.2"; sleep 1
+for f in current/log/ping_ul.txt current/log/ping_dl.txt; do echo "$f"; grep -o 'icmp_seq=[0-9]*' $f | cut -d= -f2 | \
+    awk 'NR>1 && $1!=p+1 {print "  brak icmp_seq", p+1, "-", $1-1} {p=$1}'; done | tee current/log/6_ping_gaps.txt
+step "7 wyrejestrowanie";         $PR --action deregister | tee current/log/7_inspect.json
+
+# T3: Ctrl+C, T2: Ctrl+C, T1: Ctrl+C
+step "8 koniec"
+
+
+### 3. Zapis
+
+sudo cp -R /etc/open5gs/. current/core_config/
+sudo cp -R /var/log/open5gs/. current/core_log/
+sudo chown -R $USER: current

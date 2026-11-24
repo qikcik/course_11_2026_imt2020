@@ -1,0 +1,89 @@
+# lab13: przepływ głosowy GBR na żądanie aplikacji
+# Pliki: current/pcap/ core_all.pcapng, core_n6.pcapng
+# Terminale: T1 tcpdump lo, T2 tcpdump ogstun, T3 PacketRusher, T4 5GC i AF (curl), T5 odbiorca strumienia w UE
+
+
+### 0. Przygotowanie (raz po starcie maszyny; "File exists" oznacza, że już jest)
+
+sudo ip addr add 127.0.0.100/8 dev lo      # gNB 000008
+sudo ip -4 rule add pref 32765 table local # VRF UE widzi 10.45.0.1 przez tunel, a nie jako adres lokalny
+sudo ip -4 rule del pref 0
+which iperf3 || sudo apt install -y iperf3
+
+# PacketRusher z łatką: PDU Session Resource Modify w gNB, PDU Session Modification w UE, lista DNN
+cd ~/5gs/PacketRusher
+git rev-parse --short HEAD                 # 7836091
+git apply --check ~/5gs/repo/lab/lab13/config/packetrusher-vonr.patch && git apply ~/5gs/repo/lab/lab13/config/packetrusher-vonr.patch
+go build -o packetrusher ./cmd
+git diff --stat                            # 10 zmienionych plików i 2 nowe
+cd ~/5gs/repo/lab/lab13
+
+# WebUI (http://localhost:9999), abonent 999700000000001, slice SST 1:
+#   dodać sesję DNN ims: typ IPv4, 5QI 5, ARP Priority Level 1, Session-AMBR jak dla internet
+#   w sesji ims dodać PCC Rule bez wpisów Flow: 5QI 1, ARP Priority Level 2, Capability i Vulnerability Disabled,
+#   MBR DL/UL 128 Kbps, GBR DL/UL 80 Kbps
+
+
+### 1. Czysty start
+
+cd ~/5gs/repo/lab/lab13
+sudo rm -rf current/pcap current/log current/core_log current/core_config
+mkdir -p current/{pcap,log,core_log,core_config}
+
+sudo systemctl stop open5gs-amfd open5gs-smfd open5gs-upfd open5gs-ausfd open5gs-udmd open5gs-udrd open5gs-pcfd open5gs-nssfd open5gs-bsfd open5gs-nrfd
+sudo rm -f /var/log/open5gs/*.log*
+
+
+### 2. Przebieg
+
+# T1, T2: nagranie (przed startem 5GC)
+sudo tcpdump -i lo -n -w current/pcap/core_all.pcapng "tcp port 7777 or udp port 8805 or udp port 2152 or sctp"
+sudo tcpdump -i ogstun -n -w current/pcap/core_n6.pcapng
+
+# T4: start 5GC
+step "1 start 5GC"
+sudo systemctl start open5gs-nrfd
+sleep 1
+sudo systemctl start open5gs-udrd open5gs-udmd open5gs-ausfd open5gs-pcfd open5gs-nssfd open5gs-bsfd open5gs-upfd open5gs-smfd open5gs-amfd
+
+# T3: PacketRusher, dwie sesje PDU: ims (z tunelem) i internet
+sudo rm -f /tmp/pr.sock
+sudo ~/5gs/PacketRusher/packetrusher --tunnel-backend userspace --config ./config/packetrusher.yml \
+     multi-ue -n 1 -d --tunnel --nPdu 2 --control-socket /tmp/pr.sock 2>&1 | tee current/log/packetrusher.log
+
+# T5: odbiorca strumienia w UE
+sudo ip vrf exec vrf0000000001 iperf3 -s -p 5201 2>&1 | tee current/log/iperf3_server.txt
+
+# T4: kroki (UE = "PDU session 1 address" z logu T3)
+UE=10.45.0.Y
+PR="sudo $HOME/5gs/PacketRusher/packetrusher control --socket /tmp/pr.sock --ue 1"
+H2="curl -s -i --http2-prior-knowledge"
+VOICE="iperf3 -c $UE -p 5201 -u -b 64k -l 160"
+step "2 sesje ims i internet";      $PR --action inspect | tee current/log/2_inspect.json
+step "3 AF: PCF dla adresu UE";     $H2 "http://127.0.0.15:7777/nbsf-management/v1/pcfBindings?ipv4Addr=$UE" | tee current/log/3_bsf.txt
+step "4 AF: sesja aplikacji audio"; sed "s/UE_IP/$UE/g" config/app-session-voice.json > current/log/4_app_session_req.json
+                                    $H2 -H "Content-Type: application/json" -d @current/log/4_app_session_req.json \
+                                        http://127.0.0.13:7777/npcf-policyauthorization/v1/app-sessions | tee current/log/4_app_session_rsp.txt
+LOC=$(grep -i '^location:' current/log/4_app_session_rsp.txt | tr -d '\r' | awk '{print $2}'); echo "$LOC"
+sleep 2
+step "5 strumień 20 s i ping";      ping -D -c 10 $UE > current/log/5_ping.txt 2>&1 &
+                                    $VOICE -t 20 | tee current/log/5_voice.txt
+step "6 AF: koniec sesji";          $H2 -X POST "$LOC/delete" | tee current/log/6_app_session_delete.txt
+sleep 2
+step "7 strumień po zwolnieniu";    $VOICE -t 5 | tee current/log/7_voice.txt
+step "8 wyrejestrowanie";           $PR --action deregister | tee current/log/8_inspect.json
+
+# T5: Ctrl+C, T3: Ctrl+C, T2: Ctrl+C, T1: Ctrl+C
+step "9 koniec"
+
+
+### 3. Zapis
+
+sudo cp -R /etc/open5gs/. current/core_config/
+sudo cp -R /var/log/open5gs/. current/core_log/
+sudo chown -R $USER: current
+
+
+### 4. Cofnięcie łatki (lab11 i lab12 używają PacketRushera bez łatki)
+
+cd ~/5gs/PacketRusher && git apply -R ~/5gs/repo/lab/lab13/config/packetrusher-vonr.patch && go build -o packetrusher ./cmd

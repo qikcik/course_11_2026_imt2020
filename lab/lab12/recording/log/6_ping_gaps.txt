@@ -1,0 +1,2 @@
+current/log/ping_ul.txt
+current/log/ping_dl.txt

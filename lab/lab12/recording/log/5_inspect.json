@@ -1,0 +1,24 @@
+{
+  "ues": [
+    {
+      "ue": 1,
+      "state": "registered",
+      "gnb": "000008",
+      "connected": true,
+      "ready": true,
+      "active_pdu_sessions": [
+        1
+      ]
+    }
+  ],
+  "gnbs": [
+    {
+      "id": "000008",
+      "ready": true
+    },
+    {
+      "id": "000009",
+      "ready": true
+    }
+  ]
+}
