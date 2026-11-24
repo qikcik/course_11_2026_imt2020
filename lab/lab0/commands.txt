@@ -22,7 +22,7 @@ systemctl list-units 'open5gs-*' --no-pager    # usługi 5GC: active (running)
 ### 3. Wireshark (raz)
 
 # Edit → Configuration Profiles → Import → from zip file → lab/lab0/config/wireshark-profile-5G-lab.zip
-# Profil: heurystyki MAC-NR i RLC-NR, User DLT dla pcapów srsUE, PDCP 18 bit, LCID 4 → DRB1, TCP 7777 jako HTTP/2.
+# Profil: heurystyki MAC-NR i RLC-NR, User DLT dla pcapów srsUE, PDCP 18 bit, LCID 4 → DRB1, TCP 7777 jako HTTP/2, TCP 8080 jako HTTP.
 # Aktywny profil widać w prawym dolnym rogu okna Wiresharka.
 
 
