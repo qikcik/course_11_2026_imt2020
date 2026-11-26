@@ -1,0 +1,28 @@
+# Prometheus dla lab14: co 2 s pobiera liczniki z funkcji 5GC, z PacketRushera i z systemu
+global:
+  scrape_interval: 2s
+
+scrape_configs:
+  - job_name: amf
+    static_configs:
+      - targets: ['127.0.0.5:9090']
+  - job_name: smf
+    static_configs:
+      - targets: ['127.0.0.4:9090']
+  - job_name: upf
+    static_configs:
+      - targets: ['127.0.0.7:9090']
+  - job_name: pcf
+    static_configs:
+      - targets: ['127.0.0.13:9090']
+  - job_name: packetrusher
+    static_configs:
+      - targets: ['127.0.0.101:9095']
+        labels: { grupa: 'bez handoveru' }
+      - targets: ['127.0.0.110:9095']
+        labels: { grupa: 'handover Xn' }
+      - targets: ['127.0.0.112:9095']
+        labels: { grupa: 'handover N2' }
+  - job_name: system
+    static_configs:
+      - targets: ['127.0.0.1:9100']

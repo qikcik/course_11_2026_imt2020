@@ -1,0 +1,155 @@
+# lab14: 5GC pod awarią. Wyłącz funkcję i zobacz, co się stanie.
+# Wykresy: Grafana http://127.0.0.1:3000 (dashboard "lab14: KPI 5GC pod awarią"), Prometheus http://127.0.0.1:9091
+
+
+### 0. Przygotowanie (raz po starcie maszyny; "File exists" oznacza, że już jest)
+
+for i in $(seq 120 139); do sudo ip addr add 127.0.0.$i/8 dev lo; done      # 20 gNB dla UE z ruchem, każdy z własnym adresem
+sudo ip addr add 127.0.0.101/8 dev lo      # gNB dla rejestracji w pętli
+sudo ip addr add 127.0.0.110/8 dev lo      # gNB dla handoverów Xn (2 gNB: 127.0.0.110–111)
+sudo ip addr add 127.0.0.112/8 dev lo      # gNB dla handoverów N2 (2 gNB: 127.0.0.112–113)
+sudo ip -4 rule add pref 32765 table local
+sudo ip -4 rule del pref 0
+sudo apt install -y tmux
+
+cd ~/5gs/repo/lab/lab14
+sudo cp config/prometheus.yml /etc/prometheus/prometheus.yml
+sudo cp config/grafana_datasource.yml /etc/grafana/provisioning/datasources/lab.yml
+sudo cp config/grafana_dashboards.yml /etc/grafana/provisioning/dashboards/lab.yml
+sudo rm -f /var/lib/grafana/dashboards/*.json
+sudo cp config/grafana_5gc.json /var/lib/grafana/dashboards/
+sudo systemctl restart prometheus prometheus-node-exporter grafana-server
+
+# abonenci 002–180 (te same klucze co abonent 001)
+for i in $(seq 2 180); do sudo open5gs-dbctl add $(printf '99970%010d' $i) 465B5CE8B199B49FAA5F0A2EE238A6BC E8ED289DEBA952E4283B54E88E6183CA; done
+
+
+### 1. Start 5GC
+
+sudo systemctl restart open5gs-nrfd
+sleep 1
+sudo systemctl restart open5gs-udrd open5gs-udmd open5gs-ausfd open5gs-pcfd open5gs-nssfd open5gs-bsfd open5gs-upfd open5gs-smfd open5gs-amfd
+
+# logi: osobne okienko dla każdej funkcji, ostatnie 6 ostrzeżeń i błędów, odświeżane co 5 s
+sudo tmux new-session -d -s logi
+for nf in amf smf upf pcf udm udr ausf nrf nssf bsf; do
+  sudo tmux split-window -t logi "watch -t -n 5 \"echo $nf; tail -n 500 /var/log/open5gs/$nf.log | grep -E 'WARNING|ERROR|FATAL' | grep -v -E 'UnRef NF EndPoint|PFCP-Delete-Trigger' | tail -n 6 | cut -c 1-160\""
+  sudo tmux select-layout -t logi tiled
+done
+sudo tmux kill-pane -t logi.0
+sudo tmux select-layout -t logi tiled
+sudo tmux attach -t logi
+# wyjście z podglądu: Ctrl+B, potem D; zamknięcie: sudo tmux kill-session -t logi
+
+
+### 2. Ruch
+
+# 20 UE ze stałą sesją PDU i tunelem (UE 1–20, każdy na własnym gNB)
+sudo ~/5gs/PacketRusher/packetrusher --tunnel-backend userspace --config ~/5gs/repo/lab/lab14/config/packetrusher_ue.yml \
+     multi-ue -n 20 -d --tunnel
+ip -br link | grep -c vrf      # 20: tunele wszystkich UE są gotowe
+
+# ruch z każdego z 20 UE: ping 10 razy na sekundę po 1200 bajtów, około 100 kbit/s w Uplinku i tyle samo w Downlinku
+printf 'vrf%010d\n' $(seq 1 20) | sudo xargs -P 20 -I{} ip vrf exec {} ping -q -i 0.1 -s 1200 10.45.0.1
+# większy ruch: -i 0.05 (około 200 kbit/s na UE)
+
+# wariant zamiast dwóch poleceń powyżej: 20 UE z ruchem, które po awarii same wracają
+# gdy ping z UE 1 przestaje działać, PacketRusher i pingi startują od nowa
+while true; do
+  sudo ~/5gs/PacketRusher/packetrusher --tunnel-backend userspace --config ~/5gs/repo/lab/lab14/config/packetrusher_ue.yml multi-ue -n 20 -d --tunnel &
+  for t in $(seq 60); do [ "$(ip -br link | grep -c vrf)" = 20 ] && break; sleep 1; done
+  printf 'vrf%010d
+' $(seq 1 20) | sudo xargs -P 20 -I{} ip vrf exec {} ping -q -i 0.1 -s 1200 10.45.0.1 &
+  sleep 5
+  while sudo ip vrf exec vrf0000000001 ping -c 3 -W 1 -q 10.45.0.1 > /dev/null; do sleep 2; done
+  sudo pkill -f "ping -q -i 0.1"; sudo pkill -INT -f packetrusher_ue.yml; sleep 5
+done
+# zatrzymanie: Ctrl+C, potem
+sudo pkill -f "ping -q -i 0.1"; sudo pkill -INT -f packetrusher_ue.yml
+
+# ping z UE 1: kontrola na bieżąco, czy User Plane działa
+sudo ip vrf exec vrf0000000001 ping -i 0.2 10.45.0.1
+
+# UE 21–80 w pętli: rejestracja, sesja PDU, po 4 s wyrejestrowanie
+sudo ~/5gs/PacketRusher/packetrusher --tunnel-backend userspace --metrics-addr 127.0.0.101:9095 --config ~/5gs/repo/lab/lab14/config/packetrusher_ruch.yml \
+     multi-ue -n 60 --loop --td 4000 --tbrr 2000 --tr 100
+
+# UE 81–130 w pętli z handoverem Xn: rejestracja, sesja PDU, po 3 s handover na drugi gNB, po 6 s wyrejestrowanie
+sudo ~/5gs/PacketRusher/packetrusher --tunnel-backend userspace --metrics-addr 127.0.0.110:9095 --config ~/5gs/repo/lab/lab14/config/packetrusher_ho_xn.yml \
+     multi-ue -n 50 --number-of-gnbs 2 --loop --xnh 3000 --td 6000 --tbrr 1000 --tr 200
+
+# UE 131–180 w pętli z handoverem N2: ten sam cykl, handover przez AMF
+sudo ~/5gs/PacketRusher/packetrusher --tunnel-backend userspace --metrics-addr 127.0.0.112:9095 --config ~/5gs/repo/lab/lab14/config/packetrusher_ho_n2.yml \
+     multi-ue -n 50 --number-of-gnbs 2 --loop --ngh 3000 --td 6000 --tbrr 1000 --tr 200
+
+
+### 3. Awarie (każda z poleceniem, które ją cofa)
+
+# zatrzymanie funkcji
+sudo systemctl stop open5gs-udmd
+# cofnięcie
+sudo systemctl start open5gs-udmd
+
+# nagły koniec procesu
+sudo pkill -9 open5gs-upfd
+# cofnięcie: systemd sam uruchamia proces; kontrola i ręczny start
+systemctl is-active open5gs-upfd
+sudo systemctl start open5gs-upfd
+
+# to samo dla każdej funkcji: open5gs-nrfd, -amfd, -smfd, -upfd, -pcfd, -udmd, -udrd, -ausfd, -nssfd, -bsfd oraz mongod
+
+# utrata 30% pakietów między gNB a UPF (N3, GTP-U)
+sudo iptables -I INPUT -p udp --dport 2152 -m statistic --mode random --probability 0.3 -j DROP
+# cofnięcie
+sudo iptables -D INPUT -p udp --dport 2152 -m statistic --mode random --probability 0.3 -j DROP
+
+# blokada między SMF a UPF (N4, PFCP)
+sudo iptables -I INPUT -p udp --dport 8805 -j DROP
+# cofnięcie
+sudo iptables -D INPUT -p udp --dport 8805 -j DROP
+
+# blokada między gNB a AMF (N2, SCTP)
+sudo iptables -I INPUT -p sctp -j DROP
+# cofnięcie
+sudo iptables -D INPUT -p sctp -j DROP
+
+# co trzeci pakiet do SBI ginie (TCP 7777, wszystkie NF)
+sudo iptables -I INPUT -p tcp --dport 7777 -m statistic --mode nth --every 3 --packet 0 -j DROP
+# cofnięcie
+sudo iptables -D INPUT -p tcp --dport 7777 -m statistic --mode nth --every 3 --packet 0 -j DROP
+
+# opóźnienie 200 ms wiadomości między SMF a UPF (N4, PFCP)
+sudo tc qdisc add dev lo root handle 1: prio bands 4
+sudo tc qdisc add dev lo parent 1:4 handle 40: netem delay 200ms
+sudo tc filter add dev lo parent 1: protocol ip u32 match ip dport 8805 0xffff flowid 1:4
+# cofnięcie (usuwa opóźnienie i wszystkie filtry)
+sudo tc qdisc del dev lo root
+
+# to samo dla innych połączeń: po dwóch pierwszych poleceniach inny filtr
+#   gNB i AMF (N2, SCTP):        sudo tc filter add dev lo parent 1: protocol ip u32 match ip dport 38412 0xffff flowid 1:4
+#   gNB i UPF (N3, GTP-U):       sudo tc filter add dev lo parent 1: protocol ip u32 match ip dport 2152 0xffff flowid 1:4
+#   żądania SBI między NF:       sudo tc filter add dev lo parent 1: protocol ip u32 match ip dport 7777 0xffff flowid 1:4
+# inne opóźnienie albo utrata: netem delay 1000ms, netem delay 200ms 50ms, netem loss 10%
+# kontrola: liczba opóźnionych pakietów
+tc -s qdisc show dev lo
+
+# kontrola: lista reguł powinna być pusta
+sudo iptables -L INPUT -n --line-numbers
+# cofnięcie wszystkich reguł naraz (usuwa wszystkie reguły INPUT, także spoza labu)
+sudo iptables -F INPUT
+
+# większe obciążenie: zatrzymać rejestracje w pętli (Ctrl+C) i uruchomić z krótszym cyklem, na przykład --td 1000 --tbrr 500
+# cofnięcie: Ctrl+C i polecenie z sekcji 2
+
+# powrót do stanu wyjściowego po dowolnej awarii: wszystkie funkcje od nowa, potem polecenia z sekcji 2
+sudo systemctl restart open5gs-nrfd
+sleep 1
+sudo systemctl restart open5gs-udrd open5gs-udmd open5gs-ausfd open5gs-pcfd open5gs-nssfd open5gs-bsfd open5gs-upfd open5gs-smfd open5gs-amfd
+# jeśli ping z UE 1 nie wraca (UE ze stałą sesją nie rejestrują się same od nowa): Ctrl+C i polecenie z sekcji 2
+
+
+### 4. Sprzątanie po labie
+
+sudo systemctl disable --now prometheus prometheus-node-exporter grafana-server
+for i in $(seq 2 180); do sudo open5gs-dbctl remove $(printf '99970%010d' $i); done
+sudo iptables -L INPUT -n

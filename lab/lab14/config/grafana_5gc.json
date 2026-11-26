@@ -1,0 +1,1226 @@
+{
+ "uid": "lab14",
+ "title": "lab14: KPI 5GC pod awarią",
+ "schemaVersion": 39,
+ "version": 10,
+ "refresh": "5s",
+ "time": {
+  "from": "now-15m",
+  "to": "now"
+ },
+ "timezone": "browser",
+ "editable": true,
+ "panels": [
+  {
+   "id": 100,
+   "type": "row",
+   "title": "UE ↔ AMF (N1): rejestracja, uwierzytelnienie, konfiguracja UE (okno 30 s)",
+   "collapsed": false,
+   "gridPos": {
+    "h": 1,
+    "w": 24,
+    "x": 0,
+    "y": 0
+   }
+  },
+  {
+   "id": 1,
+   "type": "timeseries",
+   "title": "UE ↔ AMF: Registration SR (RSR)",
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prometheus"
+   },
+   "gridPos": {
+    "h": 8,
+    "w": 8,
+    "x": 0,
+    "y": 1
+   },
+   "targets": [
+    {
+     "refId": "A",
+     "expr": "100 * sum(increase(fivegs_amffunction_rm_reginitsucc[30s])) / sum(increase(fivegs_amffunction_rm_reginitreq[30s]))",
+     "legendFormat": "RSR [%]",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     }
+    }
+   ],
+   "fieldConfig": {
+    "defaults": {
+     "custom": {
+      "lineInterpolation": "linear",
+      "fillOpacity": 10,
+      "showPoints": "never"
+     },
+     "min": 0,
+     "unit": "percent",
+     "max": 110
+    },
+    "overrides": []
+   },
+   "options": {
+    "legend": {
+     "displayMode": "list",
+     "placement": "bottom"
+    },
+    "tooltip": {
+     "mode": "multi"
+    }
+   },
+   "description": "Registration success rate: successes / attempts w AMF."
+  },
+  {
+   "id": 2,
+   "type": "timeseries",
+   "title": "UE ↔ AMF: Initial Registration, attempts i successes",
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prometheus"
+   },
+   "gridPos": {
+    "h": 8,
+    "w": 8,
+    "x": 8,
+    "y": 1
+   },
+   "targets": [
+    {
+     "refId": "A",
+     "expr": "sum(increase(fivegs_amffunction_rm_reginitreq[30s]))",
+     "legendFormat": "attempts: fivegs_amffunction_rm_reginitreq",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     }
+    },
+    {
+     "refId": "B",
+     "expr": "sum(increase(fivegs_amffunction_rm_reginitsucc[30s]))",
+     "legendFormat": "successes: fivegs_amffunction_rm_reginitsucc",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     }
+    }
+   ],
+   "fieldConfig": {
+    "defaults": {
+     "custom": {
+      "lineInterpolation": "linear",
+      "fillOpacity": 10,
+      "showPoints": "never"
+     },
+     "min": 0
+    },
+    "overrides": []
+   },
+   "options": {
+    "legend": {
+     "displayMode": "list",
+     "placement": "bottom"
+    },
+    "tooltip": {
+     "mode": "multi"
+    }
+   },
+   "description": "Number of initial registration requests (RM.RegInitReq) i Number of successful initial registrations (RM.RegInitSucc)."
+  },
+  {
+   "id": 12,
+   "type": "timeseries",
+   "title": "UE ↔ AMF: Initial Registration failures per cause",
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prometheus"
+   },
+   "gridPos": {
+    "h": 8,
+    "w": 8,
+    "x": 16,
+    "y": 1
+   },
+   "targets": [
+    {
+     "refId": "A",
+     "expr": "sum by (cause) (increase(fivegs_amffunction_rm_reginitfail[30s]))",
+     "legendFormat": "5GMM cause {{cause}}",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     }
+    }
+   ],
+   "fieldConfig": {
+    "defaults": {
+     "custom": {
+      "lineInterpolation": "linear",
+      "fillOpacity": 10,
+      "showPoints": "never"
+     },
+     "min": 0
+    },
+    "overrides": []
+   },
+   "options": {
+    "legend": {
+     "displayMode": "list",
+     "placement": "bottom"
+    },
+    "tooltip": {
+     "mode": "multi"
+    }
+   },
+   "description": "Wartość 5GMM cause z Registration Reject. 7: 5GS services not allowed, 22: Congestion, 90: Payload was not forwarded, 111: Protocol error, unspecified."
+  },
+  {
+   "id": 14,
+   "type": "timeseries",
+   "title": "UE ↔ AMF: Authentication, requests, rejects, failures",
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prometheus"
+   },
+   "gridPos": {
+    "h": 8,
+    "w": 8,
+    "x": 0,
+    "y": 9
+   },
+   "targets": [
+    {
+     "refId": "A",
+     "expr": "sum(increase(fivegs_amffunction_amf_authreq[30s]))",
+     "legendFormat": "requests: fivegs_amffunction_amf_authreq",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     }
+    },
+    {
+     "refId": "B",
+     "expr": "sum(increase(fivegs_amffunction_amf_authreject[30s]))",
+     "legendFormat": "rejects: fivegs_amffunction_amf_authreject",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     }
+    },
+    {
+     "refId": "C",
+     "expr": "sum by (cause) (increase(fivegs_amffunction_amf_authfail[30s]))",
+     "legendFormat": "failures cause {{cause}}: fivegs_amffunction_amf_authfail",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     }
+    }
+   ],
+   "fieldConfig": {
+    "defaults": {
+     "custom": {
+      "lineInterpolation": "linear",
+      "fillOpacity": 10,
+      "showPoints": "never"
+     },
+     "min": 0
+    },
+    "overrides": []
+   },
+   "options": {
+    "legend": {
+     "displayMode": "list",
+     "placement": "bottom"
+    },
+    "tooltip": {
+     "mode": "multi"
+    }
+   },
+   "description": "Number of authentication requests (AMF.AuthReq), Number of authentication rejection (AMF.AuthReject), failed authentications per cause (AMF.AuthFail: 20 MAC failure, 21 Synch failure)."
+  },
+  {
+   "id": 23,
+   "type": "timeseries",
+   "title": "UE ↔ AMF: UE Configuration Update, commands i completes",
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prometheus"
+   },
+   "gridPos": {
+    "h": 8,
+    "w": 8,
+    "x": 8,
+    "y": 9
+   },
+   "targets": [
+    {
+     "refId": "A",
+     "expr": "sum(increase(fivegs_amffunction_mm_confupdate[30s]))",
+     "legendFormat": "commands: fivegs_amffunction_mm_confupdate",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     }
+    },
+    {
+     "refId": "B",
+     "expr": "sum(increase(fivegs_amffunction_mm_confupdatesucc[30s]))",
+     "legendFormat": "completes: fivegs_amffunction_mm_confupdatesucc",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     }
+    }
+   ],
+   "fieldConfig": {
+    "defaults": {
+     "custom": {
+      "lineInterpolation": "linear",
+      "fillOpacity": 10,
+      "showPoints": "never"
+     },
+     "min": 0
+    },
+    "overrides": []
+   },
+   "options": {
+    "legend": {
+     "displayMode": "list",
+     "placement": "bottom"
+    },
+    "tooltip": {
+     "mode": "multi"
+    }
+   },
+   "description": "Number of UE Configuration Update: Configuration Update Command (MM.ConfUpdate) i Configuration Update Complete (MM.ConfUpdateSucc)."
+  },
+  {
+   "id": 3,
+   "type": "timeseries",
+   "title": "UE ↔ AMF od strony UE: Registration procedure (PacketRusher, wszystkie grupy)",
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prometheus"
+   },
+   "gridPos": {
+    "h": 8,
+    "w": 8,
+    "x": 16,
+    "y": 9
+   },
+   "targets": [
+    {
+     "refId": "A",
+     "expr": "sum(increase(packetrusher_procedure_started_total{procedure=\"registration\"}[30s]))",
+     "legendFormat": "attempts",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     }
+    },
+    {
+     "refId": "B",
+     "expr": "sum(increase(packetrusher_procedure_completed_total{procedure=\"registration\",outcome=\"success\"}[30s]))",
+     "legendFormat": "successes",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     }
+    },
+    {
+     "refId": "C",
+     "expr": "sum(increase(packetrusher_procedure_completed_total{procedure=\"registration\",outcome=\"failure\"}[30s]))",
+     "legendFormat": "failures",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     }
+    },
+    {
+     "refId": "D",
+     "expr": "clamp_min(sum(increase(packetrusher_procedure_started_total{procedure=\"registration\"}[30s])) - sum(increase(packetrusher_procedure_completed_total{procedure=\"registration\",outcome=\"success\"}[30s])) - sum(increase(packetrusher_procedure_completed_total{procedure=\"registration\",outcome=\"failure\"}[30s])), 0)",
+     "legendFormat": "bez odpowiedzi",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     }
+    }
+   ],
+   "fieldConfig": {
+    "defaults": {
+     "custom": {
+      "lineInterpolation": "linear",
+      "fillOpacity": 10,
+      "showPoints": "never"
+     },
+     "min": 0
+    },
+    "overrides": []
+   },
+   "options": {
+    "legend": {
+     "displayMode": "list",
+     "placement": "bottom"
+    },
+    "tooltip": {
+     "mode": "multi"
+    }
+   },
+   "description": "Attempt: pierwszy Registration Request procedury, bez retransmisji. Success: Registration Accept. Failure: Registration Reject. Bez odpowiedzi: attempts w oknie bez Accept i bez Reject."
+  },
+  {
+   "id": 103,
+   "type": "row",
+   "title": "UE ↔ SMF (N1 przez AMF): sesja PDU (okno 30 s)",
+   "collapsed": false,
+   "gridPos": {
+    "h": 1,
+    "w": 24,
+    "x": 0,
+    "y": 17
+   }
+  },
+  {
+   "id": 4,
+   "type": "timeseries",
+   "title": "UE ↔ SMF: PDU Session Establishment SR (PDUSessionEstSR)",
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prometheus"
+   },
+   "gridPos": {
+    "h": 8,
+    "w": 8,
+    "x": 0,
+    "y": 18
+   },
+   "targets": [
+    {
+     "refId": "A",
+     "expr": "100 * sum(increase(fivegs_smffunction_sm_pdusessioncreationsucc[30s])) / 2 / sum(increase(fivegs_smffunction_sm_pdusessioncreationreq{plmnid!=\"\"}[30s]))",
+     "legendFormat": "PDUSessionEstSR [%]",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     }
+    }
+   ],
+   "fieldConfig": {
+    "defaults": {
+     "custom": {
+      "lineInterpolation": "linear",
+      "fillOpacity": 10,
+      "showPoints": "never"
+     },
+     "min": 0,
+     "unit": "percent",
+     "max": 110
+    },
+    "overrides": []
+   },
+   "options": {
+    "legend": {
+     "displayMode": "list",
+     "placement": "bottom"
+    },
+    "tooltip": {
+     "mode": "multi"
+    }
+   },
+   "description": "PDU session Establishment success rate: successes / attempts w SMF. Licznik sukcesu rośnie dwa razy na sesję, dlatego jest dzielony przez 2."
+  },
+  {
+   "id": 5,
+   "type": "timeseries",
+   "title": "UE ↔ SMF: PDU Session Establishment, attempts i successes",
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prometheus"
+   },
+   "gridPos": {
+    "h": 8,
+    "w": 8,
+    "x": 8,
+    "y": 18
+   },
+   "targets": [
+    {
+     "refId": "A",
+     "expr": "sum(increase(fivegs_smffunction_sm_pdusessioncreationreq{plmnid!=\"\"}[30s]))",
+     "legendFormat": "attempts: fivegs_smffunction_sm_pdusessioncreationreq",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     }
+    },
+    {
+     "refId": "B",
+     "expr": "sum(increase(fivegs_smffunction_sm_pdusessioncreationsucc[30s])) / 2",
+     "legendFormat": "successes: fivegs_smffunction_sm_pdusessioncreationsucc / 2",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     }
+    }
+   ],
+   "fieldConfig": {
+    "defaults": {
+     "custom": {
+      "lineInterpolation": "linear",
+      "fillOpacity": 10,
+      "showPoints": "never"
+     },
+     "min": 0
+    },
+    "overrides": []
+   },
+   "options": {
+    "legend": {
+     "displayMode": "list",
+     "placement": "bottom"
+    },
+    "tooltip": {
+     "mode": "multi"
+    }
+   },
+   "description": "Number of PDU session creation requests (SM.PduSessionCreationReq) i Number of successful PDU session creations (SM.PduSessionCreationSucc). Licznik sukcesu rośnie dwa razy na sesję, dlatego jest dzielony przez 2."
+  },
+  {
+   "id": 19,
+   "type": "timeseries",
+   "title": "UE ↔ SMF od strony UE: PDU Session Establishment (PacketRusher, wszystkie grupy)",
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prometheus"
+   },
+   "gridPos": {
+    "h": 8,
+    "w": 8,
+    "x": 16,
+    "y": 18
+   },
+   "targets": [
+    {
+     "refId": "A",
+     "expr": "sum(increase(packetrusher_procedure_started_total{procedure=\"pdu_session_establishment\"}[30s]))",
+     "legendFormat": "attempts",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     }
+    },
+    {
+     "refId": "B",
+     "expr": "sum(increase(packetrusher_procedure_completed_total{procedure=\"pdu_session_establishment\",outcome=\"success\"}[30s]))",
+     "legendFormat": "successes",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     }
+    },
+    {
+     "refId": "C",
+     "expr": "sum(increase(packetrusher_procedure_completed_total{procedure=\"pdu_session_establishment\",outcome=\"failure\"}[30s]))",
+     "legendFormat": "failures",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     }
+    },
+    {
+     "refId": "D",
+     "expr": "clamp_min(sum(increase(packetrusher_procedure_started_total{procedure=\"pdu_session_establishment\"}[30s])) - sum(increase(packetrusher_procedure_completed_total{procedure=\"pdu_session_establishment\",outcome=\"success\"}[30s])) - sum(increase(packetrusher_procedure_completed_total{procedure=\"pdu_session_establishment\",outcome=\"failure\"}[30s])), 0)",
+     "legendFormat": "bez odpowiedzi",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     }
+    }
+   ],
+   "fieldConfig": {
+    "defaults": {
+     "custom": {
+      "lineInterpolation": "linear",
+      "fillOpacity": 10,
+      "showPoints": "never"
+     },
+     "min": 0
+    },
+    "overrides": []
+   },
+   "options": {
+    "legend": {
+     "displayMode": "list",
+     "placement": "bottom"
+    },
+    "tooltip": {
+     "mode": "multi"
+    }
+   },
+   "description": "Attempt: PDU Session Establishment Request. Success: Accept. Failure: Reject. Bez odpowiedzi: attempts w oknie bez Accept i bez Reject."
+  },
+  {
+   "id": 104,
+   "type": "row",
+   "title": "AMF ↔ PCF (N15), SMF ↔ PCF (N7), SMF ↔ UPF (N4) (okno 30 s)",
+   "collapsed": false,
+   "gridPos": {
+    "h": 1,
+    "w": 24,
+    "x": 0,
+    "y": 26
+   }
+  },
+  {
+   "id": 15,
+   "type": "timeseries",
+   "title": "AMF ↔ PCF i SMF ↔ PCF: AM i SM Policy Association SR",
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prometheus"
+   },
+   "gridPos": {
+    "h": 8,
+    "w": 8,
+    "x": 0,
+    "y": 27
+   },
+   "targets": [
+    {
+     "refId": "A",
+     "expr": "100 * sum(increase(fivegs_pcffunction_pa_policyamassosucc[30s])) / sum(increase(fivegs_pcffunction_pa_policyamassoreq[30s]))",
+     "legendFormat": "AM Policy Association SR [%]",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     }
+    },
+    {
+     "refId": "B",
+     "expr": "100 * sum(increase(fivegs_pcffunction_pa_policysmassosucc[30s])) / sum(increase(fivegs_pcffunction_pa_policysmassoreq[30s]))",
+     "legendFormat": "SM Policy Association SR [%]",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     }
+    }
+   ],
+   "fieldConfig": {
+    "defaults": {
+     "custom": {
+      "lineInterpolation": "linear",
+      "fillOpacity": 10,
+      "showPoints": "never"
+     },
+     "min": 0,
+     "unit": "percent",
+     "max": 110
+    },
+    "overrides": []
+   },
+   "options": {
+    "legend": {
+     "displayMode": "list",
+     "placement": "bottom"
+    },
+    "tooltip": {
+     "mode": "multi"
+    }
+   },
+   "description": "PA.PolicyAMAssoSucc / PA.PolicyAMAssoReq (rejestracja) i PA.PolicySMAssoSucc / PA.PolicySMAssoReq (sesja PDU), mierzone w PCF."
+  },
+  {
+   "id": 16,
+   "type": "timeseries",
+   "title": "SMF ↔ UPF: N4 Session Establishment, attempts i failures",
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prometheus"
+   },
+   "gridPos": {
+    "h": 8,
+    "w": 8,
+    "x": 8,
+    "y": 27
+   },
+   "targets": [
+    {
+     "refId": "A",
+     "expr": "sum(increase(fivegs_smffunction_sm_n4sessionestabreq[30s]))",
+     "legendFormat": "attempts w SMF: fivegs_smffunction_sm_n4sessionestabreq",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     }
+    },
+    {
+     "refId": "B",
+     "expr": "sum(increase(fivegs_upffunction_sm_n4sessionestabreq[30s]))",
+     "legendFormat": "odebrane w UPF: fivegs_upffunction_sm_n4sessionestabreq",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     }
+    },
+    {
+     "refId": "C",
+     "expr": "sum by (cause) (increase(fivegs_smffunction_sm_n4sessionestabfail[30s]))",
+     "legendFormat": "failures cause {{cause}}: fivegs_smffunction_sm_n4sessionestabfail",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     }
+    }
+   ],
+   "fieldConfig": {
+    "defaults": {
+     "custom": {
+      "lineInterpolation": "linear",
+      "fillOpacity": 10,
+      "showPoints": "never"
+     },
+     "min": 0
+    },
+    "overrides": []
+   },
+   "options": {
+    "legend": {
+     "displayMode": "list",
+     "placement": "bottom"
+    },
+    "tooltip": {
+     "mode": "multi"
+    }
+   },
+   "description": "Number of requested N4 session establishments (SM.N4SessionEstabReq) w SMF i w UPF, Number of failed N4 session establishments per cause (SM.N4SessionEstabFail)."
+  },
+  {
+   "id": 8,
+   "type": "timeseries",
+   "title": "SMF ↔ UPF: PDU sessions w SMF, sesje PFCP w UPF, PFCP associations",
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prometheus"
+   },
+   "gridPos": {
+    "h": 8,
+    "w": 8,
+    "x": 16,
+    "y": 27
+   },
+   "targets": [
+    {
+     "refId": "A",
+     "expr": "sum(fivegs_smffunction_sm_sessionnbr)",
+     "legendFormat": "PDU sessions w SMF: fivegs_smffunction_sm_sessionnbr",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     }
+    },
+    {
+     "refId": "B",
+     "expr": "fivegs_upffunction_upf_sessionnbr",
+     "legendFormat": "sesje PFCP w UPF: fivegs_upffunction_upf_sessionnbr",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     }
+    },
+    {
+     "refId": "C",
+     "expr": "pfcp_peers_active",
+     "legendFormat": "PFCP associations: pfcp_peers_active {{job}}",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     }
+    }
+   ],
+   "fieldConfig": {
+    "defaults": {
+     "custom": {
+      "lineInterpolation": "stepAfter",
+      "fillOpacity": 10,
+      "showPoints": "never"
+     },
+     "min": 0
+    },
+    "overrides": []
+   },
+   "options": {
+    "legend": {
+     "displayMode": "list",
+     "placement": "bottom"
+    },
+    "tooltip": {
+     "mode": "multi"
+    }
+   },
+   "description": "Number of PDU sessions w SMF (SM.SessionNbrMean), sesje PFCP w UPF, PFCP associations."
+  },
+  {
+   "id": 101,
+   "type": "row",
+   "title": "gNB ↔ AMF (N2) i stan sieci",
+   "collapsed": false,
+   "gridPos": {
+    "h": 1,
+    "w": 24,
+    "x": 0,
+    "y": 35
+   }
+  },
+  {
+   "id": 7,
+   "type": "timeseries",
+   "title": "gNB ↔ AMF: gNB po NG Setup, połączenia NG, registered subscribers",
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prometheus"
+   },
+   "gridPos": {
+    "h": 8,
+    "w": 12,
+    "x": 0,
+    "y": 36
+   },
+   "targets": [
+    {
+     "refId": "A",
+     "expr": "sum(fivegs_amffunction_rm_registeredsubnbr)",
+     "legendFormat": "registered subscribers: fivegs_amffunction_rm_registeredsubnbr",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     }
+    },
+    {
+     "refId": "B",
+     "expr": "ran_ue",
+     "legendFormat": "UE-associated logical NG-connections: ran_ue",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     }
+    },
+    {
+     "refId": "C",
+     "expr": "gnb",
+     "legendFormat": "gNB po NG Setup: gnb",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     }
+    }
+   ],
+   "fieldConfig": {
+    "defaults": {
+     "custom": {
+      "lineInterpolation": "stepAfter",
+      "fillOpacity": 10,
+      "showPoints": "never"
+     },
+     "min": 0
+    },
+    "overrides": []
+   },
+   "options": {
+    "legend": {
+     "displayMode": "list",
+     "placement": "bottom"
+    },
+    "tooltip": {
+     "mode": "multi"
+    }
+   },
+   "description": "Number of registered subscribers (RM.RegisteredSubNbrMean). ran_ue: UE z UE-associated logical NG-connection (CM-CONNECTED). gnb: gNB po NG Setup."
+  },
+  {
+   "id": 20,
+   "type": "timeseries",
+   "title": "CPU maszyny",
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prometheus"
+   },
+   "gridPos": {
+    "h": 8,
+    "w": 12,
+    "x": 12,
+    "y": 36
+   },
+   "targets": [
+    {
+     "refId": "A",
+     "expr": "100 * (1 - avg(rate(node_cpu_seconds_total{mode=\"idle\"}[10s])))",
+     "legendFormat": "CPU [%]",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     }
+    }
+   ],
+   "fieldConfig": {
+    "defaults": {
+     "custom": {
+      "lineInterpolation": "linear",
+      "fillOpacity": 10,
+      "showPoints": "never"
+     },
+     "min": 0,
+     "unit": "percent",
+     "max": 100
+    },
+    "overrides": []
+   },
+   "options": {
+    "legend": {
+     "displayMode": "list",
+     "placement": "bottom"
+    },
+    "tooltip": {
+     "mode": "multi"
+    }
+   },
+   "description": "Zajętość CPU maszyny, na której działają 5GC i PacketRusher."
+  },
+  {
+   "id": 105,
+   "type": "row",
+   "title": "Porównanie grup UE: bez handoveru, handover Xn, handover N2 (PacketRusher, okno 30 s)",
+   "collapsed": false,
+   "gridPos": {
+    "h": 1,
+    "w": 24,
+    "x": 0,
+    "y": 44
+   }
+  },
+  {
+   "id": 21,
+   "type": "timeseries",
+   "title": "Registration SR od strony UE per grupa",
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prometheus"
+   },
+   "gridPos": {
+    "h": 8,
+    "w": 8,
+    "x": 0,
+    "y": 45
+   },
+   "targets": [
+    {
+     "refId": "A",
+     "expr": "100 * sum by (grupa) (increase(packetrusher_procedure_completed_total{procedure=\"registration\",outcome=\"success\"}[30s])) / sum by (grupa) (increase(packetrusher_procedure_started_total{procedure=\"registration\"}[30s]))",
+     "legendFormat": "{{grupa}} [%]",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     }
+    }
+   ],
+   "fieldConfig": {
+    "defaults": {
+     "custom": {
+      "lineInterpolation": "linear",
+      "fillOpacity": 10,
+      "showPoints": "never"
+     },
+     "min": 0,
+     "unit": "percent",
+     "max": 110
+    },
+    "overrides": []
+   },
+   "options": {
+    "legend": {
+     "displayMode": "list",
+     "placement": "bottom"
+    },
+    "tooltip": {
+     "mode": "multi"
+    }
+   },
+   "description": "Successes / attempts rejestracji od strony UE, osobno dla każdej grupy UE."
+  },
+  {
+   "id": 6,
+   "type": "timeseries",
+   "title": "Registration procedure time od strony UE per grupa: p95",
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prometheus"
+   },
+   "gridPos": {
+    "h": 8,
+    "w": 8,
+    "x": 8,
+    "y": 45
+   },
+   "targets": [
+    {
+     "refId": "A",
+     "expr": "histogram_quantile(0.95, sum by (le, grupa) (rate(packetrusher_procedure_duration_seconds_bucket{procedure=\"registration\"}[30s])))",
+     "legendFormat": "{{grupa}}",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     }
+    }
+   ],
+   "fieldConfig": {
+    "defaults": {
+     "custom": {
+      "lineInterpolation": "linear",
+      "fillOpacity": 10,
+      "showPoints": "never"
+     },
+     "min": 0,
+     "unit": "s"
+    },
+    "overrides": []
+   },
+   "options": {
+    "legend": {
+     "displayMode": "list",
+     "placement": "bottom"
+    },
+    "tooltip": {
+     "mode": "multi"
+    }
+   },
+   "description": "Czas od Registration Request do Registration Accept, tylko dla successes."
+  },
+  {
+   "id": 22,
+   "type": "timeseries",
+   "title": "PDU Session Establishment time od strony UE per grupa: p95",
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prometheus"
+   },
+   "gridPos": {
+    "h": 8,
+    "w": 8,
+    "x": 16,
+    "y": 45
+   },
+   "targets": [
+    {
+     "refId": "A",
+     "expr": "histogram_quantile(0.95, sum by (le, grupa) (rate(packetrusher_procedure_duration_seconds_bucket{procedure=\"pdu_session_establishment\"}[30s])))",
+     "legendFormat": "{{grupa}}",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     }
+    }
+   ],
+   "fieldConfig": {
+    "defaults": {
+     "custom": {
+      "lineInterpolation": "linear",
+      "fillOpacity": 10,
+      "showPoints": "never"
+     },
+     "min": 0,
+     "unit": "s"
+    },
+    "overrides": []
+   },
+   "options": {
+    "legend": {
+     "displayMode": "list",
+     "placement": "bottom"
+    },
+    "tooltip": {
+     "mode": "multi"
+    }
+   },
+   "description": "Czas od PDU Session Establishment Request do Accept, tylko dla successes."
+  },
+  {
+   "id": 106,
+   "type": "row",
+   "title": "User Plane: gNB ↔ UPF ↔ DN",
+   "collapsed": false,
+   "gridPos": {
+    "h": 1,
+    "w": 24,
+    "x": 0,
+    "y": 53
+   }
+  },
+  {
+   "id": 9,
+   "type": "timeseries",
+   "title": "UPF ↔ DN (N6): throughput sesji PDU, Downlink i Uplink (ogstun)",
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prometheus"
+   },
+   "gridPos": {
+    "h": 8,
+    "w": 24,
+    "x": 0,
+    "y": 54
+   },
+   "targets": [
+    {
+     "refId": "A",
+     "expr": "8 * rate(node_network_transmit_bytes_total{device=\"ogstun\"}[10s])",
+     "legendFormat": "Downlink (do UE)",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     }
+    },
+    {
+     "refId": "B",
+     "expr": "8 * rate(node_network_receive_bytes_total{device=\"ogstun\"}[10s])",
+     "legendFormat": "Uplink (od UE)",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     }
+    }
+   ],
+   "fieldConfig": {
+    "defaults": {
+     "custom": {
+      "lineInterpolation": "linear",
+      "fillOpacity": 10,
+      "showPoints": "never"
+     },
+     "min": 0,
+     "unit": "bps"
+    },
+    "overrides": []
+   },
+   "options": {
+    "legend": {
+     "displayMode": "list",
+     "placement": "bottom"
+    },
+    "tooltip": {
+     "mode": "multi"
+    }
+   },
+   "description": "Ruch sesji PDU między UPF a DN, mierzony na interfejsie N6."
+  },
+  {
+   "id": 102,
+   "type": "row",
+   "title": "Dostępność NF",
+   "collapsed": false,
+   "gridPos": {
+    "h": 1,
+    "w": 24,
+    "x": 0,
+    "y": 62
+   }
+  },
+  {
+   "id": 10,
+   "type": "timeseries",
+   "title": "NF odpowiada Prometheusowi (up)",
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prometheus"
+   },
+   "gridPos": {
+    "h": 8,
+    "w": 12,
+    "x": 0,
+    "y": 63
+   },
+   "targets": [
+    {
+     "refId": "A",
+     "expr": "up{job=~\"amf|smf|upf|pcf\"}",
+     "legendFormat": "{{job}}",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     }
+    }
+   ],
+   "fieldConfig": {
+    "defaults": {
+     "custom": {
+      "lineInterpolation": "stepAfter",
+      "fillOpacity": 10,
+      "showPoints": "never"
+     },
+     "min": 0
+    },
+    "overrides": []
+   },
+   "options": {
+    "legend": {
+     "displayMode": "list",
+     "placement": "bottom"
+    },
+    "tooltip": {
+     "mode": "multi"
+    }
+   },
+   "description": "1 = NF zwraca liczniki Prometheusowi."
+  },
+  {
+   "id": 11,
+   "type": "timeseries",
+   "title": "Usługi systemd open5gs (active)",
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prometheus"
+   },
+   "gridPos": {
+    "h": 8,
+    "w": 12,
+    "x": 12,
+    "y": 63
+   },
+   "targets": [
+    {
+     "refId": "A",
+     "expr": "node_systemd_unit_state{name=~\"open5gs-.*\",state=\"active\"}",
+     "legendFormat": "{{name}}",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     }
+    }
+   ],
+   "fieldConfig": {
+    "defaults": {
+     "custom": {
+      "lineInterpolation": "stepAfter",
+      "fillOpacity": 10,
+      "showPoints": "never"
+     },
+     "min": 0
+    },
+    "overrides": []
+   },
+   "options": {
+    "legend": {
+     "displayMode": "list",
+     "placement": "bottom"
+    },
+    "tooltip": {
+     "mode": "multi"
+    }
+   },
+   "description": "1 = usługa NF jest aktywna według systemd."
+  }
+ ],
+ "tags": [
+  "lab14"
+ ]
+}
